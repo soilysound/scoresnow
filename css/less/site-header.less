@@ -1,10 +1,11 @@
 // SITE HEADER
 
 .site-header {
-  position: absolute;
+  position: fixed;
+  z-index: 2;
   top: 0;
   height: @site-header-height;
-  background: pink;
+  background: #aaa;
   width: 100%; 
   display: table;
   width: 100%;
@@ -50,6 +51,7 @@
   .site-header__hamburger {
     width: 38px;
     height: 38px;
+    pointer-events: none;
   }
 }
 
@@ -60,13 +62,13 @@
   
   .site-header__col1{
     padding-left: @site-indent-mobile;
-    width: 50px
+    width: 55px
   }
 
   .site-header__col3 {
     visibility: visible;
     padding-right: @site-indent-mobile;
-    width: 50px;
+    width: 55px;
   }
 
   .site-header__hamburger {

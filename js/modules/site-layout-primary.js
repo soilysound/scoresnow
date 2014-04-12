@@ -3,25 +3,38 @@
 module.exports = function(){
 
   // get elements
-  var openNavButton = document.querySelector('.site-header__hamburger');
+  var openNavButton = document.querySelector('.site-header__col3');
   var siteLayout = document.querySelector('.site-layout-primary');
+  var siteLayoutBody = siteLayout.querySelector('.content-window');
+
   var navIsOpen = false;
+
+   // close nav
+  function closeNav(e){
+    siteLayoutBody.removeEventListener('touchstart', closeNav, true);
+    siteLayout.classList.remove('site-layout-primary--nav-open');
+    navIsOpen = false;
+  }
+
+  // open nav
+  function openNav(e){
+    siteLayoutBody.addEventListener('touchstart', closeNav, true);
+    siteLayout.classList.add('site-layout-primary--nav-open');
+    navIsOpen = true;
+  }
 
   // bind click action
   openNavButton.addEventListener('click', function(){
     
     if(navIsOpen){
-      // close nav
-      siteLayout.classList.remove('site-layout-primary--nav-open');
-      navIsOpen = false;
+      closeNav();
     }
 
     else {
-      // open nav
-      siteLayout.classList.add('site-layout-primary--nav-open');
-      navIsOpen = true;
+      openNav();
     }
 
   }, false);
+
 
 };
