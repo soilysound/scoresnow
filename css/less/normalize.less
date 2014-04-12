@@ -1,0 +1,77 @@
+// NORMALIZE
+// basic reset file
+// ============================================================================
+
+@-ms-viewport {
+  width:auto;
+}
+
+* {
+  padding:0;
+  margin:0;
+  -moz-box-sizing:border-box;
+  -webkit-box-sizing:border-box;
+  box-sizing:border-box;
+}
+
+html {
+  height:100%;
+
+  // prevents odd text size adjustments in IOS
+  -webkit-text-size-adjust: none;
+
+  // prevents text bubble menus appearing
+  -webkit-touch-callout:none;
+  -ms-touch-action:none;
+
+  //prevents overzeaous aliasing on fonts
+  -webkit-font-smoothing:antialiased;
+
+  //prevents overzealous aliasing in firefox in osx
+  -moz-osx-font-smoothing: grayscale;
+
+  //disable double tap to zoom in ie10
+  -ms-touch-action: none !important;
+  -ms-overflow-style:-ms-autohiding-scrollbar;
+
+  //set tap highlight color
+  -webkit-tap-highlight-color: rgba(0,0,0,0.3);
+
+  font: 1em/1.45 sans-serif;
+}
+
+body {
+  height:100%;
+}
+
+img {
+  max-width:100%;
+  border:0
+}
+
+button,
+input,
+select,
+textarea {
+  font-family:sans-serif;
+  font-size:100%;
+  vertical-align: baseline;
+  line-height:normal;
+}
+
+textarea {
+  overflow: auto;
+  vertical-align: top
+}
+
+input[type="checkbox"],
+input[type="radio"] {
+  box-sizing: border-box
+}
+
+a, 
+a:focus,
+a:active {
+  outline:0;
+  text-decoration:none;
+}

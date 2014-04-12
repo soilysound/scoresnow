@@ -1,0 +1,34 @@
+// SITE-LAYOUT-PRIMARY
+
+.site-layout-primary {
+  .flex-box();
+  height: 100%;
+  overflow: hidden;
+  position: relative
+}
+
+.site-layout-primary__col1,
+.site-layout-primary__col2 {
+  .flex-col();
+}
+
+// left hand nav column
+.site-layout-primary__col1 {
+  width: 33%;
+  max-width: 400px;
+  .no-flex();
+  background: #eee
+}
+
+@media all and (@tablet-max){
+
+  // move nav off canvas on mobile
+  .site-layout-primary__col1 {
+    position: absolute;
+    height: 100%;
+    right: 0;
+    width: 90%;
+    .transform(translateX(100%));
+  }
+
+}
