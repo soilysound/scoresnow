@@ -4,6 +4,7 @@ var concat = require('gulp-concat');
 var uglify = require('gulp-uglify');
 var less = require('gulp-less');
 var minifyCSS = require('gulp-minify-css');
+var browserify = require('gulp-browserify');
 
 var paths = {
   scripts: {
@@ -24,13 +25,24 @@ gulp.task('head.js', function() {
     .pipe(gulp.dest('js'));
 });
 
-gulp.task('site.js', function() {
-  // Create site.js
-  return gulp.src(paths.scripts.modules)
+// gulp.task('site.js', function() {
+//   // Create site.js
+//   return gulp.src(paths.scripts.modules)
+//     .pipe(uglify())
+//     .pipe(concat('site.js'))
+//     .pipe(gulp.dest('js'));
+// });
+// 
+gulp.task('browserify', function(){
+
+  return gulp.src('js/app/app.js')
+    .pipe(browserify())
     .pipe(uglify())
-    .pipe(concat('site.js'))
-    .pipe(gulp.dest('js'));
+    .pipe(gulp.dest('js/'));
+
 });
+
+
 
 gulp.task('site.css', function(){
 
@@ -47,8 +59,8 @@ gulp.task('site.css', function(){
 gulp.task('watch', function() {
   gulp.watch(['css/less/*.less'], ['site.css']);
   gulp.watch(['js/head/*.js'], ['head.js']);
-  gulp.watch(['js/modules/*.js'], ['site.js']);
+  gulp.watch(['js/modules/*.js'], ['browserify']);
 });
 
 // The default task (called when you run `gulp` from cli)
-gulp.task('build', ['head.js', 'site.js', 'site.css']);
+gulp.task('build', ['head.js', 'browswerify', 'site.css']);

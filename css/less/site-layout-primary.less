@@ -3,32 +3,45 @@
 .site-layout-primary {
   .flex-box();
   height: 100%;
-  overflow: hidden;
   position: relative
 }
 
 .site-layout-primary__col1,
 .site-layout-primary__col2 {
   .flex-col();
+  position: relative
 }
 
 // left hand nav column
 .site-layout-primary__col1 {
-  width: 33%;
-  max-width: 400px;
+  width: 20%;
+  min-width: @site-nav-min-width;
   .no-flex();
-  background: #eee
+  background: #eee;
 }
 
+
 @media all and (@tablet-max){
+  
+  .site-layout-primary {
+    -webkit-transition: -webkit-transform 0.33s ease-in-out;
+    -moz-transition: -moz-transform 0.33s ease-in-out;
+    transition: transform 0.33s ease-in-out;
+  }
 
   // move nav off canvas on mobile
   .site-layout-primary__col1 {
     position: absolute;
     height: 100%;
     right: 0;
-    width: 90%;
-    .transform(translateX(100%));
+    min-width: 0;
+    width: @site-nav-width-mobile;
+    .transform(translateX(100%)); 
+  }
+
+  // nav is open
+  .site-layout-primary--nav-open {
+    .transform(translateX(@site-nav-width-mobile * -1));
   }
 
 }
