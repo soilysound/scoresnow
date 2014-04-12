@@ -1,0 +1,21 @@
+// SITE HEADER
+
+.site-header {
+  position: absolute;
+  top: 0;
+  height: @site-header-height;
+  background: pink;
+  width: 100%; 
+}
+
+@media all and (@tablet-min) and (@tablet-max){
+  .site-header {
+    height: @site-header-height-tablet;
+  }
+}
+
+@media all and (@mobile-max){
+  .site-header {
+    height: @site-header-height-mobile;
+  }
+}

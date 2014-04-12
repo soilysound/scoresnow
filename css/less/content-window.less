@@ -1,0 +1,21 @@
+// CONTENT-WINDOW
+
+.content-window {
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+  top: @site-header-height;
+  background: yellow;
+}
+
+@media all and (@tablet-min) and (@tablet-max){
+  .content-window {
+    top: @site-header-height-tablet;
+  }
+}
+
+@media all and (@mobile-max){
+  .content-window {
+    top: @site-header-height-mobile;
+  }
+}
