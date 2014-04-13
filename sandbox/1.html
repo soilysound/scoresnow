@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title></title>
+  <link rel="stylesheet" href="">
+  <style>
+  .match{
+    height: 30px;
+    border: 1px solid red;
+    margin: 6px;
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+  }
+
+  .match > span {
+    display: table-cell;
+        border: 1px solid red;
+
+  }
+  </style>
+</head>
+<body>
+  <script id="football-fixtures" type="html/template"><div class="match">
+    <span class="data-hometeam"></span>
+    <span class="data-homescore"></span>
+    <span class="data-awayscore"></span>
+    <span class="data-awayteam"></span>
+  </div>
+
+  </script>
+
+  <script>
+  NodeList.prototype.forEach = Array.prototype.forEach;
+
+  function buildView(data, templateId, updateFunction){
+
+    var template = document.getElementById(templateId);
+
+    data.forEach(function(item){
+      
+      var frag = document.createElement('span');
+      frag.innerHTML = template.innerHTML;
+      
+      var matchNode = frag.firstChild;
+      matchNode.id = "-" + item.id;
+      matchNode.update = updateFunction;
+      matchNode.update(item);
+
+      document.body.appendChild(matchNode);
+
+    });
+  }
+
+  function updateView(data){
+
+    data.forEach(function(item){
+
+      document.getElementById('-' + item.id).update(item);
+
+    });
+  }
+  
+  var viewReady = false;
+  var worker = new Worker('getdata.js');
+  worker.postMessage('football.json');
+
+  worker.addEventListener('message', function(e){
+
+    if(!viewReady){
+      buildView(e.data, 'football-fixtures', updateFootballMatch);
+      viewReady = true;
+    }
+    else {
+      updateView(e.data);
+    }
+  }, false);
+
+  function updateFootballMatch(data){
+
+    this.querySelector('.data-hometeam').innerText = data.home;
+    this.querySelector('.data-awayteam').innerText = data.away;
+
+    if(data.status === 3){
+      this.querySelector('.data-homescore').innerText = data.homescore;
+      this.querySelector('.data-awayscore').innerText = data.awayscore;
+    }
+  }
+
+  </script>
+
+
+</body>
+</html>

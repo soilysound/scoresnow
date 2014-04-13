@@ -1,1 +1,17 @@
 // SCROLL-PANES
+
+.scroll-pane {
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+  -ms-overflow-style: -ms-autohiding-scrollbar;
+}
+
+.touch .scroll-pane:before {
+  content: "";
+  height: 105%;
+  position: absolute;
+  width: 10px;
+  background: pink;
+  top: 0;
+  visibility: hidden;
+}
