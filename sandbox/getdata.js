@@ -17,13 +17,26 @@ function postData(data){
   self.postMessage(data.sport.football.matches);
 }
 
+function callback(data){
+  self.postMessage(data.data.fixtures[new Date().toISOString().split('T').shift()]);
+}
+
 self.addEventListener('message', function(e) {
   
-  XHR(e.data, postData);
+  importScripts(e.data + '&callback=callback');
+  
+  setTimeout(function(){
+    importScripts(e.data + '&callback=callback');
+  }, 45000);
 
-  setInterval(function(){
-    XHR(e.data, postData);
-  }, 10000);
+// XHR(e.data, postData);
+
+  // setInterval(function(){
+  //   XHR(e.data, postData);
+  // }, 10000);
 
  
 }, false);
+
+// http://www.espn.co.uk/blank/sport/match/json/livescores.json?_=1397395647974;callback=sdf
+// http://www.goal.com/en-gb/data/get-fixtures?gsmSeasonId=8318&gsmLang=en&callback=sdf

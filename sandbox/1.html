@@ -20,6 +20,10 @@
         border: 1px solid red;
 
   }
+
+  span[updated]{
+    background: yellow;
+  }
   </style>
 </head>
 <body>
@@ -27,8 +31,28 @@
     <span class="data-hometeam"></span>
     <span class="data-homescore"></span>
     <span class="data-awayscore"></span>
+    <span class="data-time"></span>
     <span class="data-awayteam"></span>
+    <span class="data-status"></span>
   </div>
+
+  </script>
+
+  <script id="blob-worker">
+  
+  function callback(data){
+    self.postMessage(data.data.fixtures[new Date().toISOString().split('T').shift()]);
+  }
+
+  self.addEventListener('message', function(e) {
+
+    importScripts(e.data + '&callback=callback');
+
+    setTimeout(function(){
+      importScripts(e.data + '&callback=callback');
+    }, 45000);
+
+  }, false);
 
   </script>
 
@@ -45,7 +69,7 @@
       frag.innerHTML = template.innerHTML;
       
       var matchNode = frag.firstChild;
-      matchNode.id = "-" + item.id;
+      matchNode.id = "-" + item.matchId;
       matchNode.update = updateFunction;
       matchNode.update(item);
 
@@ -62,10 +86,35 @@
 
     });
   }
+
+  function updateText(node, text){
+
+    text = text.toString();
+
+    if(node.textContent!==text){
+      if(node.textContent.length > 0){
+        node.setAttribute('updated', true);
+      }
+      node.textContent = text;
+    }
+    else {
+      node.removeAttribute('updated');
+    }
+  }
+
+  function getOffsetTime(date, time){
+
+    var date = new Date(date+'T'+time);
+    return (date.getHours() + ':' + date.getMinutes());
+  }
   
   var viewReady = false;
-  var worker = new Worker('getdata.js');
-  worker.postMessage('football.json');
+  var blob = new Blob([
+    document.getElementById('blob-worker').textContent
+  ]);
+
+  var worker = new Worker(window.URL.createObjectURL(blob));
+  worker.postMessage('http://www.goal.com/en-gb/data/get-fixtures?gsmSeasonId=8318&gsmLang=en');
 
   worker.addEventListener('message', function(e){
 
@@ -78,14 +127,17 @@
     }
   }, false);
 
+
   function updateFootballMatch(data){
 
-    this.querySelector('.data-hometeam').innerText = data.home;
-    this.querySelector('.data-awayteam').innerText = data.away;
+    updateText(this.querySelector('.data-hometeam'), data.teamHomeClubName);
+    updateText(this.querySelector('.data-awayteam'), data.teamAwayClubName);
+    updateText(this.querySelector('.data-status'), data.status === 'Played' ? 'FT' : '');
+    updateText(this.querySelector('.data-time'), getOffsetTime(data.kickoffDate, data.kickoffTime));
 
-    if(data.status === 3){
-      this.querySelector('.data-homescore').innerText = data.homescore;
-      this.querySelector('.data-awayscore').innerText = data.awayscore;
+    if(data.scoreHome!==null){
+      updateText(this.querySelector('.data-homescore'), data.scoreHome);
+      updateText(this.querySelector('.data-awayscore'), data.scoreAway);
     }
   }
 
