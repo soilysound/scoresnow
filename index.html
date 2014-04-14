@@ -23,16 +23,18 @@
         
         <div class="site-header__col site-header__col1">
           
-          <svg viewBox="0 0 100 100" class="site-header__back-button">      
-            <polygon points="0,50 100,0 100,100">
+          <svg viewBox="0 0 134 134" class="site-header__back-button">      
+            <path d="M105.614,118.681c3.398,3.396,3.4,8.912,0,12.311c-3.396,3.399-8.91,3.398-12.311,0c-0.02-0.02-0.035-0.04-0.053-0.061   l-0.025,0.022l-57.66-57.66l0.024-0.022c-1.61-1.579-2.608-3.775-2.608-6.208c-0.002-2.73,1.258-5.166,3.229-6.762l-0.06-0.058   l57.66-57.66l0.025,0.024c0.018-0.021,0.033-0.039,0.053-0.058c3.4-3.4,8.912-3.4,12.312,0c3.398,3.396,3.398,8.908,0,12.311   c-0.021,0.02-0.041,0.034-0.061,0.054l0.023,0.024L54.043,67.063l51.54,51.54l-0.025,0.021   C105.573,118.646,105.594,118.66,105.614,118.681"></path>
           </svg>
 
         </div>
         <div class="site-header__col site-header__col2"><h1 class="page-title"></h1></div>
         <div class="site-header__col site-header__col3">
           
-          <svg viewBox="0 0 100 100" class="site-header__hamburger">      
-            <rect width="100px" height="100px">
+          <svg viewBox="0 0 80 80" class="site-header__hamburger">      
+            <rect width="80" height="15"/>
+            <rect y="30" width="80" height="15"/>
+            <rect y="60" width="80" height="15"/>
           </svg>
 
         </div>
@@ -99,15 +101,15 @@
 
     dataType = e.data.type;
     importScripts(e.data.url + '&callback=callback');
-    // setTimeout(function(){
-    //   importScripts(e.data + '&callback=callback');
-    // }, 45000);
+    setTimeout(function(){
+      importScripts(e.data + '&callback=callback');
+    }, 45000);
     
   }, false);
 
 </script>
 
-<script id="football-fixtures" type="html/template"><a class="data-bar data-bar--football">
+<script id="football-fixtures" type="html/template"><a class="data-bar data-bar--football" ontouchstart="tapTouch(this)">
     <span class="data-bar__cell data-bar__cell-competition-name"></span>
   </a>
 </script>
@@ -117,7 +119,7 @@
   </a>
 </script>
 
-<script id="football-competition" type="html/template"><a class="data-bar data-bar--football">
+<script id="football-competition" type="html/template"><a class="data-bar data-bar--football" ontouchstart="tapTouch(this)">
     <span class="data-bar__cell data-bar__cell-hometeam"></span>
     <span class="data-bar__cell data-bar__cell-homescore"></span>
     <span class="data-bar__cell data-bar__cell-awayscore"></span>

@@ -12,6 +12,7 @@ var pageTransitions = require('../../js/modules/page-transitions.js');
 var scrollPanes = require('../../js/modules/scroll-panes.js');
 var buildView = require('../../js/modules/build-view.js');
 var backButton = require('../../js/modules/back-button.js');
+window.tapTouch = require('../../js/modules/tap-touch.js');
 
 window.SCORESNOW.renderFunctions = {
   "football-competition": require('../../js/modules/render-functions/football-competition.js'),

@@ -11,6 +11,9 @@ module.exports = function(){
 
    // close nav
   function closeNav(e){
+    if(e){
+      e.stopPropagation();
+    }
     siteLayoutBody.removeEventListener('touchstart', closeNav, true);
     siteLayout.classList.remove('site-layout-primary--nav-open');
     navIsOpen = false;

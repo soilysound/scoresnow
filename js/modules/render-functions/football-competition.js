@@ -16,5 +16,4 @@ module.exports = function(data){
   updateText(this.querySelector('.data-bar__cell-time'), offsetTime(data.kickoffDate, data.kickoffTime));
   updateText(this.querySelector('.data-bar__cell-status'), SCORESNOW.statusLookup[data.status.toLowerCase()]);
 
-
 };

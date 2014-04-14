@@ -4,15 +4,18 @@
   display: table;
   table-layout: fixed;
   position: relative;
-  height: 2.4em;
+  height: 2.5em;
   width: 100%;
-  margin: 0 auto 0.3em auto;
+  margin: 0 auto 0.4em auto;
   border-radius: 2px;
   overflow: hidden;
   max-width: 800px;
-  border: 1px solid @keyline;
+  color: @dark-grey;
+  box-shadow: 0 0 1px rgba(0,0,0,0.5);
+  background: white;
+  border-collapse: collapse;
   
-  font-size: 1.5rem;
+  font-size: 1.4rem;
 }
 
 .data-bar__cell {
@@ -23,15 +26,14 @@
   txt-overflow: ellipsis;
   text-align: center;
   position: relative;
-// text-transform: uppercase;
-  background: white;
-  color: @dark-grey;
 }
 
 .data-bar__cell-homescore,
 .data-bar__cell-awayscore {
   width: 2.3em;
-  border: 1px solid @keyline;
+  border: 1px solid lighten(@keyline, 5%);
+  border-top: 0;
+  border-bottom: 0;
 }
 
 // fade out long text at right side
@@ -91,17 +93,46 @@
 // RESULT
 .data-bar[data-status='FT'] > .data-bar__cell-homescore,
 .data-bar[data-status='FT'] > .data-bar__cell-awayscore {
-  
-  background:@red;
+  background: @red;
   color: white;
   border-color: @red-stroke; 
+}
+
+// EVENT
+@-webkit-keyframes update {
+  0 {
+    background: 0;
+  }
+  50% {
+    background: yellow
+  }
+
+  100% {
+    background: 0;
+  }
+}
+
+.data-bar__cell[data-update]{
+  -webkit-animation: update 1s ease-in-out;
+  -webkit-animation-iteration-count: 10;
+  -webkit-animation-fill-mode: both;
+}
+
+// TAP HIGHLIGHT STYLES
+.tap-touch,
+.tap-touch > .data-bar__cell,
+.tap-touch > .data-bar__cell:after {
+  background: @active-color!important;
+  border-color: darken(@active-color, 10%)!important;
+  color: #ddd!important;
 }
 
 
 @media all and (@tablet-min) and (@tablet-max){
   
   .data-bar {
-    font-size: 1.4rem
+    font-size: 1.34rem;
+    height: 2.6em
   }
 }
 
