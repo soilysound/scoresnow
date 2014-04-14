@@ -23,6 +23,7 @@
   text-align: left;
   width: 80px;
   padding-left: @site-indent;
+  visibility: hidden;
 }
 
 .site-header__col3 {
@@ -38,7 +39,14 @@
   font-family: ubuntu-light, sans-serif;
   font-weight: normal;
   font-size: 1.7rem;
-  Text-transform: capitalize;
+  text-transform: capitalize;
+}
+
+.site-header__back-button,
+.site-header__hamburger {
+  width: 35px;
+  height: 35px;
+  pointer-events: none;
 }
 
 
@@ -55,12 +63,6 @@
   .site-header__col3 {
     visibility: visible;
     padding-right: @site-indent-tablet;
-  }
-
-  .site-header__hamburger {
-    width: 35px;
-    height: 35px;
-    pointer-events: none;
   }
 
   .page-title {
@@ -85,6 +87,7 @@
     width: 55px;
   }
 
+  .site-header__back-button,
   .site-header__hamburger {
     width: 28px;
     height: 28px;

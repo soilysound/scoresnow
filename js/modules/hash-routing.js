@@ -48,9 +48,12 @@ module.exports = function(){
   }
 
   function setUpPages(e){
+
+     // if no has return
     if(location.hash.length === 0){
       return;
     }
+
     setPage(location.hash);
     setSport(location.hash);
     setContentId(location.hash);

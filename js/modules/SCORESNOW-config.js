@@ -2,7 +2,7 @@
 
 module.exports = function(){
   return {
-    defaultPageTitle: 'Select a sport',
+    history: 0,
     currentPage: 0,
     previousPage: 0,
     direction: 'forward',

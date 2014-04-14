@@ -52,7 +52,7 @@ module.exports = function(){
     });
 
     SCORESNOW.dataWorker.onmessage = function(e){
-      console.log(e.data);
+
       if(!e.data){
         SCORESNOW.dataWorker.terminate();
         return;

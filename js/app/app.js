@@ -11,6 +11,7 @@ var hashRouting = require('../../js/modules/hash-routing.js');
 var pageTransitions = require('../../js/modules/page-transitions.js');
 var scrollPanes = require('../../js/modules/scroll-panes.js');
 var buildView = require('../../js/modules/build-view.js');
+var backButton = require('../../js/modules/back-button.js');
 
 window.SCORESNOW.renderFunctions = {
   "football-competition": require('../../js/modules/render-functions/football-competition.js'),
@@ -23,6 +24,7 @@ siteLayoutPrimary();
 pageTransitions();
 buildView();
 hashRouting();
+backButton();
 scrollPanes();
 
 // attach fastclick
