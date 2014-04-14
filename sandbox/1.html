@@ -38,51 +38,54 @@
 
   </script>
 
-  <script id="blob-worker">
-  
-  function callback(data){
-    self.postMessage(data.data.fixtures[new Date().toISOString().split('T').shift()]);
-  }
+  <script id="blob-worker" type="worker/template">
 
-  self.addEventListener('message', function(e) {
+    function callback(data){
+      self.postMessage(data.data.fixtures[new Date().toISOString().split('T').shift()]);
+    }
 
-    importScripts(e.data + '&callback=callback');
+    self.addEventListener('message', function(e) {
 
-    setTimeout(function(){
       importScripts(e.data + '&callback=callback');
-    }, 45000);
 
-  }, false);
+      setTimeout(function(){
+        importScripts(e.data + '&callback=callback');
+      }, 45000);
+
+    }, false);
 
   </script>
 
   <script>
   NodeList.prototype.forEach = Array.prototype.forEach;
 
-  function buildView(data, templateId, updateFunction){
+  function buildView(container, data, templateId, updateFunction){
 
     var template = document.getElementById(templateId);
+    var fragment = document.createDocumentFragment();
 
     data.forEach(function(item){
       
-      var frag = document.createElement('span');
-      frag.innerHTML = template.innerHTML;
+      var span = document.createElement('span');
+      span.innerHTML = template.innerHTML;
       
-      var matchNode = frag.firstChild;
-      matchNode.id = "-" + item.matchId;
-      matchNode.update = updateFunction;
-      matchNode.update(item);
+      var domNode = span.firstChild;
+      domNode.id = "-" + item.matchId;
+      domNode.update = updateFunction;
+      domNode.update(item);
 
-      document.body.appendChild(matchNode);
+      fragment.appendChild(domNode);
 
     });
+
+    document.body.appendChild(fragment);
   }
 
-  function updateView(data){
+  function updateView(container, data){
 
     data.forEach(function(item){
 
-      document.getElementById('-' + item.id).update(item);
+      container.getElementById('-' + item.matchId).update(item);
 
     });
   }
@@ -118,12 +121,17 @@
 
   worker.addEventListener('message', function(e){
 
+    if(!e.data){
+      worker.terminate();
+      return;
+    };
+
     if(!viewReady){
-      buildView(e.data, 'football-fixtures', updateFootballMatch);
+      buildView(document.querySelector('.view'), e.data, 'football-fixtures', updateFootballMatch);
       viewReady = true;
     }
     else {
-      updateView(e.data);
+      updateView(document.querySelector('.view'), e.data);
     }
   }, false);
 
@@ -143,6 +151,7 @@
 
   </script>
 
+<div class="view"></div>
 
 </body>
 </html>

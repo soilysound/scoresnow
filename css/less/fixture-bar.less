@@ -1,0 +1,114 @@
+// FIXTURE BAR
+
+.data-bar {
+  display: table;
+  table-layout: fixed;
+  position: relative;
+  height: 2.4em;
+  width: 100%;
+  margin: 0 auto 0.3em auto;
+  border-radius: 2px;
+  overflow: hidden;
+  max-width: 800px;
+  border: 1px solid @keyline;
+  
+  font-size: 1.5rem;
+}
+
+.data-bar__cell {
+  display: table-cell;
+  vertical-align: middle;
+  overflow: hidden;
+  white-space: nowrap;
+  txt-overflow: ellipsis;
+  text-align: center;
+  position: relative;
+// text-transform: uppercase;
+  background: white;
+  color: @dark-grey;
+}
+
+.data-bar__cell-homescore,
+.data-bar__cell-awayscore {
+  width: 2.3em;
+  border: 1px solid @keyline;
+}
+
+// fade out long text at right side
+.data-bar__cell-hometeam:after,
+.data-bar__cell-awayteam:after {
+  content: "";
+  position: absolute;
+  height: 100%;
+  width: 0.6em;
+  right: 0;
+  top: 0;
+  background: white;
+  background: -webkit-linear-gradient(left, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 1) 70%, rgb(255, 255, 255, 1) 100%);
+}
+
+.data-bar__cell-status {
+  width: 2.3em;
+  display: none;
+}
+
+.data-bar__cell-hometeam {
+  text-align: right;
+  padding-right: 0.5em;
+  padding-left: 0.5em
+}
+
+.data-bar__cell-awayteam {
+  text-align: left;
+  padding-left: 0.5em;
+  padding-right: 0.5em;
+}
+
+.data-bar__cell-time {
+  width: 4.6em;
+  display: none;
+  background: @dark-grey;
+  border-color: @dark-grey;
+  color: #eee
+}
+
+// FIXTURE
+.data-bar[data-status='KO'] > .data-bar__cell-homescore,
+.data-bar[data-status='KO'] > .data-bar__cell-awayscore {
+  display: none;
+}
+
+.data-bar[data-status='KO'] > .data-bar__cell-time {
+  display: table-cell;
+}
+
+.data-bar[data-status='KO'] > .data-bar__cell-status {
+  visibility: hidden;
+}
+
+// INPLAY
+
+// RESULT
+.data-bar[data-status='FT'] > .data-bar__cell-homescore,
+.data-bar[data-status='FT'] > .data-bar__cell-awayscore {
+  
+  background:@red;
+  color: white;
+  border-color: @red-stroke; 
+}
+
+
+@media all and (@tablet-min) and (@tablet-max){
+  
+  .data-bar {
+    font-size: 1.4rem
+  }
+}
+
+@media all and (@mobile-max){
+  
+  .data-bar {
+    font-size: 0.94rem;
+    height: 2.6em
+  }
+}

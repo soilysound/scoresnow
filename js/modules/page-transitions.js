@@ -3,6 +3,11 @@
 module.exports = function(){
 
   var pages = document.querySelectorAll('.page-slot');
+  SCORESNOW.pages = pages;
+
+  // create a page transition event complete event
+  var transitionEvent = document.createEvent('Event');
+  transitionEvent.initEvent('pageTransitionComplete', true, true);
 
   function setPosition(domNode, position, animate){
     
@@ -33,6 +38,7 @@ module.exports = function(){
 
       setTimeout(function(){
         setPosition(pages[previousPage], '100%', false);
+        document.dispatchEvent(transitionEvent);
       }, 400);
 
   }
@@ -42,6 +48,10 @@ module.exports = function(){
     var pageToGoTo = SCORESNOW.currentPage;
     var previousPage = SCORESNOW.previousPage;
     var direction = SCORESNOW.direction;
+
+    if(pageToGoTo === previousPage){
+      return;
+    }
     
     animateTo(pageToGoTo - 1, previousPage - 1 , direction);
 

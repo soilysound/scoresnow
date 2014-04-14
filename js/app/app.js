@@ -1,19 +1,27 @@
 // APP.JS
 
 // get dependencies
-var siteConfig = require('../../js/modules/SCORESNOW-config.js');
+
+// create site config object
+window.SCORESNOW = require('../../js/modules/SCORESNOW-config.js')();
+
 var siteLayoutPrimary = require('../../js/modules/site-layout-primary.js');
 var attachFastClick = require('../../js/vendor/fastclick.js');
 var hashRouting = require('../../js/modules/hash-routing.js');
 var pageTransitions = require('../../js/modules/page-transitions.js');
 var scrollPanes = require('../../js/modules/scroll-panes.js');
+var buildView = require('../../js/modules/build-view.js');
 
-// create site config object
-window.SCORESNOW = siteConfig();
+window.SCORESNOW.renderFunctions = {
+  "football-competition": require('../../js/modules/render-functions/football-competition.js'),
+  "football-fixtures": require('../../js/modules/render-functions/football-fixtures.js')
+};
+
 
 // run modules
 siteLayoutPrimary();
 pageTransitions();
+buildView();
 hashRouting();
 scrollPanes();
 

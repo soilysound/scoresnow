@@ -32,6 +32,16 @@
   visibility: hidden
 }
 
+
+// set page title
+.page-title {
+  font-family: ubuntu-light, sans-serif;
+  font-weight: normal;
+  font-size: 1.7rem;
+  Text-transform: capitalize;
+}
+
+
 @media all and (@tablet-min) and (@tablet-max){
 
   .site-header {
@@ -52,6 +62,11 @@
     height: 35px;
     pointer-events: none;
   }
+
+  .page-title {
+    font-size: 1.4rem
+  }
+
 }
 
 @media all and (@mobile-max){
@@ -73,5 +88,9 @@
   .site-header__hamburger {
     width: 28px;
     height: 28px;
+  }
+
+  .page-title {
+    font-size: 1rem
   }
 }

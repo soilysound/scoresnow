@@ -12,15 +12,40 @@
 // dimensions
 @site-header-height: 82px;
 @site-header-height-tablet: 68px;
-@site-header-height-mobile: 48px;
+@site-header-height-mobile: 50px;
 
-@site-nav-min-width: 190px;
+@site-nav-min-width: 218px;
 @site-nav-width-mobile: 268px;
 
 @site-indent: 24px;
 @site-indent-tablet: 18px;
 @site-indent-mobile: 12px;
 
+@page-slot-padding: 24px;
+@page-slot-padding-tablet: 18px;
+@page-slot-padding-mobile: 12px;
+
 // colors
 @content-window-background: #eee;
 @site-nav-background: #ddd;
+@keyline: #ccc;
+@red: #BF2A2C;
+@red-stroke: darken(@red, 8%);
+
+@dark-grey: #333;
+@dark-grey-stroke: lighten(@dark-grey, 20%);
+
+// fonts 
+@font-face {
+  font-family: 'ubuntu';
+  font-style: normal;
+  font-weight: 400;
+  src: local(Ubuntu), local('ubuntu'), url(/fonts/ubuntu.woff) format('woff');
+}
+
+@font-face {
+  font-family: 'ubuntu-light';
+  font-style: normal;
+  font-weight: 400;
+  src: local(ubuntu-light), local('ubuntu-light'), url(/fonts/ubuntu-light.woff) format('woff');
+}

@@ -10,20 +10,19 @@
   <meta name="viewport" id="viewport" content="width=device-width,maximum-scale=1,minimum-scale=1,minimal-ui">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   <meta name="format-detection" content="telephone=no">
-
   <link rel="stylesheet" href="/css/site.css">
   <script src="/js/head.js"></script>
 </head>
 <body>
   <div class="site-layout-primary">
     <div class="site-layout-primary__col1">
-      1
+      <a href='/#/football/fixtures/'>FOOTBALL</a>
     </div>
     <div class="site-layout-primary__col2">
       <header class="site-header">
         
         <div class="site-header__col site-header__col1"></div>
-        <div class="site-header__col site-header__col2">Scores Now</div>
+        <div class="site-header__col site-header__col2"><h1 class="page-title"></h1></div>
         <div class="site-header__col site-header__col3">
           
           <svg viewBox="0 0 100 100" class="site-header__hamburger">      
@@ -34,17 +33,94 @@
 
       </header>
       <main class="content-window">
-        
+
         <div class="page-slots">
-          <div class="page-slot scroll-pane page-slot--1">1</div>
-          <div class="page-slot scroll-pane page-slot--2">2</div>
-          <div class="page-slot scroll-pane page-slot--3">3</div>
+          <div class="page-slot scroll-pane page-slot--1">
+            <a class="data-bar data-bar--football">
+              <span class="data-bar__cell data-bar__cell-competition-name"></span>
+            </a>
+          </div>
+          <div class="page-slot scroll-pane page-slot--2">
+            <a class="data-bar data-bar--football">
+              <span class="data-bar__cell data-bar__cell-competition-name"></span>
+            </a>
+          </div>
+          <div class="page-slot scroll-pane page-slot--3">
+
+          </div>
         </div>
 
       </main>
     </div>
   </div>
 </body>
+<script id="blob-worker" type="worker/template">
+  
+  var dataType;
+  var dataObject;
+  var todaysDate = new Date().toISOString().split('T').shift();
+
+  function callback(data){
+
+    // FOOTBALL FIXTURES LIST
+    if(dataType === 'football-fixtures'){
+
+      var todaysData = [];
+      var competitions = [];
+
+      data.events.forEach(function(item){
+
+        if(item.kickOffDate === todaysDate && competitions.indexOf(item.competitionId) === -1){
+          todaysData.push(item);
+          competitions.push(item.competitionId);
+        }
+      });
+
+      dataObject = todaysData;
+
+    }
+
+    // FOOTBALL COMPETITIONS
+    if(dataType === 'football-competition'){
+      
+        dataObject = data.data.fixtures[new Date().toISOString().split('T').shift()]
+    }
+
+    self.postMessage(dataObject);
+  }
+
+  self.addEventListener('message', function(e) {
+
+    dataType = e.data.type;
+    importScripts(e.data.url + '&callback=callback');
+    // setTimeout(function(){
+    //   importScripts(e.data + '&callback=callback');
+    // }, 45000);
+    
+  }, false);
+
+</script>
+
+<script id="football-fixtures" type="html/template"><a class="data-bar data-bar--football">
+    <span class="data-bar__cell data-bar__cell-competition-name"></span>
+  </a>
+</script>
+
+<script id="shim-template" type="html/template"><a class="data-bar data-bar--football">
+    <span class="data-bar__cell data-bar__cell-competition-name"></span>
+  </a>
+</script>
+
+<script id="football-competition" type="html/template"><a class="data-bar data-bar--football">
+    <span class="data-bar__cell data-bar__cell-hometeam"></span>
+    <span class="data-bar__cell data-bar__cell-homescore"></span>
+    <span class="data-bar__cell data-bar__cell-awayscore"></span>
+    <span class="data-bar__cell data-bar__cell-time"></span>
+    <span class="data-bar__cell data-bar__cell-awayteam"></span>
+    <span class="data-bar__cell data-bar__cell-status"></span>
+  </a>
+</script>
+
 <script src="/js/app.js"></script>
 
 </html>
