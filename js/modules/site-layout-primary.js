@@ -30,14 +30,15 @@ module.exports = {
     if(e){
       e.stopPropagation();
     }
-    this.siteLayoutBody.removeEventListener('touchstart', this.closeNav.bind(this), true);
+    
+    this.siteLayoutBody.ontouchstart = null;
     this.siteLayout.classList.remove('site-layout-primary--nav-open');
     this.navIsOpen = false;
   },
 
   // open nav
   openNav: function(e){
-    this.siteLayoutBody.addEventListener('touchstart', this.closeNav.bind(this), true);
+    this.siteLayoutBody.ontouchstart = this.closeNav.bind(this);
     this.siteLayout.classList.add('site-layout-primary--nav-open');
     this.navIsOpen = true;
   }
