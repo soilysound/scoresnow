@@ -121,20 +121,22 @@
 </body>
 <script id="blob-worker" type="worker/template">
   
+  var refreshInterval = 45000;
   var dataType;
   var dataObject;
   var todaysDate = new Date().toISOString().split('T').shift();
 
   function callback(data){
 
-    // FOOTBALL FIXTURES LIST
+    // A FOOTBALL FIXTURES LIST
     if(dataType === 'football-fixtures'){
 
       dataObject = data.events;
+      clearInterval(self.timer);
 
     }
 
-    // FOOTBALL COMPETITIONS
+    // A FOOTBALL COMPETITION
     if(dataType === 'football-competition'){
       
         dataObject = data.data.fixtures[new Date().toISOString().split('T').shift()]
@@ -149,9 +151,9 @@
 
     importScripts(e.data.url + '&callback=callback');
 
-    setInterval(function(){
+    self.timer = setInterval(function(){
       importScripts(e.data.url + '&callback=callback');
-    }, 45000);
+    }, refreshInterval);
     
   }, false);
 
