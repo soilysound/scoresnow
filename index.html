@@ -130,18 +130,7 @@
     // FOOTBALL FIXTURES LIST
     if(dataType === 'football-fixtures'){
 
-      var todaysData = [];
-      var competitions = [];
-
-      data.events.forEach(function(item){
-
-        if(item.kickOffDate === todaysDate && competitions.indexOf(item.competitionId) === -1){
-          todaysData.push(item);
-          competitions.push(item.competitionId);
-        }
-      });
-
-      dataObject = todaysData;
+      dataObject = data.events;
 
     }
 

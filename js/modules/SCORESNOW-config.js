@@ -34,22 +34,36 @@ module.exports = function(){
 
     competitionLookup: {
       'football': {
-        8: [8318, 'Premier League'],
-        7: [8491, 'La Liga'],
-        10: [8381, 'Champions League'],
-        13: [8398, 'Serie A'],
-        16: [8463, 'Ligue 1'],
-        93: [8260, 'FA Cup'],
-        104: [8472, 'DFB Pokal Cup']
-
+        2896: [8318, 'Premier League'],
+        2897: [8428, 'Championship'],
+        3268: [8325, 'League One'],
+        3269: [8326, 'League Two'],
+        2900: [8260, 'FA Cup'],
+        // 233: [111, 'AFC Champions League'],
+        76: [7707, 'Friendlies'],
+        // 105: [999, 'Club Friendlies'],
+        2932: [8391, 'Scottish Premiership'],
+        438: [8217, 'Scottish Championship'],
+        // 159: [444, 'Indonesian Superleague'],
+        // 65: [555, 'Argentian Primera Division'],
+        // 75: [666, 'Indian I-League'],
+        140: [8218, 'Scottish League 1'],
+        3277: [8491, 'La Liga'],
+        3275: [8467, 'Bundesliga'],
+        3276: [8398, 'Seria A'],
+        2914: [8381, 'UEFA Champions League'],
+        3274: [8463, 'Ligue 1'],
+        82: [8472, 'DFB Pokal German Cup'],
+        2915: [8295, 'UEFA Europa League']
       }
     },
 
     endpoints: {
       football: {
-        fixtures: 'http://www.goal.com/feed/matches/highlights?edition=en&format=lmc',
+        fixtures: 'https://googledrive.com/host/0B5Em7PKD4NLoR2dYMktjTmxOckU/football-fixtures-#{date}.js?',
+        // fixtures: 'http://192.168.0.6/data/football/today.js?',
         competition: 'http://www.goal.com/en-gb/data/get-fixtures?gsmSeasonId=#{id}&gsmLang=en',
-        match: 'match/#{id}.json'
+        match: 'http://www.goal.com/feed/matches/scores?format=goal&matchId=1635404%2C1635405&edition=en-gb'
       }
     }
   };

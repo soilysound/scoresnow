@@ -80,6 +80,7 @@ module.exports = function(){
 
     var url = SCORESNOW.endpoints[currentSport][pageType];
     url = url.replace('#{id}', SCORESNOW.contentId);
+    url = url.replace('#{date}', new Date().toISOString().split('T').shift());
 
     var currentView = (SCORESNOW.pages[SCORESNOW.currentPage - 1]);
 
