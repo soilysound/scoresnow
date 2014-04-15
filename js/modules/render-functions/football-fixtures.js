@@ -3,7 +3,7 @@
 module.exports = function(data){
   
   var updateText = require('../update-text.js');
-
+console.log(data);
   var competitionName = SCORESNOW.competitionLookup[SCORESNOW.currentSport][data.competitionId][1];
   var competitionURL = '/#/' + [
     'football',

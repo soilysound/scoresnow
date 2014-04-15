@@ -1,0 +1,49 @@
+// SITE-LOGO
+
+.site-logo {
+  display: table;
+  table-layout: fixed;
+  width: 100%
+}
+
+.site-logo__title {
+  display: table-cell;
+  height: @site-header-height;
+  color: white;
+  text-align: center;
+  vertical-align: middle;
+  font-size: 1.45rem;
+  line-height: 0;
+  padding-top: 0.25em
+}
+
+.site-logo__icon {
+  width: 1.1em;
+  height: 1.1em;
+  display: inline-block;
+  fill: #aaa;
+  vertical-align: middle;
+  margin: -1px 2px 0 0
+}
+
+@media all and (@tablet-min) and (@tablet-max){
+
+  .site-logo__title {
+    height: @site-header-height-tablet;
+    font-size: 1.5rem
+  }
+}
+
+@media all and (@mobile-max){
+  .site-logo__title {
+    height: @site-header-height-mobile;
+    font-size: 1.3rem;
+    padding-top: 0.4em
+  }
+} 
+
+@media all and (@desktop-wide-min){
+  .site-logo__title {
+    font-size: 1.6rem;
+  }
+}

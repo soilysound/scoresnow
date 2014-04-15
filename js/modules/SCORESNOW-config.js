@@ -36,16 +36,18 @@ module.exports = function(){
       'football': {
         8: [8318, 'Premier League'],
         7: [8491, 'La Liga'],
+        10: [8381, 'Champions League'],
         13: [8398, 'Serie A'],
         16: [8463, 'Ligue 1'],
-        93: [8260, 'FA Cup']
+        93: [8260, 'FA Cup'],
+        104: [8472, 'DFB Pokal Cup']
 
       }
     },
 
     endpoints: {
       football: {
-        fixtures: 'http://www.goal.com/feed/matches/highlights?edition=en-gb&format=lmc',
+        fixtures: 'http://www.goal.com/feed/matches/highlights?edition=en&format=lmc',
         competition: 'http://www.goal.com/en-gb/data/get-fixtures?gsmSeasonId=#{id}&gsmLang=en',
         match: 'match/#{id}.json'
       }

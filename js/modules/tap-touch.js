@@ -20,7 +20,7 @@ module.exports = function(el){
     setTimeout(function(){
       el.classList.remove('tap-touch');
       el.ontouchend = null;
-    }, 150);
+    }, 33);
     
   };
 
