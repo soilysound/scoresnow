@@ -29,7 +29,8 @@ module.exports = function(){
 
     statusLookup: {
       'played': 'FT',
-      'fixture': 'KO'
+      'fixture': 'KO',
+      'playing': 'IP'
     },
 
     competitionLookup: {
@@ -63,7 +64,7 @@ module.exports = function(){
         fixtures: 'https://googledrive.com/host/0B5Em7PKD4NLoR2dYMktjTmxOckU/football-fixtures-#{date}.js?',
         // fixtures: 'http://192.168.0.6/data/football/today.js?',
         competition: 'http://www.goal.com/en-gb/data/get-fixtures?gsmSeasonId=#{id}&gsmLang=en',
-        match: 'http://www.goal.com/feed/matches/scores?format=goal&matchId=1635404%2C1635405&edition=en-gb'
+        match: 'http://www.goal.com/en-gb/data/get-events-for-match?gsmMatchId=#{id}&gsmLang=en&callback=callback'
       }
     }
   };

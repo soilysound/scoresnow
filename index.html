@@ -142,6 +142,13 @@
         dataObject = data.data.fixtures[new Date().toISOString().split('T').shift()]
     }
 
+    // A FOOTBALL MATCH
+    if(dataType === 'football-match'){
+
+      dataObject = [data.data];
+
+    }
+
     self.postMessage(dataObject);
   }
 
@@ -150,7 +157,7 @@
     dataType = e.data.type;
 
     importScripts(e.data.url + '&callback=callback');
-
+    
     self.timer = setInterval(function(){
       importScripts(e.data.url + '&callback=callback');
     }, refreshInterval);
@@ -161,6 +168,11 @@
 
 <script id="football-fixtures" type="html/template"><a class="data-bar data-bar--football" ontouchstart="tapTouch(this)">
     <span class="data-bar__cell data-bar__cell-competition-name"></span>
+  </a>
+</script>
+
+<script id="football-match" type="html/template"><a class="data-bar data-bar--football" ontouchstart="tapTouch(this)">
+    <span class="data-bar__cell data-bar__cell-competition-name">MATCH!!</span>
   </a>
 </script>
 

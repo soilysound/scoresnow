@@ -39,6 +39,10 @@ module.exports = function(){
       });
     }
 
+    if(SCORESNOW.page === 'match'){
+      SCORESNOW.pageTitle = 'Match';
+    }
+
     addPageTitle(SCORESNOW.pageTitle);
 
   }

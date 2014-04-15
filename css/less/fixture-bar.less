@@ -89,6 +89,14 @@
 }
 
 // INPLAY
+.data-bar[data-status='IP'] > .data-bar__cell-time {
+  display: none;
+}
+
+.data-bar[data-status='IP'] > .data-bar__cell-homescore,
+.data-bar[data-status='IP'] > .data-bar__cell-awayscore {
+  display: table-cell
+}
 
 // RESULT
 .data-bar[data-status='FT'] > .data-bar__cell-homescore,
@@ -104,7 +112,7 @@
     background: 0;
   }
   50% {
-    background: yellow
+    background: #ffcc00;
   }
 
   100% {
@@ -112,9 +120,9 @@
   }
 }
 
-.data-bar__cell[data-update]{
-  -webkit-animation: update 1s ease-in-out;
-  -webkit-animation-iteration-count: 10;
+.data-bar__cell[data-updated]{
+  -webkit-animation: update 2s ease-in-out;
+  -webkit-animation-iteration-count: 15;
   -webkit-animation-fill-mode: both;
 }
 
@@ -123,7 +131,7 @@
 .tap-touch > .data-bar__cell,
 .tap-touch > .data-bar__cell:after {
   background: @active-color!important;
-  border-color: darken(@active-color, 70%)!important;
+  border-color: darken(@active-color, 10%)!important;
   color: #ddd!important;
 }
 

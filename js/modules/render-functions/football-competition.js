@@ -4,7 +4,7 @@ module.exports = function(data){
 
   var updateText = require('../update-text.js');
   var offsetTime = require('../offset-time.js');
-  
+
   this.setAttribute('data-status', SCORESNOW.statusLookup[data.status.toLowerCase()]);
 
   updateText(this.querySelector('.data-bar__cell-hometeam'), data.teamHomeClubName);
@@ -15,5 +15,7 @@ module.exports = function(data){
 
   updateText(this.querySelector('.data-bar__cell-time'), offsetTime(data.kickoffDate, data.kickoffTime));
   updateText(this.querySelector('.data-bar__cell-status'), SCORESNOW.statusLookup[data.status.toLowerCase()]);
+
+  this.href = "/#/football/match/" + data.matchId;
 
 };

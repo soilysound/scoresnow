@@ -10,11 +10,11 @@ module.exports = function(node, text){
 
   if(node.textContent!==text){
     if(node.textContent.length > 0){
-      node.setAttribute('updated', true);
+      node.setAttribute('data-updated', true);
     }
     node.textContent = text;
   }
   else {
-    node.removeAttribute('updated');
+    node.removeAttribute('data-updated');
   }
 };

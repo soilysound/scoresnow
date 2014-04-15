@@ -29,8 +29,13 @@ module.exports = function(){
     container.appendChild(fragment);
   }
 
-  function updateView(){
-    console.log('update');
+  function updateView(container, data){
+    
+    var bars = container.querySelectorAll('.data-bar');
+
+    data.forEach(function(item, index){
+      bars[index].update(item);
+    });
   }
 
   function buildView(container, dataUrl, template){
