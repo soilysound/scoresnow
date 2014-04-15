@@ -12,6 +12,9 @@ var pageTransitions = require('../../js/modules/page-transitions.js');
 var scrollPanes = require('../../js/modules/scroll-panes.js');
 var buildView = require('../../js/modules/build-view.js');
 var backButton = require('../../js/modules/back-button.js');
+var nav = require('../../js/modules/nav.js');
+
+// add taptpuch globally to add inline
 window.tapTouch = require('../../js/modules/tap-touch.js');
 
 window.SCORESNOW.renderFunctions = {
@@ -21,8 +24,9 @@ window.SCORESNOW.renderFunctions = {
 
 
 // run modules
-siteLayoutPrimary();
+siteLayoutPrimary.init();
 pageTransitions();
+nav();
 buildView();
 hashRouting();
 backButton();

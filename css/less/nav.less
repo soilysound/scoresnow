@@ -25,11 +25,21 @@
   padding-top: 2em;
 }
 
+// selected item
+.nav__item-link--selected {
+  background: @red;
+  color: #eee;
+}
+
+.nav__item-link--selected > .nav__item-icon {
+  fill: #eee
+} 
 
 .nav__item-icon {
   width: 2em;
   height: 2em;
-  fill: rgba(255,255,255,0.5)
+  fill: rgba(255,255,255,0.5);
+  pointer-events: none;
 }
 
 .nav__item-title {
