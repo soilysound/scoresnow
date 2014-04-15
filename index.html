@@ -171,14 +171,16 @@
   </a>
 </script>
 
-<script id="football-match" type="html/template"><a class="data-bar data-bar--football" ontouchstart="tapTouch(this)">
-    <span class="data-bar__cell data-bar__cell-competition-name">MATCH!!</span>
-  </a>
-</script>
-
-<script id="shim-template" type="html/template"><a class="data-bar data-bar--football">
-    <span class="data-bar__cell data-bar__cell-competition-name"></span>
-  </a>
+<script id="football-match" type="html/template"><div>
+<div class="data-bar data-bar--football data-bar--football-match">
+    <span class="data-bar__cell data-bar__cell-hometeam"></span>
+    <span class="data-bar__cell data-bar__cell-homescore"></span>
+  </div>
+  <div class="data-bar data-bar--football data-bar--football-match">
+    <span class="data-bar__cell data-bar__cell-awayteam"></span>
+    <span class="data-bar__cell data-bar__cell-awayscore"></span>
+  </div>
+  </div>
 </script>
 
 <script id="football-competition" type="html/template"><a class="data-bar data-bar--football" ontouchstart="tapTouch(this)">
@@ -188,6 +190,11 @@
     <span class="data-bar__cell data-bar__cell-time"></span>
     <span class="data-bar__cell data-bar__cell-awayteam"></span>
     <span class="data-bar__cell data-bar__cell-status"></span>
+  </a>
+</script>
+
+<script id="shim-template" type="html/template"><a class="data-bar data-bar--football">
+    <span class="data-bar__cell data-bar__cell-competition-name"></span>
   </a>
 </script>
 

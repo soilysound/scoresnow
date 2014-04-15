@@ -136,11 +136,32 @@
 }
 
 
+// MATCH VIEW
+.data-bar--football-match {
+  font-size: 1.6rem
+}
+
+.data-bar--football-match > .data-bar__cell-hometeam,
+.data-bar--football-match > .data-bar__cell-awayteam {
+  text-align: left;
+  padding-left: 1.1em;
+}
+
+.data-bar--football-match > .data-bar__cell-homescore,
+.data-bar--football-match > .data-bar__cell-awayscore {
+  width: 3em;
+}
+
+
 @media all and (@tablet-min) and (@tablet-max){
   
   .data-bar {
     font-size: 1.34rem;
-    height: 2.6em
+    height: 2.6em;
+  }
+
+  .data-bar--football-match {
+    font-size: 1.45rem
   }
 }
 
@@ -149,5 +170,9 @@
   .data-bar {
     font-size: 0.94rem;
     height: 2.52em
+  }
+
+  .data-bar--football-match {
+    font-size: 1.1rem
   }
 }
