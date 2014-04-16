@@ -22,7 +22,7 @@ module.exports = function(){
 
       var templateInstance = template.cloneNode(true);
       templateInstance.update = renderFunction;
-      templateInstance.update(item);
+      templateInstance.update(item, true);
 
       templateInstance.onclick = function(el){
         // oerride ghostpage function with explicit number of children in next view

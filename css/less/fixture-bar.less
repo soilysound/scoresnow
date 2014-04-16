@@ -30,7 +30,7 @@
 
 .data-bar__cell-homescore,
 .data-bar__cell-awayscore {
-  width: 2.3em;
+  width: 2.4em;
   border: 1px solid lighten(@keyline, 5%);
   border-top: 0;
   border-bottom: 0;
@@ -67,7 +67,7 @@
 }
 
 .data-bar__cell-time {
-  width: 4.6em;
+  width: 4.8em;
   display: none;
   background: @dark-grey;
   border-color: @dark-grey;
@@ -120,7 +120,7 @@
   }
 }
 
-.data-bar__cell[data-updated]{
+.data-bar[data-status='IP'] > .data-bar__cell[data-updated]{
   -webkit-animation: update 2s ease-in-out;
   -webkit-animation-iteration-count: 15;
   -webkit-animation-fill-mode: both;
@@ -132,7 +132,7 @@
 .tap-touch > .data-bar__cell:after {
   background: @active-color!important;
   border-color: darken(@active-color, 10%)!important;
-  color: #ddd!important;
+  color: #ddd!important
 }
 
 
