@@ -24,6 +24,7 @@ module.exports = function(){
   scrollPanes.forEach(function(element){
 
     element.addEventListener('touchstart', disableOverScroll, false);
+    element.scrollTop = 1;
 
   });
 };

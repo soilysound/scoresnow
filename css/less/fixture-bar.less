@@ -9,7 +9,7 @@
   margin: 0 auto 0.4em auto;
   border-radius: 2px;
   overflow: hidden;
-  max-width: 800px;
+  max-width: @view-width-max;
   color: @dark-grey;
   box-shadow: 0 0 1px rgba(0,0,0,0.5);
   background: white;
@@ -136,32 +136,11 @@
 }
 
 
-// MATCH VIEW
-.data-bar--football-match {
-  font-size: 1.6rem
-}
-
-.data-bar--football-match > .data-bar__cell-hometeam,
-.data-bar--football-match > .data-bar__cell-awayteam {
-  text-align: left;
-  padding-left: 1.1em;
-}
-
-.data-bar--football-match > .data-bar__cell-homescore,
-.data-bar--football-match > .data-bar__cell-awayscore {
-  width: 3em;
-}
-
-
 @media all and (@tablet-min) and (@tablet-max){
   
   .data-bar {
     font-size: 1.34rem;
     height: 2.6em;
-  }
-
-  .data-bar--football-match {
-    font-size: 1.45rem
   }
 }
 
@@ -170,9 +149,5 @@
   .data-bar {
     font-size: 0.94rem;
     height: 2.52em
-  }
-
-  .data-bar--football-match {
-    font-size: 1.1rem
   }
 }

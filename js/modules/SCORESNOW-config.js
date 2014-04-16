@@ -16,6 +16,22 @@ module.exports = function(){
       'competition': 2,
       'match': 3
     },
+    ghostPages: {
+      'football': {
+        'fixtures':1,
+        'competition': {
+
+        },
+        'match': 1
+      },
+      'tennis': {
+        'fixtures': 1,
+        'competition': {
+
+        },
+        'match': 1
+      }
+    },
     sportLookup: {
       1: 'football',
       2: 'cricket',
@@ -41,21 +57,22 @@ module.exports = function(){
         3269: [8326, 'League Two'],
         2900: [8260, 'FA Cup'],
         // 233: [111, 'AFC Champions League'],
-        76: [7707, 'Friendlies'],
+        //76: [7707, 'Friendlies'],
         // 105: [999, 'Club Friendlies'],
         2932: [8391, 'Scottish Premiership'],
         438: [8217, 'Scottish Championship'],
         // 159: [444, 'Indonesian Superleague'],
         // 65: [555, 'Argentian Primera Division'],
         // 75: [666, 'Indian I-League'],
-        140: [8218, 'Scottish League 1'],
+        46: [8218, 'Scottish League 1'],
         3277: [8491, 'La Liga'],
         3275: [8467, 'Bundesliga'],
         3276: [8398, 'Seria A'],
         2914: [8381, 'UEFA Champions League'],
         3274: [8463, 'Ligue 1'],
         82: [8472, 'DFB Pokal German Cup'],
-        2915: [8295, 'UEFA Europa League']
+        2915: [8295, 'UEFA Europa League'],
+        53: [8342, 'Copa Del Ray']
       }
     },
 

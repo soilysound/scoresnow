@@ -3,8 +3,12 @@
 module.exports = function(){
   
   var viewRendered;
+  var date = require('../modules/offset-time.js');
+  var ghostPage = require('../modules/ghost-page.js');
 
   function constructView(container, data, template, renderFunction){
+
+    ghostPage.set(data.length);
 
     template = document.getElementById(template);
 
@@ -17,7 +21,6 @@ module.exports = function(){
     data.forEach(function(item){
 
       var templateInstance = template.cloneNode(true);
-
       templateInstance.update = renderFunction;
       templateInstance.update(item);
 
@@ -31,14 +34,20 @@ module.exports = function(){
 
   function updateView(container, data){
     
-    var bars = container.querySelectorAll('.data-bar');
-
-    data.forEach(function(item, index){
-      bars[index].update(item);
+    // @TODO  use ids here instead
+    data.forEach(function(item){
+      var bar = container.querySelector('#i' + item.matchId);
+      if(!bar){
+        return;
+      }
+      bar.update(item);
     });
   }
 
-  function buildView(container, dataUrl, template){
+  function buildView(container, dataUrl, template, contentId){
+
+    // create ghost pages
+    ghostPage.add(container);
 
     // terminate previous web worker
     if(SCORESNOW.dataWorker){
@@ -53,7 +62,9 @@ module.exports = function(){
     SCORESNOW.dataWorker = new Worker(window.URL.createObjectURL(blob));
     SCORESNOW.dataWorker.postMessage({
       url: dataUrl,
-      type: template
+      type: template,
+      currentDate: date.getDate(),
+      id: contentId
     });
 
     SCORESNOW.dataWorker.onmessage = function(e){
@@ -85,11 +96,11 @@ module.exports = function(){
 
     var url = SCORESNOW.endpoints[currentSport][pageType];
     url = url.replace('#{id}', SCORESNOW.contentId);
-    url = url.replace('#{date}', new Date().toISOString().split('T').shift());
+    url = url.replace('#{date}', date.getDate());
 
     var currentView = (SCORESNOW.pages[SCORESNOW.currentPage - 1]);
 
-    buildView(currentView, url, currentSport + '-' + pageType);
+    buildView(currentView, url, currentSport + '-' + pageType, SCORESNOW.contentId);
     
   });
 
@@ -101,7 +112,7 @@ module.exports = function(){
       return;
     }
 
-    previousPage.innerHTML = document.getElementById('shim-template').innerHTML;
+    //previousPage.innerHTML = document.getElementById('shim-template').innerHTML;
 
   }, false);
 

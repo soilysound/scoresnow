@@ -13,9 +13,10 @@ module.exports = function(data){
   updateText(this.querySelector('.data-bar__cell-homescore'), data.scoreHome);
   updateText(this.querySelector('.data-bar__cell-awayscore'), data.scoreAway);
 
-  updateText(this.querySelector('.data-bar__cell-time'), offsetTime(data.kickoffDate, data.kickoffTime));
+  updateText(this.querySelector('.data-bar__cell-time'), offsetTime.getTime(data.kickoffDate, data.kickoffTime));
   updateText(this.querySelector('.data-bar__cell-status'), SCORESNOW.statusLookup[data.status.toLowerCase()]);
 
   this.href = "/#/football/match/" + data.matchId;
+  this.id = 'i' + data.matchId;
 
 };

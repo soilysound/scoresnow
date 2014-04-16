@@ -3,6 +3,7 @@ var cheerio = require('cheerio');
 var SCORESNOW = require('../js/modules/SCORESNOW-config.js')();
 var fs = require('fs');
 var schedule = require('node-schedule');
+var date = require('../js/modules/offset-time.js');
 
 
 function scrapeFootballFixtures(){
@@ -44,15 +45,15 @@ function scrapeFootballFixtures(){
 
     });
 
-    fs.writeFile("../../../../Users/mark/Google Drive/scoresnow/football-fixtures-" + new Date().toISOString().split('T').shift() + ".js", "callback(" + JSON.stringify(json) + ")");
+    fs.writeFile("../../../../Users/mark/Google Drive/scoresnow/football-fixtures-" + date.getDate() + ".js", "callback(" + JSON.stringify(json) + ")");
 
   });
 
 }
-
+scrapeFootballFixtures();
 var rule = new schedule.RecurrenceRule();
-rule.hour = 0;
-rule.minute = 59;
+rule.hour = 1;
+rule.minute = 1;
 schedule.scheduleJob(rule, function(){
   scrapeFootballFixtures();
 });

@@ -4,8 +4,6 @@ module.exports = function(data){
   
   var updateText = require('../update-text.js');
 
-  var isDefinedLeague = SCORESNOW.competitionLookup[SCORESNOW.currentSport][data.competitionId];
-
   updateText(this.querySelector('.data-bar__cell-hometeam'), data.teams.home.name);
   updateText(this.querySelector('.data-bar__cell-awayteam'), data.teams.away.name);
 
@@ -16,6 +14,8 @@ module.exports = function(data){
   this.querySelectorAll('.data-bar').forEach(function(item){
     item.setAttribute('data-status', status);
   });
+
+  this.id = 'i' + data.matchId;
 
 
 

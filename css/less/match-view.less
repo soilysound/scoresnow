@@ -1,0 +1,37 @@
+// MATCH VIEW
+
+.match-view {
+  max-width: @view-width-max;
+  margin: 0 auto;
+}
+
+// Score bars
+.data-bar--football-match {
+  font-size: 1.57rem;
+}
+
+.data-bar--football-match > .data-bar__cell-hometeam,
+.data-bar--football-match > .data-bar__cell-awayteam {
+  text-align: left;
+  padding-left: 1.1em;
+}
+
+.data-bar--football-match > .data-bar__cell-homescore,
+.data-bar--football-match > .data-bar__cell-awayscore {
+  width: 3em;
+}
+
+
+@media all and (@tablet-min) and (@tablet-max){
+  
+  .data-bar--football-match {
+    font-size: 1.45rem
+  }
+}
+
+@media all and (@mobile-max){
+
+  .data-bar--football-match {
+    font-size: 1.08rem
+  }
+}
