@@ -8,7 +8,7 @@ module.exports = function(){
 
   function constructView(container, data, template, renderFunction){
 
-    ghostPage.set(data.length);
+    ghostPage.set(SCORESNOW.children || data.length);
 
     template = document.getElementById(template);
 
@@ -23,6 +23,15 @@ module.exports = function(){
       var templateInstance = template.cloneNode(true);
       templateInstance.update = renderFunction;
       templateInstance.update(item);
+
+      templateInstance.onclick = function(el){
+        // oerride ghostpage function with explicit number of children in next view
+        SCORESNOW.children = parseInt(this.getAttribute('data-children'), 10);
+        setTimeout(function(){
+          // reset so ghost page function works as normal on next page
+          SCORESNOW.children = null;
+        }, 300);
+      };
 
       fragment.appendChild(templateInstance);
 

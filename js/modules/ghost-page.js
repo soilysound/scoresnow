@@ -21,6 +21,10 @@ module.exports = {
       }
     }
 
+    if(SCORESNOW.children){
+      number = SCORESNOW.children;
+    }
+
     var template = document.getElementById('shim-template');
     if(SCORESNOW.page === 'match'){
       template = document.getElementById(SCORESNOW.currentSport + '-match');

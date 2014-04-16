@@ -19,6 +19,7 @@ module.exports = function(data){
   updateText(this.querySelector('.data-bar__cell-competition-name'), competitionName);
   this.href = competitionURL;
   this.setAttribute('data-title', competitionName);
+  this.setAttribute('data-children', data.competitionChildren);
   this.id = 'i' + data.competitionId;
 
 

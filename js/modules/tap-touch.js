@@ -16,12 +16,4 @@ module.exports = function(el){
     notMoved = false;
   };
 
-  // el.ontouchend = function(){
-  //   setTimeout(function(){
-  //     el.classList.remove('tap-touch');
-  //     el.ontouchend = null;
-  //   }, 33);
-    
-  // };
-
 };

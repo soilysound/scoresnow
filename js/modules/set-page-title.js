@@ -11,6 +11,6 @@ module.exports = function(text, defaultText){
   updateText(pageTitle, newTitle);
   setTimeout(function(){
     pageTitle.style.cssText = "opacity: 1; visibility: visible";
-  }, SCORESNOW.disableTransitions ? 0 : 250);
+  }, SCORESNOW.disableTransitions ? 0 : 180);
   
 };

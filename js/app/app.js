@@ -35,4 +35,3 @@ scrollPanes();
 
 // attach fastclick
 attachFastClick(document.body);
-
