@@ -20,7 +20,16 @@ module.exports = function(){
 
     item.addEventListener('click', function(e){
 
+      if(document.currentBreakPoint === 'mobile' || document.currentBreakPoint === 'tablet'){
+        SCORESNOW.disableTransitions = true;
+      }
+
       siteLayout.closeNav();
+
+      setTimeout(function(){
+        SCORESNOW.disableTransitions = false;
+      }, 333);
+
 
     }.bind(item), false);
 

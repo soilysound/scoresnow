@@ -6,10 +6,14 @@ module.exports = {
 
     // get elements
     this.openNavButton = document.querySelector('.site-header__col3');
-    this.siteLayout = document.querySelector('.site-layout-primary');
+    this.siteLayout = document.querySelector('.site-layout-primary__col2');
     this.siteLayoutBody = this.siteLayout.querySelector('.content-window');
 
     this.navIsOpen = false;
+
+    // if(document.currentBreakPoint === 'mobile' || document.currentBreakPoint === 'tablet'){
+    //   this.navIsOpen = true;
+    // }
 
     // bind click action
     this.openNavButton.addEventListener('click', function(){

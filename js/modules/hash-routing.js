@@ -43,6 +43,10 @@ module.exports = function(){
       SCORESNOW.pageTitle = 'Match';
     }
 
+    if(SCORESNOW.page === 'home'){
+      SCORESNOW.pageTitle = 'Home';
+    }
+
     addPageTitle(SCORESNOW.pageTitle);
 
   }
@@ -52,16 +56,16 @@ module.exports = function(){
   }
 
   function setUpPages(e){
-
+    var hash = location.hash;
      // if no has return
-    if(location.hash.length === 0){
-      return;
+    if(location.hash.length < 3){
+      hash = '#/all/home/0';
     }
 
-    setPage(location.hash);
-    setSport(location.hash);
-    setContentId(location.hash);
-    setPageTitle(location.hash);
+    setPage(hash);
+    setSport(hash);
+    setContentId(hash);
+    setPageTitle(hash);
     // @TODO - work out how to tell if the user is going back
     setDirection('forward');
 

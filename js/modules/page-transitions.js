@@ -17,7 +17,7 @@ module.exports = function(){
 
     var styles = [];
 
-    if(!animate){
+    if(!animate || SCORESNOW.disableTransitions){
       styles.push("-webkit-transition-duration: 0");
       styles.push("transition-duration: 0");
     }

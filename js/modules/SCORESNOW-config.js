@@ -6,17 +6,23 @@ module.exports = function(){
     currentPage: 0,
     previousPage: 0,
     direction: 'forward',
+    disableTransitions: false,
     pageTypeLookup: {
-      1: 'fixtures',
-      2: 'competition',
-      3: 'match',
+      1: 'home',
+      2: 'fixtures',
+      3: 'competition',
+      4: 'match',
 
       // and the reverse
-      'fixtures': 1,
-      'competition': 2,
-      'match': 3
+      'home': 1,
+      'fixtures': 2,
+      'competition': 3,
+      'match': 4
     },
     ghostPages: {
+      'all': {
+        'home': 1
+      },
       'football': {
         'fixtures':1,
         'competition': {
@@ -33,14 +39,16 @@ module.exports = function(){
       }
     },
     sportLookup: {
-      1: 'football',
-      2: 'cricket',
-      3: 'tennis',
+      1: 'all',
+      2: 'football',
+      3: 'cricket',
+      4: 'tennis',
 
       //and reverse
-      'football': 1,
-      'cricket': 2,
-      'tennis': 3
+      'all': 1,
+      'football': 2,
+      'cricket': 3,
+      'tennis': 4
     },
 
     statusLookup: {
@@ -77,6 +85,10 @@ module.exports = function(){
     },
 
     endpoints: {
+      all: {
+        home: ''
+      },
+
       football: {
         fixtures: 'https://googledrive.com/host/0B5Em7PKD4NLoR2dYMktjTmxOckU/football-fixtures-#{date}.js?',
         // fixtures: 'http://192.168.0.6/data/football/today.js?',

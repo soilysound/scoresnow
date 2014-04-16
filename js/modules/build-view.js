@@ -99,8 +99,9 @@ module.exports = function(){
     url = url.replace('#{date}', date.getDate());
 
     var currentView = (SCORESNOW.pages[SCORESNOW.currentPage - 1]);
-
-    buildView(currentView, url, currentSport + '-' + pageType, SCORESNOW.contentId);
+    if(SCORESNOW.page !== 'home'){
+      buildView(currentView, url, currentSport + '-' + pageType, SCORESNOW.contentId);
+    }
     
   });
 

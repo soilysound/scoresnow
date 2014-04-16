@@ -7,8 +7,10 @@ module.exports = function(text, defaultText){
   var pageTitle = document.querySelector('.page-title');
   var newTitle = text ? text : defaultText;
 
+  pageTitle.style.cssText = "opacity: 0; visibility: hidden";
   updateText(pageTitle, newTitle);
-  pageTitle.style.visibility = 'visible';
- 
-
+  setTimeout(function(){
+    pageTitle.style.cssText = "opacity: 1; visibility: visible";
+  }, SCORESNOW.disableTransitions ? 0 : 250);
+  
 };

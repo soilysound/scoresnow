@@ -13,7 +13,7 @@
 .data-bar--football-match > .data-bar__cell-hometeam,
 .data-bar--football-match > .data-bar__cell-awayteam {
   text-align: left;
-  padding-left: 1.1em;
+  padding-left: 1em;
 }
 
 .data-bar--football-match > .data-bar__cell-homescore,
@@ -21,17 +21,68 @@
   width: 3em;
 }
 
+// match events
+.match-view__events {
+  margin-top: 0.6em;
+}
+
+.match-view__events-row {
+  border-bottom: 1px solid @keyline;
+  display: table;
+  table-layout: fixed;
+  width: 100%;
+  font-size: 1.25rem;
+  padding-left: 1em;
+}
+
+.match-view__events-row__col {
+   padding: 1em 0;
+   display: table-cell;
+}
+
+.match-view__events-row__col1 {
+  width: 3em;
+}
+
+.match-view__events-row__col2 {
+  width: 4em
+}
+
+.match-view__events-icon {
+  width: 2em;
+  height: 2em;
+  fill: #bbb;
+  vertical-align: middle;
+  display: inline-block;
+}
 
 @media all and (@tablet-min) and (@tablet-max){
   
   .data-bar--football-match {
     font-size: 1.45rem
   }
+
+  .match-view__events-row {
+    font-size: 1.25rem;
+  }
+
 }
 
 @media all and (@mobile-max){
 
   .data-bar--football-match {
     font-size: 1.08rem
+  }
+
+  .match-view__events-row {
+    font-size: 1rem;
+  }
+
+  .match-view__events-row__col2 {
+    width: 3em
+  }
+
+  .match-view__events-row__col {
+    padding: 0.9em 0
   }
 }

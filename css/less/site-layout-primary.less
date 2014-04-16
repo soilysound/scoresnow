@@ -24,12 +24,6 @@
 
 @media all and (@tablet-max){
   
-  .site-layout-primary {
-    -webkit-transition: -webkit-transform 0.33s ease-in-out;
-    -moz-transition: -moz-transform 0.33s ease-in-out;
-    transition: transform 0.33s ease-in-out;
-  }
-
   // move nav off canvas on mobile
   .site-layout-primary__col1 {
     position: absolute;
@@ -37,12 +31,31 @@
     right: 0;
     min-width: 0;
     width: @site-nav-width-mobile;
-    .transform(translateX(100%)); 
+    z-index: 1
+  }
+
+  .site-layout-primary__col2 {
+    -webkit-transition: -webkit-transform 0.33s ease-in-out;
+    -moz-transition: -moz-transform 0.33s ease-in-out;
+    transition: transform 0.33s ease-in-out;
+    z-index: 3
   }
 
   // nav is open
   .site-layout-primary--nav-open {
     .transform(translateX(@site-nav-width-mobile * -1));
   }
+  
+  // // nav is initally open and full width
+  // .site-layout-primary--nav-open-initially > .site-layout-primary__col1 {
+  //   width: 100%;
+  //   .transform(translateX(0));
+  // }
+
+  // .site-layout-primary--nav-open-initially > .site-layout-primary--nav-open {
+  //   width: 100%;
+  //   .transform(translateX(-100%));
+  // }
+
 
 }
