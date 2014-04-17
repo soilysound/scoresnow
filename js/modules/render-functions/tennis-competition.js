@@ -1,7 +1,7 @@
 // TENNIS COMPETITION
 
 module.exports = function(data, firstRun){
-  console.log(data);
+
   var updateText = require('../update-text.js');
 
   var players = data.players;
