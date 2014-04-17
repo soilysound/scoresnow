@@ -59,11 +59,12 @@ function scrapeDartsFixtures(){
 
 }
 
-scrapeDartsFixtures();
+// scrapeDartsFixtures();
 
-// var rule = new schedule.RecurrenceRule();
-// rule.hour = 1;
-// rule.minute = 1;
-// schedule.scheduleJob(rule, function(){
-//   scrapeFootballFixtures();
-// });
+var rule = new schedule.RecurrenceRule();
+rule.hour = 1;
+rule.minute = 1;
+rule.day = 5;
+schedule.scheduleJob(rule, function(){
+  scrapeDartsFixtures();
+});

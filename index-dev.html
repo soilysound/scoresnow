@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Scores Now</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="Scores Now">
+  <meta name="application-name" content="Scores Now">
+  <meta name="viewport" id="viewport" content="width=device-width,maximum-scale=1,minimum-scale=1,minimal-ui">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no">
+  <link rel="stylesheet" href="/css/site.css">
+  <script src="/js/head.js"></script>
+</head>
+<body>
+  <div class="site-layout-primary">
+    <div class="site-layout-primary__col1 scroll-pane">
+      <div class="site-logo">
+        <h1 class="site-logo__title">
+          scoresnow
+        </h1>
+      </div>
+
+      <nav class="nav">
+        <ul class="nav__group">
+          <li class="nav__item">
+            <a class="nav__item-link nav__item-link--football" href='/#/football/fixtures/'>
+              
+                <svg class="nav__item-icon" viewBox="0 0 27 27">
+                  <path d="M26.726,12.676c-0.133-2.512-0.945-4.845-2.279-6.805c-1.827-2.684-4.608-4.658-7.848-5.462 C15.565,0.152,14.492,0,13.381,0c-1.438,0-2.822,0.235-4.121,0.657c-3.14,1.02-5.765,3.172-7.409,5.971 C0.942,8.17,0.334,9.904,0.109,11.76C0.045,12.292,0,12.831,0,13.38c0,2.961,0.979,5.689,2.613,7.908 c1.617,2.197,3.881,3.881,6.517,4.768c1.338,0.45,2.764,0.704,4.251,0.704c2.009,0,3.909-0.458,5.621-1.255 c1.859-0.866,3.491-2.138,4.77-3.713c1.865-2.3,2.989-5.227,2.989-8.412C26.761,13.143,26.737,12.91,26.726,12.676z M24.01,12.676 l-2.751,4.764l1.813,3.139c-1.22,1.637-2.839,2.956-4.715,3.808l-1.382-2.391h-5.501l-1.691,2.928 c-2.627-0.821-4.872-2.517-6.393-4.745l2.112-3.655L2.752,11.76H1.413c0.253-1.88,0.928-3.628,1.943-5.132h3.849l2.75-4.765 L9.921,1.801c1.097-0.33,2.257-0.511,3.46-0.511c0.874,0,1.727,0.099,2.549,0.276l-0.172,0.297l2.75,4.765h4.896 c1.18,1.745,1.9,3.819,2.031,6.048H24.01z"/>
+                  <polygon points="10.631,8.455 7.88,13.219 10.631,17.983 16.131,17.983 18.882,13.219 16.131,8.455  "/>
+                </svg>
+            </a>
+          </li>
+
+          <li class="nav__item">
+            <a class="nav__item-link nav__item-link--tennis" href='/#/tennis/fixtures/'>
+              <svg viewBox="0 0 42.5 42.5" class="nav__item-icon">
+
+                <path d="M18.76,0.079C14.128,0.511,9.606,2.505,6.052,6.056c-3.553,3.551-5.545,8.073-5.976,12.711 c5.086,0.589,10.495,3.19,14.934,7.628c4.441,4.442,7.045,9.855,7.63,14.936c4.644-0.429,9.156-2.425,12.713-5.975 c3.553-3.549,5.545-8.074,5.973-12.711c-5.074-0.587-10.492-3.188-14.931-7.628C21.957,10.578,19.353,5.165,18.76,0.079z"/>
+                <path d="M41.405,20.079c-0.152-5.093-2.164-10.139-6.049-14.026C31.472,2.166,26.421,0.157,21.327,0 c0.574,4.448,2.936,9.227,6.895,13.188C32.184,17.147,36.956,19.505,41.405,20.079z"/>
+                <path d="M0,21.332c0.15,5.093,2.166,10.14,6.052,14.024c3.884,3.885,8.93,5.902,14.021,6.052   c-0.572-4.441-2.931-9.22-6.892-13.181C9.224,24.268,4.446,21.909,0,21.332z"/>
+
+              </svg>
+            </a>
+          </li>
+
+          <li class="nav__item">
+            <a class="nav__item-link nav__item-link--darts" href='/#/darts/fixtures/'>
+
+                <svg viewBox="0 0 200 200" class="nav__item-icon">
+
+                  <path d="M109.514,102.73v32.369c24.206-4.486,42.6-25.742,42.6-51.228c0-28.735-23.378-52.113-52.114-52.113 S47.886,55.136,47.886,83.871c0,25.486,18.394,46.742,42.6,51.228V102.73c-6.89-3.483-11.625-10.61-11.625-18.859 c0-11.675,9.464-21.139,21.139-21.139s21.139,9.464,21.139,21.139C121.139,92.12,116.404,99.247,109.514,102.73z"/>
+                  <path d="M100,4.038c-44.091,0-79.833,35.743-79.833,79.833c0,39.039,28.029,71.512,65.056,78.446 c1.054-2.399,2.936-4.315,5.264-5.332v-11.729c-29.75-4.592-52.6-30.37-52.6-61.385c0-34.249,27.864-62.113,62.114-62.113 s62.114,27.864,62.114,62.113c0,31.016-22.85,56.793-52.6,61.385v11.729c2.328,1.017,4.21,2.933,5.264,5.332 c37.027-6.933,65.056-39.406,65.056-78.446C179.833,39.781,144.091,4.038,100,4.038z"/>
+                  <path d="M105.684,161.185h-1.17v-15.381v-10.026v-31.261V89.298l7.888,2.815L100.365,72.5L87.598,92.112l7.888-2.815v15.218v31.261 v10.026v15.381h-1.17c-1.525,0-2.889,0.754-3.809,1.939c-0.751,0.967-1.206,2.22-1.206,3.593v26.546l10.366-11.063l11.034,11.063 v-26.546c0-1.373-0.456-2.626-1.206-3.593C108.573,161.939,107.209,161.185,105.684,161.185z"/>
+                </svg>
+
+            </a>
+          </li>
+
+          <li class="nav__item">
+            <a class="nav__item-link" href='/#/football/fixtures/'>
+            </a>
+          </li>
+
+          <li class="nav__item">
+            <a class="nav__item-link" href='/#/football/fixtures/'>
+            </a>
+          </li>
+
+          <li class="nav__item">
+            <a class="nav__item-link" href='/#/football/fixtures/'>
+            </a>
+          </li>
+        </ul>
+      </nav>
+      
+    </div>
+    <div class="site-layout-primary__col2">
+      <header class="site-header">
+        
+        <div class="site-header__col site-header__col1">
+          
+          <svg viewBox="0 0 134 134" class="site-header__back-button">      
+            <path d="M105.614,118.681c3.398,3.396,3.4,8.912,0,12.311c-3.396,3.399-8.91,3.398-12.311,0c-0.02-0.02-0.035-0.04-0.053-0.061   l-0.025,0.022l-57.66-57.66l0.024-0.022c-1.61-1.579-2.608-3.775-2.608-6.208c-0.002-2.73,1.258-5.166,3.229-6.762l-0.06-0.058   l57.66-57.66l0.025,0.024c0.018-0.021,0.033-0.039,0.053-0.058c3.4-3.4,8.912-3.4,12.312,0c3.398,3.396,3.398,8.908,0,12.311   c-0.021,0.02-0.041,0.034-0.061,0.054l0.023,0.024L54.043,67.063l51.54,51.54l-0.025,0.021   C105.573,118.646,105.594,118.66,105.614,118.681"></path>
+          </svg>
+
+        </div>
+        <div class="site-header__col site-header__col2"><h1 class="page-title"></h1></div>
+        <div class="site-header__col site-header__col3">
+          
+          <svg viewBox="0 0 80 80" class="site-header__hamburger">      
+            <rect width="80" height="15"/>
+            <rect y="30" width="80" height="15"/>
+            <rect y="60" width="80" height="15"/>
+          </svg>
+
+        </div>
+
+      </header>
+      <main class="content-window">
+      
+        <div class="page-slots">
+          <div class="page-slot page-slot--0">
+            HOMEPAGE
+          </div>
+          <div class="page-slot scroll-pane page-slot--1">
+            <a class="data-bar data-bar--football">
+              <span class="data-bar__cell data-bar__cell-competition-name"></span>
+            </a>
+          </div>
+          <div class="page-slot scroll-pane page-slot--2">
+            <a class="data-bar data-bar--football">
+              <span class="data-bar__cell data-bar__cell-competition-name"></span>
+            </a>
+          </div>
+          <div class="page-slot scroll-pane page-slot--3">
+            <div class="match-view" data-status="KO">
+              <div class="data-bar data-bar--football data-bar--football-match">
+                <span class="data-bar__cell data-bar__cell-hometeam"></span>
+                <span class="data-bar__cell data-bar__cell-homescore"></span>
+              </div>
+              <div class="data-bar data-bar--football data-bar--football-match">
+                <span class="data-bar__cell data-bar__cell-awayteam"></span>
+                <span class="data-bar__cell data-bar__cell-awayscore"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </main>
+    </div>
+  </div>
+</body>
+<script id="blob-worker" type="worker/template">
+var refreshInterval = 45000;
+  var dataType;
+  var dataObject = {};
+  var currentDate;
+  var contentId;
+
+  function compareName (a, b){
+    
+    if(a.teamHomeName > b.teamHomeName){
+     return 1;
+    }
+    
+    if(a.teamHomeName < b.teamHomeName){
+     return -1;
+    }
+    
+    return 0;
+  }
+
+  function compareTime (a, b){
+
+    if(a.kickofftime > b.kickofftime){
+      return 1;
+    }
+    
+    if(a.kickofftime < b.kickofftime){
+      return -1;
+    }
+    
+    return 0;
+  }
+
+
+  function callback(data){
+
+    if(dataType === 'darts-fixtures'){
+      dataObject.items = data;
+    }
+
+    if(dataType === 'darts-competition'){
+      var tournaments = data;
+      tournaments.forEach(function(item){
+        
+        if(item.id == contentId){
+          dataObject.items = item.events;
+          dataObject.name = item.name;
+        }
+      });
+    }
+
+
+    if(dataType === 'tennis-fixtures'){
+      dataObject.items = JSON.parse(data);
+      dataObject.items.forEach(function(item){
+        item.competitionChildren = item.events.length;
+      });
+    }
+
+    if(dataType === 'tennis-competition'){
+      var tennisTournaments = JSON.parse(data);
+
+      tennisTournaments.forEach(function(item){
+        if(item.id === contentId){
+          dataObject.items = item.events;
+          dataObject.name = item.name;
+        }
+      });
+    }
+
+    /* A FOOTBALL FIXTURES LIST */
+    if(dataType === 'football-fixtures'){
+
+      dataObject.items = data.events;
+      clearInterval(self.timer);
+
+    }
+
+    /* A FOOTBALL COMPETITION */
+    if(dataType === 'football-competition'){
+      
+        dataObject.items = data.data.fixtures[currentDate];
+        dataObject.items.sort(compareName);
+        dataObject.items.sort(compareTime);
+    }
+
+    /* A FOOTBALL MATCH */
+    if(dataType === 'football-match'){
+
+      dataObject.items = [data.data];
+      dataObject.matchId = contentId;
+
+    }
+
+    self.postMessage(dataObject);
+  }
+
+  self.addEventListener('message', function(e) {
+
+    dataType = e.data.type;
+    currentDate = e.data.currentDate;
+    contentId = e.data.id;
+    
+    importScripts(e.data.url + '&callback=callback');
+    
+    self.timer = setInterval(function(){
+      importScripts(e.data.url + '&callback=callback');
+    }, refreshInterval);
+    
+  }, false);
+</script>
+
+<script id="football-fixtures" type="html/template"><a class="data-bar" ontouchstart="tapTouch(this)">
+    <span class="data-bar__cell data-bar__cell-competition-name"></span>
+  </a>
+</script>
+
+<script id="football-match" type="html/template"><div class="match-view">
+<div class="data-bar data-bar--football data-bar--football-match" data-status="KO">
+    <span class="data-bar__cell data-bar__cell-hometeam"></span>
+    <span class="data-bar__cell data-bar__cell-homescore"></span>
+  </div>
+  <div class="data-bar data-bar--football data-bar--football-match" data-status="KO">
+    <span class="data-bar__cell data-bar__cell-awayteam"></span>
+    <span class="data-bar__cell data-bar__cell-awayscore"></span>
+  </div>
+</div>
+</script>
+
+<script id="football-competition" type="html/template"><a class="data-bar data-bar--football" ontouchstart="tapTouch(this)">
+    <span class="data-bar__cell data-bar__cell-hometeam"></span>
+    <span class="data-bar__cell data-bar__cell-homescore"></span>
+    <span class="data-bar__cell data-bar__cell-awayscore"></span>
+    <span class="data-bar__cell data-bar__cell-time"></span>
+    <span class="data-bar__cell data-bar__cell-awayteam"></span>
+    <span class="data-bar__cell data-bar__cell-status"></span>
+  </a>
+</script>
+
+<script id="darts-fixtures" type="html/template"><a class="data-bar" ontouchstart="tapTouch(this)">
+    <span class="data-bar__cell data-bar__cell-competition-name"></span>
+  </a>
+</script>
+
+<script id="darts-competition" type="html/template"><div class="data-bar data-bar--football">
+    <span class="data-bar__cell data-bar__cell-hometeam"></span>
+    <span class="data-bar__cell data-bar__cell-homescore"></span>
+    <span class="data-bar__cell data-bar__cell-awayscore"></span>
+    <span class="data-bar__cell data-bar__cell-time"></span>
+    <span class="data-bar__cell data-bar__cell-awayteam"></span>
+    <span class="data-bar__cell data-bar__cell-status"></span>
+  </div>
+</script>
+
+<script id="tennis-fixtures" type="html/template"><a class="data-bar" ontouchstart="tapTouch(this)">
+    <span class="data-bar__cell data-bar__cell-competition-name"></span>
+  </a>
+</script>
+
+<script id="tennis-competition" type="html/template"><div class="data-bar data-bar--tennis-match"> 
+    <span class="data-bar__row"> 
+      <span class="data-bar__cell data-bar__cell-tennis-side1">
+        
+        <svg viewBox="0 0 42.5 42.5" class="data-bar__cell-tennis-icon">
+          <path d="M18.76,0.079C14.128,0.511,9.606,2.505,6.052,6.056c-3.553,3.551-5.545,8.073-5.976,12.711   c5.086,0.589,10.495,3.19,14.934,7.628c4.441,4.442,7.045,9.855,7.63,14.936c4.644-0.429,9.156-2.425,12.713-5.975   c3.553-3.549,5.545-8.074,5.973-12.711c-5.074-0.587-10.492-3.188-14.931-7.628C21.957,10.578,19.353,5.165,18.76,0.079z"/>
+          <path d="M41.405,20.079c-0.152-5.093-2.164-10.139-6.049-14.026C31.472,2.166,26.421,0.157,21.327,0   c0.574,4.448,2.936,9.227,6.895,13.188C32.184,17.147,36.956,19.505,41.405,20.079z"/>
+          <path d="M0,21.332c0.15,5.093,2.166,10.14,6.052,14.024c3.884,3.885,8.93,5.902,14.021,6.052   c-0.572-4.441-2.931-9.22-6.892-13.181C9.224,24.268,4.446,21.909,0,21.332z"/>
+        </svg>
+
+        <span class="data-bar__cell-tennis-side1-participant"></span>
+
+      </span>
+      <span class="data-bar__cell data-bar__cell-tennis-score1">
+        <span class="data-bar__cell-tennis-set-group">
+          <span class="data-bar__cell-tennis-set">-</span> 
+          <span class="data-bar__cell-tennis-set">-</span> 
+          <span class="data-bar__cell-tennis-set">-</span> 
+          <span class="data-bar__cell-tennis-set">-</span> 
+          <span class="data-bar__cell-tennis-set">-</span> 
+        </span>
+      </span>
+    </span>
+    <span class="data-bar__row"> 
+      <span class="data-bar__cell data-bar__cell-tennis-side2">
+
+        <svg viewBox="0 0 42.5 42.5" class="data-bar__cell-tennis-icon ">
+          <path d="M18.76,0.079C14.128,0.511,9.606,2.505,6.052,6.056c-3.553,3.551-5.545,8.073-5.976,12.711   c5.086,0.589,10.495,3.19,14.934,7.628c4.441,4.442,7.045,9.855,7.63,14.936c4.644-0.429,9.156-2.425,12.713-5.975   c3.553-3.549,5.545-8.074,5.973-12.711c-5.074-0.587-10.492-3.188-14.931-7.628C21.957,10.578,19.353,5.165,18.76,0.079z"/>
+          <path d="M41.405,20.079c-0.152-5.093-2.164-10.139-6.049-14.026C31.472,2.166,26.421,0.157,21.327,0   c0.574,4.448,2.936,9.227,6.895,13.188C32.184,17.147,36.956,19.505,41.405,20.079z"/>
+          <path d="M0,21.332c0.15,5.093,2.166,10.14,6.052,14.024c3.884,3.885,8.93,5.902,14.021,6.052   c-0.572-4.441-2.931-9.22-6.892-13.181C9.224,24.268,4.446,21.909,0,21.332z"/>
+        </svg>
+
+        <span class="data-bar__cell-tennis-side2-participant"></span>
+
+      </span>
+      <span class="data-bar__cell data-bar__cell-tennis-score2">
+        <span class="data-bar__cell-tennis-set-group">
+          <span class="data-bar__cell-tennis-set">-</span> 
+          <span class="data-bar__cell-tennis-set">-</span> 
+          <span class="data-bar__cell-tennis-set">-</span> 
+          <span class="data-bar__cell-tennis-set">-</span> 
+          <span class="data-bar__cell-tennis-set">-</span> 
+        </span>
+      </span>
+    </span>
+  </div>
+</script>
+
+<script id="shim-template" type="html/template"><a class="data-bar data-bar--football">
+    <span class="data-bar__cell data-bar__cell-competition-name"></span>
+  </a>
+</script>
+
+<script src="/js/app.js"></script>
+
+</html>

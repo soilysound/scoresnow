@@ -5,6 +5,9 @@ var uglify = require('gulp-uglify');
 var less = require('gulp-less');
 var minifyCSS = require('gulp-minify-css');
 var browserify = require('gulp-browserify');
+var minifyHTML = require('gulp-minify-html');
+var rename = require("gulp-rename");
+
 
 var paths = {
   scripts: {
@@ -23,6 +26,16 @@ gulp.task('head.js', function() {
     .pipe(uglify())
     .pipe(concat('head.js'))
     .pipe(gulp.dest('js'));
+});
+
+gulp.task('minify-html', function() {
+
+  var opts = {quotes:true};
+
+  gulp.src('index-dev.html')
+    .pipe(minifyHTML(opts))
+    .pipe(rename('index.html'))
+    .pipe(gulp.dest(''));
 });
 
 // gulp.task('site.js', function() {
@@ -59,8 +72,9 @@ gulp.task('site.css', function(){
 gulp.task('watch', function() {
   gulp.watch(['css/less/*.less'], ['site.css']);
   gulp.watch(['js/head/*.js'], ['head.js']);
-  gulp.watch(['js/modules/*.js'], ['browserify']);
+  gulp.watch(['js/modules/**/*.js'], ['browserify']);
+  gulp.watch(['index-dev.html'], ['minify-html']);
 });
 
 // The default task (called when you run `gulp` from cli)
-gulp.task('build', ['head.js', 'browswerify', 'site.css']);
+gulp.task('default', ['head.js', 'browserify', 'site.css', 'minify-html']);
