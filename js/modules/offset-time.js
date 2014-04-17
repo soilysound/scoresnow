@@ -11,6 +11,11 @@ module.exports = {
     if(minutes === 0){
       minutes = '0' + minutes;
     }
+
+    if(hours === 0){
+      hours = '0' + hours;
+    }
+    
     return (hours + ':' + minutes);
 
     },

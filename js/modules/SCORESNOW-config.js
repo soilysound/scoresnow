@@ -36,6 +36,14 @@ module.exports = function(){
 
         },
         'match': 1
+      },
+
+      'darts': {
+        'fixtures': 1,
+        'competition': {
+
+        },
+        'match': 1
       }
     },
     sportLookup: {
@@ -43,12 +51,14 @@ module.exports = function(){
       2: 'football',
       3: 'cricket',
       4: 'tennis',
+      5: 'darts',
 
       //and reverse
       'all': 1,
       'football': 2,
       'cricket': 3,
-      'tennis': 4
+      'tennis': 4,
+      'darts': 5
     },
 
     statusLookup: {
@@ -88,6 +98,9 @@ module.exports = function(){
       },
       'tennis': {
         
+      },
+      'darts': {
+
       }
     },
 
@@ -106,6 +119,10 @@ module.exports = function(){
       tennis: {
         fixtures: 'https://googledrive.com/host/0B5Em7PKD4NLoR2dYMktjTmxOckU/tennis-fixtures-#{date}.js?',
         competition: 'https://googledrive.com/host/0B5Em7PKD4NLoR2dYMktjTmxOckU/tennis-fixtures-#{date}.js?'
+      },
+      darts: {
+        fixtures: 'https://googledrive.com/host/0B5Em7PKD4NLoR2dYMktjTmxOckU/darts-fixtures-#{date}.js?',
+        competition: 'https://googledrive.com/host/0B5Em7PKD4NLoR2dYMktjTmxOckU/darts-fixtures-#{date}.js?'
       }
     }
   };

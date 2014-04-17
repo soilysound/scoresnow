@@ -25,11 +25,11 @@ module.exports = {
       number = SCORESNOW.children;
     }
 
-    var template = document.getElementById('shim-template');
-    if(SCORESNOW.page === 'match'){
-      template = document.getElementById(SCORESNOW.currentSport + '-match');
-      console.log(template);
-    }
+    var template = document.getElementById(SCORESNOW.currentSport + '-' + SCORESNOW.page);
+    // if(SCORESNOW.page === 'match'){
+    //   template = document.getElementById(SCORESNOW.currentSport + '-match');
+    //   console.log(template);
+    // }
 
     var shim = document.createElement('div');
     shim.innerHTML = template.innerHTML;

@@ -22,7 +22,9 @@ window.SCORESNOW.renderFunctions = {
   "football-fixtures": require('../../js/modules/render-functions/football-fixtures.js'),
   "football-match": require('../../js/modules/render-functions/football-match.js'),
   'tennis-fixtures': require('../../js/modules/render-functions/tennis-fixtures.js'),
-  'tennis-competition': require('../../js/modules/render-functions/tennis-competition.js')
+  'tennis-competition': require('../../js/modules/render-functions/tennis-competition.js'),
+  'darts-fixtures': require('../../js/modules/render-functions/darts-fixtures.js'),
+  'darts-competition': require('../../js/modules/render-functions/darts-competition.js')
 };
 
 // run modules
