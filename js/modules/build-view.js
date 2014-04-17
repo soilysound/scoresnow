@@ -6,13 +6,15 @@ module.exports = function(){
   var date = require('../modules/offset-time.js');
   var ghostPage = require('../modules/ghost-page.js');
   var addPageTitle = require('../modules/set-page-title.js');
+  var sanitizeName = require('../modules/sanitize-name.js');
+
 
   function constructView(container, data, template, renderFunction){
     
     ghostPage.set(SCORESNOW.children || data.items.length);
     template = document.getElementById(template);
 
-    addPageTitle(data.name);
+    addPageTitle(sanitizeName(data.name));
 
     var span = document.createElement('span');
     span.innerHTML = template.innerHTML;
@@ -45,7 +47,7 @@ module.exports = function(){
   function updateView(container, data){
     
     // @TODO  use ids here instead
-    data.forEach(function(item){
+    data.items.forEach(function(item){
       var bar = container.querySelector('#i' + item.matchId);
       if(!bar){
         return;
