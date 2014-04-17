@@ -50,38 +50,12 @@ function scrapeFootballFixtures(){
   });
 
 }
-scrapeFootballFixtures();
+
+//scrapeFootballFixtures();
+
 var rule = new schedule.RecurrenceRule();
 rule.hour = 1;
 rule.minute = 1;
 schedule.scheduleJob(rule, function(){
   scrapeFootballFixtures();
 });
-
-  // request.post({
-  //   'url': 'https://www.googleapis.com/upload/drive/v2/files',
-  //   'qs': {
-  //     'uploadType': 'multipart'
-  //   },
-  //   'headers' : {
-  //     'Authorization': 'Bearer ' + 'ya29.1.AADtN_WYgm8cqN_ca5npdAi0XyZmr61RHdJeM5vdVDT14QBYvSM6-NDtcIblKA'
-  //   },
-  //   'multipart':  [
-  //     {
-  //       'Content-Type': 'application/json; charset=UTF-8',
-  //       'body': JSON.stringify({
-  //          'title': 'football-fixtures-' + new Date().toISOString().split('T').shift() + '.js',
-  //          'parents': [
-  //            {
-  //              'id': '0B5Em7PKD4NLoR2dYMktjTmxOckU'
-  //            }
-  //          ]
-  //        })
-  //     },
-  //     {
-  //       'Content-Type': 'text/javascript',
-  //       'Cache-Control': 'public, max-age=36000',
-  //       'body': new Buffer("callback(" + JSON.stringify(json) + ")", "utf-8")
-  //     }
-  //   ]
-  // });

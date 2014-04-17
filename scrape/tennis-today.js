@@ -21,10 +21,12 @@ function scrapeTennisFixtures(){
   });
 
 }
-scrapeTennisFixtures();
-// var rule = new schedule.RecurrenceRule();
-// rule.hour = 1;
-// rule.minute = 1;
-// schedule.scheduleJob(rule, function(){
-//   scrapeFootballFixtures();
-// });
+
+// scrapeTennisFixtures();
+
+var rule = new schedule.RecurrenceRule();
+rule.hour = 1;
+rule.minute = 1;
+schedule.scheduleJob(rule, function(){
+  scrapeTennisFixtures();
+});
