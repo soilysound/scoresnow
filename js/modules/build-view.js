@@ -48,7 +48,7 @@ module.exports = function(){
     
     // @TODO  use ids here instead
     data.items.forEach(function(item){
-      var bar = container.querySelector('#i' + item.matchId);
+      var bar = container.querySelector('#i' + (item.matchId || item.id));
       if(!bar){
         return;
       }

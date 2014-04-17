@@ -54,7 +54,10 @@ module.exports = function(){
     statusLookup: {
       'played': 'FT',
       'fixture': 'KO',
-      'playing': 'IP'
+      'playing': 'IP',
+      'finished': 'FT',
+      'not started': 'KO',
+      'in progress': 'IP'
     },
 
     competitionLookup: {

@@ -1,7 +1,6 @@
 // RENDER A FOOTBALL COMPETITION FIXTURE
 
 module.exports = function(data, firstRun){
-  console.log(data);
 
   var updateText = require('../update-text.js');
   var offsetTime = require('../offset-time.js');

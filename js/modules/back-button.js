@@ -8,11 +8,11 @@ module.exports = function(){
   function showBackButton(show){
 
     if(show){
-      backButton.style.cssText = 'visibility: visible; opacity: 1';
+      backButton.style.cssText = 'opacity: 1';
     }
 
     else {
-      backButton.style.cssText = 'opacity: 0';
+      backButton.style.cssText = 'opacity: 0; pointer-events: none';
     }
 
   }
