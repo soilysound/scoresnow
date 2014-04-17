@@ -127,7 +127,8 @@
   }
 }
 
-.data-bar[data-status='IP'] > .data-bar__cell[data-updated]{
+.data-bar[data-status='IP'] > .data-bar__cell[data-updated],
+.data-bar__cell-tennis-set-group[data-status='IP'] > .data-bar__cell-tennis-set[data-updated]{
   -webkit-animation: update 2s ease-in-out;
   -webkit-animation-iteration-count: 15;
   -webkit-animation-fill-mode: both;
@@ -213,7 +214,7 @@
 .data-bar__row[data-is-winner] .data-bar__cell-tennis-set {
   color: white;
   border-color: @red-stroke;
-  background: @red
+  background: @red!important
 }
 
 // set icon coour for winner and server

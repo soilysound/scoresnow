@@ -22,6 +22,7 @@
   height: 100%;
   width: 100%;
   color: white;
+  .transition(background 0.33s ease-in-out)
 }
 
 // selected item
@@ -32,24 +33,28 @@
 
 .nav__item-icon {
   position: absolute;
-  width: 40%%;
-  height: 40%;
-  left: 30%;
-  top: 29%;
+  width: 35%;
+  height: 35%;
+  left: 32.5%;
+  top: 22%;
   fill: @nav-icon-color;
   pointer-events: none;
 }
 
 .nav__item-title {
-  font-weight: normal
+  font-weight: normal;
+  font-size: 0.9em;
+  position: absolute;
+  width: 100%;
+  bottom: 20%;
 }
 
-@media all and (@mobile-max),
- all and (@desktop-wide-min){
+// @media all and (@mobile-max),
+//  all and (@desktop-wide-min){
 
-  .nav__item {
-    width: 33%;
-    padding-bottom: 33%;
-  }
+//   .nav__item {
+//     width: 33%;
+//     padding-bottom: 33%;
+//   }
 
-}
+// }
