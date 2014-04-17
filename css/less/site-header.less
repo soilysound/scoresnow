@@ -16,7 +16,6 @@
   display: table-cell;
   vertical-align: middle;
   text-align: center;
-  line-height: 0;
   height: @site-header-height;
 }
 
@@ -28,6 +27,7 @@
   opacity: 0;
   .transition(opacity 0.33s ease-in-out);
   cursor: pointer;
+  line-height: 0;
 }
 
 .site-header__col3 {
@@ -36,6 +36,7 @@
   padding-right: @site-indent;
   visibility: hidden;
   cursor: pointer;
+  line-height: 0;
 }
 
 
@@ -45,6 +46,9 @@
   font-weight: normal;
   font-size: 1.62rem;
   text-transform: capitalize;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
 }
 
 .site-header__back-button,

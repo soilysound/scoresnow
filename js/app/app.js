@@ -20,9 +20,10 @@ window.tapTouch = require('../../js/modules/tap-touch.js');
 window.SCORESNOW.renderFunctions = {
   "football-competition": require('../../js/modules/render-functions/football-competition.js'),
   "football-fixtures": require('../../js/modules/render-functions/football-fixtures.js'),
-  "football-match": require('../../js/modules/render-functions/football-match.js')
+  "football-match": require('../../js/modules/render-functions/football-match.js'),
+  'tennis-fixtures': require('../../js/modules/render-functions/tennis-fixtures.js'),
+  'tennis-competition': require('../../js/modules/render-functions/tennis-competition.js')
 };
-
 
 // run modules
 siteLayoutPrimary.init();

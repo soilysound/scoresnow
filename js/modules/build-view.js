@@ -5,12 +5,14 @@ module.exports = function(){
   var viewRendered;
   var date = require('../modules/offset-time.js');
   var ghostPage = require('../modules/ghost-page.js');
+  var addPageTitle = require('../modules/set-page-title.js');
 
   function constructView(container, data, template, renderFunction){
-
-    ghostPage.set(SCORESNOW.children || data.length);
-
+    
+    ghostPage.set(SCORESNOW.children || data.items.length);
     template = document.getElementById(template);
+
+    addPageTitle(data.name);
 
     var span = document.createElement('span');
     span.innerHTML = template.innerHTML;
@@ -18,8 +20,7 @@ module.exports = function(){
 
     var fragment = document.createDocumentFragment();
 
-    data.forEach(function(item){
-
+    data.items.forEach(function(item){
       var templateInstance = template.cloneNode(true);
       templateInstance.update = renderFunction;
       templateInstance.update(item, true);

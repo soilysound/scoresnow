@@ -70,7 +70,6 @@ module.exports = function(){
         2932: [8391, 'Scottish Premiership'],
         438: [8217, 'Scottish Championship'],
         // 159: [444, 'Indonesian Superleague'],
-        // 65: [555, 'Argentian Primera Division'],
         // 75: [666, 'Indian I-League'],
         46: [8218, 'Scottish League 1'],
         3277: [8491, 'La Liga'],
@@ -80,7 +79,12 @@ module.exports = function(){
         3274: [8463, 'Ligue 1'],
         82: [8472, 'DFB Pokal German Cup'],
         2915: [8295, 'UEFA Europa League'],
-        53: [8342, 'Copa Del Ray']
+        53: [8342, 'Copa Del Ray'],
+        65: [8658, 'Argentina Primera Division']
+        //63: [7964, 'Major League Soccer']
+      },
+      'tennis': {
+        
       }
     },
 
@@ -94,8 +98,12 @@ module.exports = function(){
         // fixtures: 'http://192.168.0.6/data/football/today.js?',
         competition: 'http://www.goal.com/en-gb/data/get-fixtures?gsmSeasonId=#{id}&gsmLang=en',
         match: 'http://www.goal.com/en-gb/data/get-events-for-match?gsmMatchId=#{id}&gsmLang=en&callback=callback'
+      },
+
+      tennis: {
+        fixtures: 'https://googledrive.com/host/0B5Em7PKD4NLoR2dYMktjTmxOckU/tennis-fixtures-#{date}.js?',
+        competition: 'https://googledrive.com/host/0B5Em7PKD4NLoR2dYMktjTmxOckU/tennis-fixtures-#{date}.js?'
       }
     }
   };
 };
-  

@@ -138,7 +138,7 @@
 
   var refreshInterval = 45000;
   var dataType;
-  var dataObject;
+  var dataObject = {};
   var currentDate;
   var contentId;
 
@@ -171,10 +171,26 @@
 
   function callback(data){
 
+    if(dataType === 'tennis-fixtures'){
+      dataObject.items = JSON.parse(data);
+    } 
+
+    if(dataType === 'tennis-competition'){
+      var tournaments = JSON.parse(data);
+
+      //dataObject.name = data
+      tournaments.forEach(function(item){
+        if(item.id === contentId){
+          dataObject.items = item.events;
+          dataObject.name = item.name;
+        };
+      });
+    }
+
     // A FOOTBALL FIXTURES LIST
     if(dataType === 'football-fixtures'){
 
-      dataObject = data.events;
+      dataObject.items = data.events;
       clearInterval(self.timer);
 
     }
@@ -182,17 +198,16 @@
     // A FOOTBALL COMPETITION
     if(dataType === 'football-competition'){
       
-        dataObject = data.data.fixtures[currentDate];
-        dataObject.sort(compareName);
-        dataObject.sort(compareTime);
-
+        dataObject.items = data.data.fixtures[currentDate];
+        dataObject.items.sort(compareName);
+        dataObject.items.sort(compareTime);
     }
 
     // A FOOTBALL MATCH
     if(dataType === 'football-match'){
 
-      dataObject = [data.data];
-      dataObject[0].matchId = contentId;
+      dataObject.items = [data.data];
+      dataObject.matchId = contentId;
 
     }
 
@@ -215,7 +230,7 @@
 
 </script>
 
-<script id="football-fixtures" type="html/template"><a class="data-bar data-bar--football" ontouchstart="tapTouch(this)">
+<script id="football-fixtures" type="html/template"><a class="data-bar" ontouchstart="tapTouch(this)">
     <span class="data-bar__cell data-bar__cell-competition-name"></span>
   </a>
 </script>
@@ -229,75 +244,6 @@
     <span class="data-bar__cell data-bar__cell-awayteam"></span>
     <span class="data-bar__cell data-bar__cell-awayscore"></span>
   </div>
-  <div class="match-view__events">
-    
-    <div class="match-view__events-row">
-      <div class="match-view__events-row__col match-view__events-row__col1">
-        <svg class="match-view__events-icon" viewBox="0 0 27 27">
-          <path d="M26.726,12.676c-0.133-2.512-0.945-4.845-2.279-6.805c-1.827-2.684-4.608-4.658-7.848-5.462
-            C15.565,0.152,14.492,0,13.381,0c-1.438,0-2.822,0.235-4.121,0.657c-3.14,1.02-5.765,3.172-7.409,5.971
-            C0.942,8.17,0.334,9.904,0.109,11.76C0.045,12.292,0,12.831,0,13.38c0,2.961,0.979,5.689,2.613,7.908
-            c1.617,2.197,3.881,3.881,6.517,4.768c1.338,0.45,2.764,0.704,4.251,0.704c2.009,0,3.909-0.458,5.621-1.255
-            c1.859-0.866,3.491-2.138,4.77-3.713c1.865-2.3,2.989-5.227,2.989-8.412C26.761,13.143,26.737,12.91,26.726,12.676z M24.01,12.676
-            l-2.751,4.764l1.813,3.139c-1.22,1.637-2.839,2.956-4.715,3.808l-1.382-2.391h-5.501l-1.691,2.928
-            c-2.627-0.821-4.872-2.517-6.393-4.745l2.112-3.655L2.752,11.76H1.413c0.253-1.88,0.928-3.628,1.943-5.132h3.849l2.75-4.765
-            L9.921,1.801c1.097-0.33,2.257-0.511,3.46-0.511c0.874,0,1.727,0.099,2.549,0.276l-0.172,0.297l2.75,4.765h4.896
-            c1.18,1.745,1.9,3.819,2.031,6.048H24.01z"/>
-          <polygon points="10.631,8.455 7.88,13.219 10.631,17.983 16.131,17.983 18.882,13.219 16.131,8.455  "/>
-        </svg>
-      </div>
-      <div class="match-view__events-row__col match-view__events-row__col2">
-        42'
-      </div>
-      <div class="match-view__events-row__col match-view__events-row__col3">
-      Wayne Rooney
-      </div>
-  </div>
-  <div class="match-view__events-row">
-      <div class="match-view__events-row__col match-view__events-row__col1">
-        <svg class="match-view__events-icon" viewBox="0 0 27 27">
-          <path d="M26.726,12.676c-0.133-2.512-0.945-4.845-2.279-6.805c-1.827-2.684-4.608-4.658-7.848-5.462
-            C15.565,0.152,14.492,0,13.381,0c-1.438,0-2.822,0.235-4.121,0.657c-3.14,1.02-5.765,3.172-7.409,5.971
-            C0.942,8.17,0.334,9.904,0.109,11.76C0.045,12.292,0,12.831,0,13.38c0,2.961,0.979,5.689,2.613,7.908
-            c1.617,2.197,3.881,3.881,6.517,4.768c1.338,0.45,2.764,0.704,4.251,0.704c2.009,0,3.909-0.458,5.621-1.255
-            c1.859-0.866,3.491-2.138,4.77-3.713c1.865-2.3,2.989-5.227,2.989-8.412C26.761,13.143,26.737,12.91,26.726,12.676z M24.01,12.676
-            l-2.751,4.764l1.813,3.139c-1.22,1.637-2.839,2.956-4.715,3.808l-1.382-2.391h-5.501l-1.691,2.928
-            c-2.627-0.821-4.872-2.517-6.393-4.745l2.112-3.655L2.752,11.76H1.413c0.253-1.88,0.928-3.628,1.943-5.132h3.849l2.75-4.765
-            L9.921,1.801c1.097-0.33,2.257-0.511,3.46-0.511c0.874,0,1.727,0.099,2.549,0.276l-0.172,0.297l2.75,4.765h4.896
-            c1.18,1.745,1.9,3.819,2.031,6.048H24.01z"/>
-          <polygon points="10.631,8.455 7.88,13.219 10.631,17.983 16.131,17.983 18.882,13.219 16.131,8.455  "/>
-        </svg>
-      </div>
-      <div class="match-view__events-row__col match-view__events-row__col2">
-        42'
-      </div>
-      <div class="match-view__events-row__col match-view__events-row__col3">
-      Wayne Rooney
-      </div>
-  </div>
-  <div class="match-view__events-row">
-      <div class="match-view__events-row__col match-view__events-row__col1">
-        <svg class="match-view__events-icon" viewBox="0 0 27 27">
-          <path d="M26.726,12.676c-0.133-2.512-0.945-4.845-2.279-6.805c-1.827-2.684-4.608-4.658-7.848-5.462
-            C15.565,0.152,14.492,0,13.381,0c-1.438,0-2.822,0.235-4.121,0.657c-3.14,1.02-5.765,3.172-7.409,5.971
-            C0.942,8.17,0.334,9.904,0.109,11.76C0.045,12.292,0,12.831,0,13.38c0,2.961,0.979,5.689,2.613,7.908
-            c1.617,2.197,3.881,3.881,6.517,4.768c1.338,0.45,2.764,0.704,4.251,0.704c2.009,0,3.909-0.458,5.621-1.255
-            c1.859-0.866,3.491-2.138,4.77-3.713c1.865-2.3,2.989-5.227,2.989-8.412C26.761,13.143,26.737,12.91,26.726,12.676z M24.01,12.676
-            l-2.751,4.764l1.813,3.139c-1.22,1.637-2.839,2.956-4.715,3.808l-1.382-2.391h-5.501l-1.691,2.928
-            c-2.627-0.821-4.872-2.517-6.393-4.745l2.112-3.655L2.752,11.76H1.413c0.253-1.88,0.928-3.628,1.943-5.132h3.849l2.75-4.765
-            L9.921,1.801c1.097-0.33,2.257-0.511,3.46-0.511c0.874,0,1.727,0.099,2.549,0.276l-0.172,0.297l2.75,4.765h4.896
-            c1.18,1.745,1.9,3.819,2.031,6.048H24.01z"/>
-          <polygon points="10.631,8.455 7.88,13.219 10.631,17.983 16.131,17.983 18.882,13.219 16.131,8.455  "/>
-        </svg>
-      </div>
-      <div class="match-view__events-row__col match-view__events-row__col2">
-        42'
-      </div>
-      <div class="match-view__events-row__col match-view__events-row__col3">
-      Wayne Rooney
-      </div>
-  </div>
-  </div>
 </div>
 </script>
 
@@ -309,6 +255,23 @@
     <span class="data-bar__cell data-bar__cell-awayteam"></span>
     <span class="data-bar__cell data-bar__cell-status"></span>
   </a>
+</script>
+
+<script id="tennis-fixtures" type="html/template"><a class="data-bar" ontouchstart="tapTouch(this)">
+    <span class="data-bar__cell data-bar__cell-competition-name"></span>
+  </a>
+</script>
+
+<script id="tennis-competition" type="html/template"><div class="data-bar data-bar--tennis-match"> 
+    <span class="data-bar__row"> 
+      <span class="data-bar__cell data-bar__cell-tennis-side1"></span>
+      <span class="data-bar__cell data-bar__cell-tennis-score1"></span>
+    </span>
+    <span class="data-bar__row"> 
+      <span class="data-bar__cell data-bar__cell-tennis-side2"></span>
+      <span class="data-bar__cell data-bar__cell-tennis-score2"></span>
+    </span>
+  </div>
 </script>
 
 <script id="shim-template" type="html/template"><a class="data-bar data-bar--football">
