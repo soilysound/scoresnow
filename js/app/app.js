@@ -1,10 +1,23 @@
 // APP.JS
 
-// get dependencies
-
 // create site config object
 window.SCORESNOW = require('../../config/SCORESNOW-config.js')();
 
+// asyncronously update config object with ghost pages
+window.ghostPageCallBack = function(object){
+  SCORESNOW.ghostPages.football.fixtures = object.football.fixtures;
+  SCORESNOW.ghostPages.tennis.fixtures = object.tennis.fixtures;
+};
+
+(function(){
+  var script = document.createElement('script');
+  script.src = "https://googledrive.com/host/0B5Em7PKD4NLoR2dYMktjTmxOckU/ghost-pages.js";
+  document.head.appendChild(script);
+})();
+
+
+
+// get modules
 var siteLayoutPrimary = require('../../js/modules/site-layout-primary.js');
 var attachFastClick = require('../../js/vendor/fastclick.js');
 var hashRouting = require('../../js/modules/hash-routing.js');

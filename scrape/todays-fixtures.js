@@ -7,13 +7,13 @@ var date = require('../js/modules/offset-time.js');
 
 var ghostPages = {
   football: {
-    fixtures: 1
+    fixtures: 0
   },
   tennis: {
-    fixtures: 1
+    fixtures: 0
   },
   darts: {
-    fixtures: 1
+    fixtures: 0
   }
 };
 
@@ -30,8 +30,8 @@ function scrapeFootballFixtures(){
     
     ];
 
-    $(competitions).each(function(item, node){
 
+    $(competitions).each(function(item, node){
       var data = {};
       var complink = $(node).find('a').first();
       var comphref = $(complink).attr('href');
@@ -50,13 +50,15 @@ function scrapeFootballFixtures(){
           data.name = comptitle;
           data.children = children;
           json.push(data);
+          ghostPages.football.fixtures++;
+
         }
       }
 
     });
 
     fs.writeFile("../../../../Users/mark/Google Drive/scoresnow/football-fixtures-" + date.getDate() + ".js", "callback(" + JSON.stringify(json) + ")");
-
+    createGhostPages();
   });
 
 }
@@ -68,9 +70,8 @@ function scrapeTennisFixtures(){
     var json = [];
     var data = JSON.parse(body);
 
-    ghostPages.tennis.fixtures = data.tournaments.length;
-
     data.tournaments.forEach(function(item){
+      ghostPages.tennis.fixtures ++;
       var row = {};
       row = item;
       row.children = row.events.length;
@@ -78,7 +79,7 @@ function scrapeTennisFixtures(){
     });
     
     fs.writeFile("../../../../Users/mark/Google Drive/scoresnow/tennis-fixtures-" + date.getDate() + ".js", "callback(" + JSON.stringify(json) + ")");
-
+    createGhostPages();
   });
 
 }
@@ -137,15 +138,13 @@ function scrapeDartsFixtures(){
 }
 
 function createGhostPages(){
-  fs.writeFile("../config/ghost-pages.js", "callback(" + JSON.stringify(ghostPages) + ")");
+  fs.writeFile("../../../../Users/mark/Google Drive/scoresnow/ghost-pages.js", 'ghostPageCallBack(' + JSON.stringify(ghostPages) + ');');
 }
-console.log(ghostPages);
+
 scrapeFootballFixtures();
 scrapeTennisFixtures();
 scrapeDartsFixtures();
-setTimeout(function(){
-  createGhostPages();
-}, 2000);
+
 
 // var rule = new schedule.RecurrenceRule();
 // rule.hour = 0;

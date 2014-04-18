@@ -25,6 +25,8 @@ module.exports = {
       number = SCORESNOW.children;
     }
 
+console.log(number);
+
     var template = document.getElementById(SCORESNOW.currentSport + '-' + SCORESNOW.page);
    
     var shim = document.createElement('div');

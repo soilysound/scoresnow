@@ -1,1 +1,1 @@
-callback({"football":{"fixtures":22},"tennis":{"fixtures":7},"darts":{"fixtures":1}})
+window.ghostPages = {"football":{"fixtures":7},"tennis":{"fixtures":7},"darts":{"fixtures":0}}
