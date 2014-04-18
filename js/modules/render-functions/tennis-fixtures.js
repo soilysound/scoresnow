@@ -10,7 +10,6 @@ module.exports = function(data, firstRun){
     var tournamentName = data.name.trim();
     updateText(this.querySelector('.data-bar__cell-competition-name'), sanitizeName(tournamentName));
     this.href = "/#/tennis/competition/" + data.id;
-    this.setAttribute('data-children', data.competitionChildren);
   }
 
 };

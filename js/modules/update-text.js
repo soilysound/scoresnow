@@ -7,10 +7,10 @@ module.exports = function(node, text){
   }
   
   text = text.toString().trim();
-  var currentText = node.textContent.trim();
+  var currentText = node.textContent;
 
-  if(currentText!==text || currentText === '-'){
-    if(currentText.length > 0){
+  if(currentText !== text){
+    if(currentText.length > 0 && currentText !== '-'){
       node.setAttribute('data-updated', true);
     }
     node.textContent = text;

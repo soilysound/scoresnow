@@ -11,35 +11,45 @@ module.exports = function(){
 
   function constructView(container, data, template, renderFunction){
     
-    ghostPage.set(SCORESNOW.children || data.items.length);
-    template = document.getElementById(template);
+    // add ghost page with number of items expected on the next page
+    ghostPage.set(SCORESNOW.children || data.length);
 
+    // set page title
     addPageTitle(sanitizeName(data.name));
 
+    // get template for this view
+    template = document.getElementById(template);
     var span = document.createElement('span');
     span.innerHTML = template.innerHTML;
     template = span.firstChild;
 
     var fragment = document.createDocumentFragment();
+  
+    // loop through items in the data
+    data.forEach(function(item){
 
-    data.items.forEach(function(item){
       var templateInstance = template.cloneNode(true);
       templateInstance.update = renderFunction;
-      templateInstance.update(item, true);
-
-      templateInstance.onclick = function(el){
-        // oerride ghostpage function with explicit number of children in next view
+      templateInstance.id = 'i' + item.id;
+      templateInstance.setAttribute('data-children', item.children || 1);
+      
+      // override ghostpage function with explicit number of children in next view
+      templateInstance.onclick = function(){
         SCORESNOW.children = parseInt(this.getAttribute('data-children'), 10);
         setTimeout(function(){
-          // reset so ghost page function works as normal on next page
+        // reset so ghost page function works as normal on next page
           SCORESNOW.children = null;
         }, 300);
       };
 
+      // update data in this template
+      templateInstance.update(item, true);
+      // add template to fragment
       fragment.appendChild(templateInstance);
 
     });
 
+    // add fragment to view
     container.innerHTML = "";
     container.appendChild(fragment);
   }
@@ -47,13 +57,17 @@ module.exports = function(){
   function updateView(container, data){
     
     // @TODO  use ids here instead
-    data.items.forEach(function(item){
-      var bar = container.querySelector('#i' + (item.matchId || item.id));
+    data.forEach(function(item){
+      var bar = container.querySelector('#i' + (item.id));
       if(!bar){
         return;
       }
       bar.update(item);
     });
+  }
+
+  function noFixtures(container){
+    container.innerHTML = "NO FIXTURES";
   }
 
   function buildView(container, dataUrl, template, contentId){
@@ -86,6 +100,11 @@ module.exports = function(){
         return;
       }
 
+      if(e.data.length === 0){
+        noFixtures(container);
+        return;
+      }
+
       if(viewRendered){
         updateView(container, e.data);
       }
@@ -111,6 +130,7 @@ module.exports = function(){
     url = url.replace('#{date}', date.getDate());
 
     var currentView = (SCORESNOW.pages[SCORESNOW.currentPage - 1]);
+
     if(SCORESNOW.page !== 'home'){
       buildView(currentView, url, currentSport + '-' + pageType, SCORESNOW.contentId);
     }

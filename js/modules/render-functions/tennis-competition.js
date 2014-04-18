@@ -10,7 +10,6 @@ module.exports = function(data, firstRun){
   if(firstRun){
     updateText(this.querySelector('.data-bar__cell-tennis-side1-participant'), players[0].name);
     updateText(this.querySelector('.data-bar__cell-tennis-side2-participant'), players[1].name);
-    this.id = 'i' + data.id;
   }
 
   // get player row
@@ -42,6 +41,9 @@ module.exports = function(data, firstRun){
   }
 
   if(playerRows[server]){
+    playerRows.forEach(function(item){
+      item.removeAttribute('data-is-server');
+    });
     playerRows[server].setAttribute('data-is-server', server + 1);
   }
 
@@ -56,6 +58,7 @@ module.exports = function(data, firstRun){
     item.setAttribute('data-status', status);
 
     player.set_games.forEach(function(set, index){
+      console.log(setNodes[index]);
       updateText(setNodes[index], set);
     });
 

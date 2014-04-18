@@ -138,11 +138,12 @@
   </div>
 </body>
 <script id="blob-worker" type="worker/template">
-var refreshInterval = 45000;
+  
+  var refreshInterval = 45000;
   var dataType;
   var dataObject = {};
   var currentDate;
-  var contentId;
+  var id;
 
   function compareName (a, b){
     
@@ -170,83 +171,88 @@ var refreshInterval = 45000;
     return 0;
   }
 
+  /* data format
+  [{children:[], name: 'premier league', id: 12},{children:[], name: 'championship', id: 13}]
+  */
 
   function callback(data){
 
+    /* darts fixtures */
     if(dataType === 'darts-fixtures'){
-      dataObject.items = data;
+
+      dataObject = data;
     }
 
+    /* darts competition */
     if(dataType === 'darts-competition'){
-      var tournaments = data;
-      tournaments.forEach(function(item){
-        
-        if(item.id == contentId){
-          dataObject.items = item.events;
+
+      data.forEach(function(item){
+        if(item.id == id){
+          dataObject = item.events;
           dataObject.name = item.name;
         }
       });
     }
 
-
+    /* tennis fixtures */
     if(dataType === 'tennis-fixtures'){
-      dataObject.items = JSON.parse(data);
-      dataObject.items.forEach(function(item){
-        item.competitionChildren = item.events.length;
-      });
+
+      dataObject = data;
+      clearInterval(self.timer);
     }
 
+    /* tennis competition */
     if(dataType === 'tennis-competition'){
-      var tennisTournaments = JSON.parse(data);
-
-      tennisTournaments.forEach(function(item){
-        if(item.id === contentId){
-          dataObject.items = item.events;
+    
+      data.forEach(function(item){
+        if(item.id === id){
+          dataObject = item.events;
           dataObject.name = item.name;
         }
       });
     }
 
-    /* A FOOTBALL FIXTURES LIST */
+    /* a football fixtures list */
     if(dataType === 'football-fixtures'){
-
-      dataObject.items = data.events;
+      
+      dataObject = data;
       clearInterval(self.timer);
 
     }
 
-    /* A FOOTBALL COMPETITION */
+    /* a football competition */
     if(dataType === 'football-competition'){
       
-        dataObject.items = data.data.fixtures[currentDate];
-        dataObject.items.sort(compareName);
-        dataObject.items.sort(compareTime);
+        dataObject = data.data.fixtures[currentDate];
+        dataObject.sort(compareTime);
     }
 
-    /* A FOOTBALL MATCH */
+    /* a football match */
     if(dataType === 'football-match'){
 
-      dataObject.items = [data.data];
-      dataObject.matchId = contentId;
+      dataObject = [data.data];
+      dataObject.id = id;
 
     }
 
     self.postMessage(dataObject);
   }
 
-  self.addEventListener('message', function(e) {
 
+  self.addEventListener('message', function(e) {
+    
     dataType = e.data.type;
     currentDate = e.data.currentDate;
-    contentId = e.data.id;
-    
+    id = e.data.id;
+
     importScripts(e.data.url + '&callback=callback');
-    
+
     self.timer = setInterval(function(){
       importScripts(e.data.url + '&callback=callback');
     }, refreshInterval);
     
   }, false);
+
 </script>
 
 <script id="football-fixtures" type="html/template"><a class="data-bar" ontouchstart="tapTouch(this)">
@@ -266,7 +272,7 @@ var refreshInterval = 45000;
 </div>
 </script>
 
-<script id="football-competition" type="html/template"><a class="data-bar data-bar--football" ontouchstart="tapTouch(this)">
+<script id="football-competition" type="html/template"><a class="data-bar data-bar--football" ontouchstart="tapTouch(this)" data-status="shim">
     <span class="data-bar__cell data-bar__cell-hometeam"></span>
     <span class="data-bar__cell data-bar__cell-homescore"></span>
     <span class="data-bar__cell data-bar__cell-awayscore"></span>
