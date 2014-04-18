@@ -17,6 +17,7 @@
   -moz-transition: -moz-transform 0.33s ease-in-out;
   transition: transform 0.33s ease-in-out;
   padding: @page-slot-padding;
+  padding-bottom: @page-slot-padding + 12px;
   overflow-y: scroll!important;
 }
 
@@ -29,13 +30,15 @@
 @media all and (@tablet-min) and (@tablet-max){
   
   .page-slot {
-    padding: @page-slot-padding-tablet
+    padding: @page-slot-padding-tablet;
+    padding-bottom: @page-slot-padding-tablet + 12px;
   }
 }
 
 @media all and (@mobile-max){
   
   .page-slot {
-    padding: @page-slot-padding-mobile
+    padding: @page-slot-padding-mobile;
+    padding-bottom: @page-slot-padding-mobile + 12px;
   }
 }

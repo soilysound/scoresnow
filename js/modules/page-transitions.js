@@ -49,6 +49,9 @@ module.exports = function(){
     var previousPage = SCORESNOW.previousPage;
     var direction = SCORESNOW.direction;
 
+    // make sure each page starts at scroll top 1;
+    pages[pageToGoTo - 1].scrollTop = 1;
+
     if(pageToGoTo === previousPage){
       return;
     }
