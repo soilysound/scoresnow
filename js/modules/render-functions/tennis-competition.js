@@ -58,7 +58,6 @@ module.exports = function(data, firstRun){
     item.setAttribute('data-status', status);
 
     player.set_games.forEach(function(set, index){
-      console.log(setNodes[index]);
       updateText(setNodes[index], set);
     });
 

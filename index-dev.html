@@ -135,6 +135,13 @@
       </main>
     </div>
   </div>
+  <div class="offline-overlay">
+    <div class="offline-overlay__body">
+      <svg height="16" viewBox="0 0 16 16" class="offline-overlay__icon"><path fill-rule="evenodd" d="m8,0c-4.418,0-8,3.582-8,8s3.582,8 8,8 8-3.582 8-8-3.582-8-8-8zm1,13h-2v-2h2v2zm0-3h-2v-7h2v7z"/></svg>
+      <h4 class="offline-overlay__header">Offline<h4>
+      <p class="offline-overlay__text">Please check network connectivity.</p>
+    </div>
+  </div>
 </body>
 <script id="blob-worker" type="worker/template">
   
@@ -144,30 +151,14 @@
   var currentDate;
   var id;
 
-  function compareName (a, b){
-    
-    if(a.teamHomeName > b.teamHomeName){
-     return 1;
-    }
-    
-    if(a.teamHomeName < b.teamHomeName){
-     return -1;
-    }
-    
-    return 0;
-  }
 
-  function compareTime (a, b){
-
-    if(a.kickofftime > b.kickofftime){
-      return 1;
+  function sortFixtureList (a, b){
+    if(parseInt(a.kickoffTime, 10) === parseInt(b.kickoffTime, 10)){
+      return a.teamHomeClubName > b.teamHomeClubName ? 1 : -1
     }
-    
-    if(a.kickofftime < b.kickofftime){
-      return -1;
+    else {
+      return parseInt(a.kickoffTime, 10) > parseInt(b.kickoffTime, 10) ? 1 : -1
     }
-    
-    return 0;
   }
 
   /* data format
@@ -222,8 +213,12 @@
     /* a football competition */
     if(dataType === 'football-competition'){
       
-        dataObject = data.data.fixtures[currentDate];
-        dataObject.sort(compareTime);
+        var compList = data.data.fixtures[currentDate];
+        compList.forEach(function(item){
+          item.id = item.matchId;
+        });
+
+        dataObject = compList.sort(sortFixtureList);
     }
 
     /* a football match */
@@ -244,7 +239,13 @@
     currentDate = e.data.currentDate;
     id = e.data.id;
 
-    importScripts(e.data.url + '&callback=callback');
+    try{
+      importScripts(e.data.url + '&callback=callback');
+    }
+    catch(e){
+      self.postMessage([]);
+      clearInterval(self.timer);
+    }
 
     self.timer = setInterval(function(){
       importScripts(e.data.url + '&callback=callback');
@@ -316,11 +317,11 @@
       </span>
       <span class="data-bar__cell data-bar__cell-tennis-score1">
         <span class="data-bar__cell-tennis-set-group">
-          <span class="data-bar__cell-tennis-set">-</span> 
-          <span class="data-bar__cell-tennis-set">-</span> 
-          <span class="data-bar__cell-tennis-set">-</span> 
-          <span class="data-bar__cell-tennis-set">-</span> 
-          <span class="data-bar__cell-tennis-set">-</span> 
+          <span class="data-bar__cell-tennis-set"></span> 
+          <span class="data-bar__cell-tennis-set"></span> 
+          <span class="data-bar__cell-tennis-set"></span> 
+          <span class="data-bar__cell-tennis-set"></span> 
+          <span class="data-bar__cell-tennis-set"></span> 
         </span>
       </span>
     </span>
@@ -338,11 +339,11 @@
       </span>
       <span class="data-bar__cell data-bar__cell-tennis-score2">
         <span class="data-bar__cell-tennis-set-group">
-          <span class="data-bar__cell-tennis-set">-</span> 
-          <span class="data-bar__cell-tennis-set">-</span> 
-          <span class="data-bar__cell-tennis-set">-</span> 
-          <span class="data-bar__cell-tennis-set">-</span> 
-          <span class="data-bar__cell-tennis-set">-</span> 
+          <span class="data-bar__cell-tennis-set"></span> 
+          <span class="data-bar__cell-tennis-set"></span> 
+          <span class="data-bar__cell-tennis-set"></span> 
+          <span class="data-bar__cell-tennis-set"></span> 
+          <span class="data-bar__cell-tennis-set"></span> 
         </span>
       </span>
     </span>

@@ -6,14 +6,10 @@ module.exports = {
 
     // get elements
     this.openNavButton = document.querySelector('.site-header__col3');
-    this.siteLayout = document.querySelector('.site-layout-primary__col2');
+    this.siteLayout = document.querySelector('.site-layout-primary');
     this.siteLayoutBody = this.siteLayout.querySelector('.content-window');
 
     this.navIsOpen = false;
-
-    // if(document.currentBreakPoint === 'mobile' || document.currentBreakPoint === 'tablet'){
-    //   this.navIsOpen = true;
-    // }
 
     // bind click action
     this.openNavButton.addEventListener('click', function(){
@@ -27,6 +23,8 @@ module.exports = {
       }
 
     }.bind(this), false);
+
+    this.bouncCloseNav = this.closeNav.bind(this);
   },
 
    // close nav
@@ -35,14 +33,14 @@ module.exports = {
       e.stopPropagation();
     }
     
-    this.siteLayoutBody.ontouchstart = null;
+    this.siteLayoutBody.removeEventListener('touchstart', this.bouncCloseNav, true);
     this.siteLayout.classList.remove('site-layout-primary--nav-open');
     this.navIsOpen = false;
   },
 
   // open nav
   openNav: function(e){
-    this.siteLayoutBody.ontouchstart = this.closeNav.bind(this);
+    this.siteLayoutBody.addEventListener('touchstart', this.bouncCloseNav, true);
     this.siteLayout.classList.add('site-layout-primary--nav-open');
     this.navIsOpen = true;
   }

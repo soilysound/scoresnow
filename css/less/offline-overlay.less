@@ -1,0 +1,44 @@
+// OFFLINE OVERLAY
+
+div.offline-overlay {
+  display: table;
+  position: absolute;
+  background: @site-nav-background;
+  width: 100%;
+  height: 100%;
+  z-index: 999;
+  top: 0;
+  left: 0
+}
+
+.offline-overlay__body {
+  display: table-cell;
+  vertical-align: middle;
+  text-align: center;
+  color: white;
+  padding-bottom: 120px;
+}
+
+.offline-overlay__icon {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  vertical-align: middle;
+  position: relative;
+  top: -4px;
+  left: -5px;
+  fill: @mid-grey;
+}
+
+.offline-overlay__header {
+  font-weight: normal;
+  font-size: 1.25rem;
+  font-family: ubuntu-medium;
+  padding-bottom: 0.3em;
+  display: inline-block
+}
+
+.offline-overlay__text {
+  font-family: ubuntu;
+  font-weight: normal
+}

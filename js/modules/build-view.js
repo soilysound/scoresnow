@@ -7,9 +7,10 @@ module.exports = function(){
   var ghostPage = require('../modules/ghost-page.js');
   var addPageTitle = require('../modules/set-page-title.js');
   var sanitizeName = require('../modules/sanitize-name.js');
+  var getTemplate = require('../modules/get-template.js');
 
 
-  function constructView(container, data, template, renderFunction){
+  function constructView(container, data, templateId, renderFunction){
     
     // add ghost page with number of items expected on the next page
     ghostPage.set(SCORESNOW.children || data.length);
@@ -17,11 +18,7 @@ module.exports = function(){
     // set page title
     addPageTitle(sanitizeName(data.name));
 
-    // get template for this view
-    template = document.getElementById(template);
-    var span = document.createElement('span');
-    span.innerHTML = template.innerHTML;
-    template = span.firstChild;
+    var template = getTemplate(templateId);
 
     var fragment = document.createDocumentFragment();
   
@@ -59,6 +56,7 @@ module.exports = function(){
     // @TODO  use ids here instead
     data.forEach(function(item){
       var bar = container.querySelector('#i' + (item.id));
+
       if(!bar){
         return;
       }
@@ -66,8 +64,21 @@ module.exports = function(){
     });
   }
 
-  function noFixtures(container){
-    container.innerHTML = "NO FIXTURES";
+  function noFixtures(container, templateId){
+
+    var template = getTemplate(templateId);
+    container.innerHTML = '';
+    template.classList.add('no-fixtures');
+    template.style.cssText = "pointer-events: none";
+    container.appendChild(template);
+    window.requestAnimationFrame(function(){
+      template.classList.add('no-fixtures--fade-out');
+    });
+
+    var div = document.createElement('div');
+    div.className = 'no-fixtures-message';
+    div.innerHTML = '<div class="no-fixtures-message__body"><svg height="16" viewBox="0 0 16 16" class="no-fixtures-message__icon"><path fill-rule="evenodd" d="m8,0c-4.418,0-8,3.582-8,8s3.582,8 8,8 8-3.582 8-8-3.582-8-8-8zm1,13h-2v-2h2v2zm0-3h-2v-7h2v7z"/></svg> No events</div>';
+    container.appendChild(div);
   }
 
   function buildView(container, dataUrl, template, contentId){
@@ -101,7 +112,7 @@ module.exports = function(){
       }
 
       if(e.data.length === 0){
-        noFixtures(container);
+        noFixtures(container, template);
         return;
       }
 

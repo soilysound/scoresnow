@@ -3,7 +3,7 @@
 module.exports = function(data, firstRun){
 
   var updateText = require('../update-text.js');
-  console.log(data);
+
   if(firstRun){
     var isDefinedLeague = SCORESNOW.competitionLookup[SCORESNOW.currentSport][data.id];
 

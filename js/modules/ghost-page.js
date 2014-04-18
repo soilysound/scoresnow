@@ -26,11 +26,7 @@ module.exports = {
     }
 
     var template = document.getElementById(SCORESNOW.currentSport + '-' + SCORESNOW.page);
-    // if(SCORESNOW.page === 'match'){
-    //   template = document.getElementById(SCORESNOW.currentSport + '-match');
-    //   console.log(template);
-    // }
-
+   
     var shim = document.createElement('div');
     shim.innerHTML = template.innerHTML;
     shim = shim.firstChild;

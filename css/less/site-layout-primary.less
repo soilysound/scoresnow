@@ -19,7 +19,6 @@
   min-width: @site-nav-min-width;
   .no-flex();
   background: @site-nav-background;
-  z-index: 3;
 }
 
 
@@ -32,20 +31,21 @@
     right: 0;
     min-width: 0;
     width: @site-nav-width-mobile;
-    z-index: 1
+    .transform(translateX(100%));
+    z-index: 2
   }
 
-  .site-layout-primary__col2 {
+  .site-layout-primary {
     -webkit-transition: -webkit-transform 0.33s ease-in-out;
     -moz-transition: -moz-transform 0.33s ease-in-out;
     transition: transform 0.33s ease-in-out;
-    z-index: 3
   }
 
   // nav is open
   .site-layout-primary--nav-open {
     .transform(translateX(@site-nav-width-mobile * -1));
   }
+
   
   // // nav is initally open and full width
   // .site-layout-primary--nav-open-initially > .site-layout-primary__col1 {

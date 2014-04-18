@@ -3,7 +3,7 @@
 // get dependencies
 
 // create site config object
-window.SCORESNOW = require('../../js/modules/SCORESNOW-config.js')();
+window.SCORESNOW = require('../../config/SCORESNOW-config.js')();
 
 var siteLayoutPrimary = require('../../js/modules/site-layout-primary.js');
 var attachFastClick = require('../../js/vendor/fastclick.js');

@@ -1,10 +1,21 @@
 var request = require('request');
 var cheerio = require('cheerio');
-var SCORESNOW = require('../js/modules/SCORESNOW-config.js')();
+var SCORESNOW = require('../config/SCORESNOW-config.js')();
 var fs = require('fs');
 var schedule = require('node-schedule');
 var date = require('../js/modules/offset-time.js');
 
+var ghostPages = {
+  football: {
+    fixtures: 1
+  },
+  tennis: {
+    fixtures: 1
+  },
+  darts: {
+    fixtures: 1
+  }
+};
 
 function scrapeFootballFixtures(){
 
@@ -56,6 +67,9 @@ function scrapeTennisFixtures(){
 
     var json = [];
     var data = JSON.parse(body);
+
+    ghostPages.tennis.fixtures = data.tournaments.length;
+
     data.tournaments.forEach(function(item){
       var row = {};
       row = item;
@@ -122,9 +136,16 @@ function scrapeDartsFixtures(){
 
 }
 
+function createGhostPages(){
+  fs.writeFile("../config/ghost-pages.js", "callback(" + JSON.stringify(ghostPages) + ")");
+}
+console.log(ghostPages);
 scrapeFootballFixtures();
 scrapeTennisFixtures();
 scrapeDartsFixtures();
+setTimeout(function(){
+  createGhostPages();
+}, 2000);
 
 // var rule = new schedule.RecurrenceRule();
 // rule.hour = 0;
