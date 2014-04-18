@@ -138,7 +138,7 @@ module.exports = function(){
 
     var url = SCORESNOW.endpoints[currentSport][pageType];
     url = url.replace('#{id}', SCORESNOW.contentId);
-    url = url.replace('#{date}', date.getDate());
+    url = url.replace('#{date}', date.getDate(-30));
 
     var currentView = (SCORESNOW.pages[SCORESNOW.currentPage - 1]);
 

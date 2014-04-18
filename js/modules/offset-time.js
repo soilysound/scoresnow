@@ -20,8 +20,11 @@ module.exports = {
 
     },
 
-    getDate: function(){
+    getDate: function(lessMinutes){
       var date = new Date();
+      if(lessMinutes){
+        date.setMinutes(lessMinutes);
+      }
       // offset for Daylight saving hours
       var offset = Math.abs(date.getTimezoneOffset());
       date.setHours(date.getHours() + (offset / 60));
