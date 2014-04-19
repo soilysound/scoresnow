@@ -22,12 +22,16 @@ module.exports = {
 
     getDate: function(lessMinutes){
       var date = new Date();
-      if(lessMinutes){
-        date.setMinutes(lessMinutes);
-      }
       // offset for Daylight saving hours
       var offset = Math.abs(date.getTimezoneOffset());
       date.setHours(date.getHours() + (offset / 60));
+
+      if(lessMinutes){
+        var dateInMs = date.valueOf();
+        var minutesInMs = (Math.abs(lessMinutes) * 60) * 1000;
+        date = new Date(dateInMs - minutesInMs);
+      }
+
       return date.toISOString().split('T').shift();
     }
 

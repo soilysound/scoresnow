@@ -91,12 +91,8 @@ module.exports = function(){
       SCORESNOW.dataWorker.terminate();
     }
 
-    // create new data worker
-    var blob = new Blob([
-      document.getElementById('blob-worker').textContent
-    ]);
+    SCORESNOW.dataWorker = new Worker(blob);
 
-    SCORESNOW.dataWorker = new Worker(window.URL.createObjectURL(blob));
     SCORESNOW.dataWorker.postMessage({
       url: dataUrl,
       type: template,
@@ -129,6 +125,20 @@ module.exports = function(){
 
   }
 
+  // create blob url for our inline web worker
+  if(!window.Blob){
+    alert('blob workers not supported');
+    return;
+  }
+  
+  window.URL = window.URL || window.webkitURL;
+
+  var blob = window.URL.createObjectURL(
+    new Blob([
+      document.getElementById('blob-worker').textContent
+    ])
+  );
+
   document.addEventListener('pageChange', function(){
 
     viewRendered = false;
@@ -138,7 +148,7 @@ module.exports = function(){
 
     var url = SCORESNOW.endpoints[currentSport][pageType];
     url = url.replace('#{id}', SCORESNOW.contentId);
-    url = url.replace('#{date}', date.getDate(-30));
+    url = url.replace('#{date}', date.getDate(-15));
 
     var currentView = (SCORESNOW.pages[SCORESNOW.currentPage - 1]);
 

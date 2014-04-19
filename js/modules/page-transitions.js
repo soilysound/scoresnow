@@ -19,12 +19,12 @@ module.exports = function(){
 
     if(!animate || SCORESNOW.disableTransitions){
       styles.push("-webkit-transition-duration: 0");
-      styles.push("transition-duration: 0");
+      styles.push("transition-duration: 0s!important");
     }
 
     styles.push("-webkit-transform: translateX("+ position +")");
     styles.push("transform: translateX("+ position +")");
-    
+    console.log(styles.join(';'));
     domNode.style.cssText = styles.join(';');
   }
 

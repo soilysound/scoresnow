@@ -19,7 +19,6 @@ module.exports = function(){
   navItems.forEach(function(item){
 
     item.addEventListener('click', function(e){
-
       if(document.currentBreakPoint === 'mobile' || document.currentBreakPoint === 'tablet'){
         SCORESNOW.disableTransitions = true;
       }
@@ -28,7 +27,7 @@ module.exports = function(){
 
       setTimeout(function(){
         SCORESNOW.disableTransitions = false;
-      }, 333);
+      }, 400);
 
 
     }.bind(item), false);
