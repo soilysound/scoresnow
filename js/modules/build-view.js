@@ -137,14 +137,13 @@ module.exports = function(){
     viewRendered = false;
 
     var currentSport = SCORESNOW.currentSport;
-    var pageType = SCORESNOW.pageTypeLookup[SCORESNOW.currentPage];
+    var pageType = SCORESNOW.page;
 
     var url = SCORESNOW.endpoints[currentSport][pageType];
     url = url.replace('#{id}', SCORESNOW.contentId);
     url = url.replace('#{date}', date.getDate(-15));
 
-    var currentView = (SCORESNOW.pages[SCORESNOW.currentPage - 1]);
-
+    var currentView = (SCORESNOW.pages[SCORESNOW.currentPage]);
     if(SCORESNOW.page !== 'home'){
       buildView(currentView, url, currentSport + '-' + pageType, SCORESNOW.contentId);
     }
@@ -154,7 +153,7 @@ module.exports = function(){
   // when page transition is complete, scrubb view
   document.addEventListener('pageTransitionComplete', function(){
 
-    var previousPage = SCORESNOW.pages[SCORESNOW.previousPage - 1];
+    var previousPage = SCORESNOW.pages[SCORESNOW.previousPage];
     if(!previousPage){
       return;
     }

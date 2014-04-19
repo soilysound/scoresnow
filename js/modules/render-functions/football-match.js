@@ -12,6 +12,8 @@ module.exports = function(data, firstRun){
     item.setAttribute('data-status', status);
   });
 
+  this.querySelector('.match-view__events').textContent = JSON.stringify(data);
+
   if(firstRun){
     updateText(this.querySelector('.data-bar__cell-hometeam'), data.teams.home.name);
     updateText(this.querySelector('.data-bar__cell-awayteam'), data.teams.away.name);

@@ -14,7 +14,6 @@ module.exports = function(data, firstRun){
     var competitionName = isDefinedLeague[1];
     var competitionURL = '/#/' + [
       'football',
-      'competition',
       isDefinedLeague[0]
     ].join('/');
    

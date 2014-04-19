@@ -24,7 +24,6 @@ module.exports = function(){
 
     styles.push("-webkit-transform: translateX("+ position +")");
     styles.push("transform: translateX("+ position +")");
-    console.log(styles.join(';'));
     domNode.style.cssText = styles.join(';');
   }
 
@@ -52,13 +51,16 @@ module.exports = function(){
     var direction = SCORESNOW.direction;
 
     // make sure each page starts at scroll top 1;
-    pages[pageToGoTo - 1].scrollTop = 1;
-
+    pages[pageToGoTo].scrollTop = 1;
+  
     if(pageToGoTo === previousPage){
+      setPosition(pages[pageToGoTo], 0, false);
+      // reenable transitions after first load
+      SCORESNOW.disableTransitions = false;
       return;
     }
     
-    animateTo(pageToGoTo - 1, previousPage - 1 , direction);
+    animateTo(pageToGoTo, previousPage , direction);
 
   }, false);
 

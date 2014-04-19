@@ -9,19 +9,17 @@ module.exports = function(){
   hashEvent.initEvent('pageChange', true, true);
 
   function setPage(hash){
-    SCORESNOW.page = hash.replace('#/','').split('/')[1];
+
+    var tiers = hash.toLowerCase().replace('#','').replace(/^\//, '').split('/');
+    if(tiers.length === 1 && tiers[0].length === 0){
+      tiers.pop();
+    }
+
+    SCORESNOW.page = SCORESNOW.pageType[tiers.length];
+    SCORESNOW.currentSport = tiers[0] || 'all';
+    SCORESNOW.contentId = tiers[tiers.length - 1];
     SCORESNOW.previousPage = SCORESNOW.currentPage;
-    SCORESNOW.currentPage = SCORESNOW.pageTypeLookup[SCORESNOW.page];
-  }
-
-  function setSport(hash){
-    var sport = hash.replace('#/','').split('/').shift();
-    SCORESNOW.currentSport = sport;
-  }
-
-  function setContentId(hash){
-    var id = hash.split('/').pop();
-    SCORESNOW.contentId = id;
+    SCORESNOW.currentPage = SCORESNOW.pageSlot[tiers.length < 2 ? SCORESNOW.currentSport : SCORESNOW.page];
   }
 
   function setPageTitle(hash){
@@ -56,16 +54,18 @@ module.exports = function(){
   }
 
   function setUpPages(e){
-    var hash = location.hash;
-     // if no has return
-    if(location.hash.length < 3){
-      hash = '#/all/home/0';
+
+    // remove trailing slash
+    if(location.hash.match(/\/$/)){
+      location.hash = location.hash.replace(/\/$/, '');
+      return;
     }
 
+    var hash = location.hash;
+
     setPage(hash);
-    setSport(hash);
-    setContentId(hash);
-    setPageTitle(hash);
+    setPageTitle();
+
     // @TODO - work out how to tell if the user is going back
     setDirection('forward');
 

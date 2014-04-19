@@ -7,6 +7,20 @@ module.exports = function(){
     previousPage: 0,
     direction: 'forward',
     disableTransitions: true,
+    pageType:{
+      0: 'home',
+      1: 'fixtures',
+      2: 'competition',
+      3: 'match'
+    },
+    pageSlot: {
+      'all': 0,
+      'competition': 1,
+      'match': 2,
+      'football': 3,
+      'tennis': 4,
+      'darts': 5
+    },
     pageTypeLookup: {
       1: 'home',
       2: 'fixtures',
