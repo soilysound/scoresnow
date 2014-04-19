@@ -6,7 +6,7 @@ module.exports = function(){
     currentPage: 0,
     previousPage: 0,
     direction: 'forward',
-    disableTransitions: false,
+    disableTransitions: true,
     pageTypeLookup: {
       1: 'home',
       2: 'fixtures',
@@ -24,22 +24,22 @@ module.exports = function(){
         'home': 1
       },
       'football': {
-        'fixtures':1,
+        'fixtures':0,
         'competition': {
 
         },
-        'match': 1
+        'match': 0
       },
       'tennis': {
-        'fixtures': 1,
+        'fixtures': 0,
         'competition': {
 
         },
-        'match': 1
+        'match': 0
       },
 
       'darts': {
-        'fixtures': 1,
+        'fixtures': 0,
         'competition': {
 
         },

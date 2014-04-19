@@ -141,9 +141,9 @@ function createGhostPages(){
   fs.writeFile("../../../../Users/mark/Google Drive/scoresnow/ghost-pages.js", 'ghostPageCallBack(' + JSON.stringify(ghostPages) + ');');
 }
 
-scrapeFootballFixtures();
-scrapeTennisFixtures();
-scrapeDartsFixtures();
+// scrapeFootballFixtures();
+// scrapeTennisFixtures();
+// scrapeDartsFixtures();
 
 
 var rule = new schedule.RecurrenceRule();

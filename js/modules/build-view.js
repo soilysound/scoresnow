@@ -66,14 +66,7 @@ module.exports = function(){
 
   function noFixtures(container, templateId){
 
-    var template = getTemplate(templateId);
-    container.innerHTML = '';
-    template.classList.add('no-fixtures');
-    template.style.cssText = "pointer-events: none";
-    container.appendChild(template);
-    window.requestAnimationFrame(function(){
-      template.classList.add('no-fixtures--fade-out');
-    });
+    ghostPage.add(container);
 
     var div = document.createElement('div');
     div.className = 'no-fixtures-message';

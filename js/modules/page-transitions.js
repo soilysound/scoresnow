@@ -30,17 +30,19 @@ module.exports = function(){
 
   function animateTo(page, previousPage, direction){
 
-      setPosition(pages[previousPage], 0, false);
-      setPosition(pages[page], '100%', false);
+    setPosition(pages[previousPage], 0, false);
+    setPosition(pages[page], '100%', false);
 
-      setPosition(pages[previousPage], '-100%', true);
-      setPosition(pages[page], 0, true);
+    setPosition(pages[previousPage], '-100%', true);
+    setPosition(pages[page], 0, true);
 
-      setTimeout(function(){
-        setPosition(pages[previousPage], '100%', false);
-        document.dispatchEvent(transitionEvent);
-      }, 400);
+    setTimeout(function(){
+      setPosition(pages[previousPage], '100%', false);
+      document.dispatchEvent(transitionEvent);
+    }, 400);
 
+    // reenable transitions after first load
+    SCORESNOW.disableTransitions = false;
   }
 
   document.addEventListener('pageChange', function(){

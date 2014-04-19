@@ -4,7 +4,7 @@ module.exports = {
 
   add: function(container){
 
-    var number = 1;
+    var number = 0;
 
     if(SCORESNOW.page === 'fixtures' && SCORESNOW.ghostPages[SCORESNOW.currentSport]['fixtures']){
         number = SCORESNOW.ghostPages[SCORESNOW.currentSport]['fixtures'];
@@ -14,7 +14,7 @@ module.exports = {
       number = 1;
     }
 
-    else {
+    if(SCORESNOW.page === 'competition') {
       var reference = SCORESNOW.ghostPages[SCORESNOW.currentSport][SCORESNOW.page];
       if(reference[SCORESNOW.contentId]){
         number = reference[SCORESNOW.contentId];
@@ -24,8 +24,6 @@ module.exports = {
     if(SCORESNOW.children){
       number = SCORESNOW.children;
     }
-
-console.log(number);
 
     var template = document.getElementById(SCORESNOW.currentSport + '-' + SCORESNOW.page);
    

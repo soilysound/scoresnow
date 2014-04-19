@@ -7,6 +7,7 @@ window.SCORESNOW = require('../../config/SCORESNOW-config.js')();
 window.ghostPageCallBack = function(object){
   SCORESNOW.ghostPages.football.fixtures = object.football.fixtures;
   SCORESNOW.ghostPages.tennis.fixtures = object.tennis.fixtures;
+  SCORESNOW.ghostPages.darts.fixtures = object.darts.fixtures;
 };
 
 (function(){
