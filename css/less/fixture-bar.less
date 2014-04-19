@@ -171,9 +171,11 @@
   display: table;
   height: 2.5em;
   direction: ltr;
+  position: relative;
 }
 
 .data-bar__cell-tennis-set {
+  position: relative;
   border-left: 1px solid @keyline;
   display: table-cell;
   vertical-align: middle;
@@ -211,8 +213,28 @@
 
 
 // match has not started
-.data-bar__cell-tennis-set-group[data-status='KO'] {
+.data-bar__cell-tennis-set-group[data-status='shim'] {
   visibility: hidden;
+}
+
+.data-bar__cell-tennis-set-group[data-status='KO']:after {
+  content: "scheduled";
+  position: absolute;
+  display: inline-block;
+  right: 0;
+  top: 0;
+  height: 100%;
+  padding-top: 1.8em;
+  line-height: 0;
+  width: 100%;
+  background: #333;
+  border-color: #333;
+  color: #fff;
+  font-size: 0.7em;
+}
+
+.data-bar__row:last-child  > .data-bar__cell > .data-bar__cell-tennis-set-group[data-status='KO']:after {
+  content: ""
 }
 
 // match winner/match finished

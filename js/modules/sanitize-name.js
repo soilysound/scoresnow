@@ -10,6 +10,8 @@ module.exports = function(name){
   name = name.replace(/20[0-9][0-9] /, '');
   // remove brackets
   name = name.replace(/ *\([^)]*\) */, '');
+
+  name = name.split(',')[0];
   
   return name;
 
