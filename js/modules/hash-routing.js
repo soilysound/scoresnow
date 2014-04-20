@@ -3,6 +3,7 @@
 module.exports = function(){
 
   var addPageTitle = require('../modules/set-page-title.js');
+  var offsetDate = require('../modules/offset-time.js');
 
   // create a custom event which we can fire when we've performed all actions in hashchange
   var hashEvent = document.createEvent('Event');
@@ -20,6 +21,13 @@ module.exports = function(){
     SCORESNOW.contentId = tiers[tiers.length - 1];
     SCORESNOW.previousPage = SCORESNOW.currentPage;
     SCORESNOW.currentPage = SCORESNOW.pageSlot[tiers.length < 2 ? SCORESNOW.currentSport : SCORESNOW.page];
+
+    var lastPage = {
+      url: hash,
+      date: offsetDate.getDate()
+    };
+    
+    window.localStorage.setItem('last-page', JSON.stringify(lastPage));
   }
 
   function setPageTitle(hash){

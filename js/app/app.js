@@ -17,7 +17,6 @@ window.ghostPageCallBack = function(object){
 })();
 
 
-
 // get modules
 var siteLayoutPrimary = require('../../js/modules/site-layout-primary.js');
 var attachFastClick = require('../../js/vendor/fastclick.js');
@@ -27,6 +26,7 @@ var scrollPanes = require('../../js/modules/scroll-panes.js');
 var buildView = require('../../js/modules/build-view.js');
 var backButton = require('../../js/modules/back-button.js');
 var nav = require('../../js/modules/nav.js');
+var offsetDate = require('../../js/modules/offset-time.js');
 
 // add taptpuch globally to add inline
 window.tapTouch = require('../../js/modules/tap-touch.js');
@@ -40,6 +40,26 @@ window.SCORESNOW.renderFunctions = {
   'darts-fixtures': require('../../js/modules/render-functions/darts-fixtures.js'),
   'darts-competition': require('../../js/modules/render-functions/darts-competition.js')
 };
+
+// if homepage app, retrieve last page from localstorage
+(function(){
+
+  var lastPage = window.localStorage.getItem('last-page');
+
+  if(window.navigator.standalone && lastPage){
+
+    lastPage = JSON.parse(lastPage);
+    var date = offsetDate.getDate();
+
+    if(date !== lastPage.date){
+      window.localStorage.removeItem('last-page');
+    }
+    else {
+      location.hash = lastPage.url;
+    }
+  }
+
+})();
 
 // run modules
 siteLayoutPrimary.init();
