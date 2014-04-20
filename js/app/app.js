@@ -56,6 +56,7 @@ window.SCORESNOW.renderFunctions = {
     }
     else {
       location.hash = lastPage.url;
+      SCORESNOW.history = 0;
     }
   }
 

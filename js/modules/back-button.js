@@ -37,11 +37,11 @@ module.exports = function(){
 
   document.addEventListener('pageChange', function(){
 
-      // iterate internal history if not back button
+    // iterate internal history if not back button
     if(!SCORESNOW.historyBack){
       SCORESNOW.history++;
     }
-
+    
     if(SCORESNOW.history > 0){
       showBackButton(true);
     }

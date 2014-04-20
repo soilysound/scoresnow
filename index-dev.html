@@ -252,7 +252,7 @@
         events.push({"eventType": "KO", "actualTime": 0, "matchEvent": true});
       }
 
-      if(data.data.generalInfo.matchTime.match(/SECOND-HALF|FULL-TIME/i)){
+      if(data.data.generalInfo.matchTime.match(/SECOND-HALF|HALF-TIME|FULL-TIME/i)){
         events.push({"eventType": "HT", "actualTime": 45.999, "matchEvent": true})
       }
 

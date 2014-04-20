@@ -7,9 +7,13 @@ module.exports = function(data, firstRun){
   var row = '<div class="match-view__events-row #{class}" id="#{id}"><div class="match-view__events-row__col match-view__events-row__col1">#{home}</div><div class="match-view__events-row__col match-view__events-row__col2">#{event}</div> <div class="match-view__events-row__col match-view__events-row__col3">#{away}</div></div>';
 
   if(firstRun){
-    updateText(this.querySelector('.data-bar__cell-hometeam'), data.teams.home.name);
-    updateText(this.querySelector('.data-bar__cell-awayteam'), data.teams.away.name);
+    updateText(this.querySelector('.data-bar__cell-hometeam'), data.teams.home.short_name);
+    updateText(this.querySelector('.data-bar__cell-awayteam'), data.teams.away.short_name);
     this.id = 'i' + data.matchId;
+  }
+
+  function sanitizePlayerName(name){
+    return name.split(' ').pop();
   }
 
   updateText(this.querySelector('.data-bar__cell-homescore'), data.score.home);
@@ -32,12 +36,12 @@ module.exports = function(data, firstRun){
     }
 
     if(item.isHomeEvent === 1){
-      itemRow = itemRow.replace('#{home}', item.player[0] + ' ' + item.time + '\'');
+      itemRow = itemRow.replace('#{home}', sanitizePlayerName(item.player[0]) + '<em class="match-view__events-time-home">' + item.time + '\'</em>');
       itemRow = itemRow.replace('#{away}', '');
     }
 
     if(item.isHomeEvent === 0){
-      itemRow = itemRow.replace('#{away}', item.time + '\' ' + item.player[0]);
+      itemRow = itemRow.replace('#{away}', '<em class="match-view__events-time-away">' + item.time + '\'</em>' + sanitizePlayerName(item.player[0]));
       itemRow = itemRow.replace('#{home}', '');
     }
 
