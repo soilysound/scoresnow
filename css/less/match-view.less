@@ -26,6 +26,14 @@
   margin: 0 auto;
 }
 
+.match-view__head {
+  position: -webkit-sticky;
+  top: 0;
+  background: @content-window-background;
+  outline: @page-slot-padding solid @content-window-background;
+  z-index: 2
+}
+
 // Score bars
 .data-bar--football-match {
   font-size: 1.57rem;
@@ -108,6 +116,10 @@
     font-size: 1.45rem
   }
 
+  .match-view__head {
+    outline: @page-slot-padding-tablet solid @content-window-background;;
+  }
+
 }
 
 @media all and (@mobile-max){
@@ -126,6 +138,10 @@
 
   .match-view__events-row__col2 {
     width: 4.8em;
+  }
+
+  .match-view__head {
+    outline: @page-slot-padding-mobile solid @content-window-background;;
   }
 
 }
