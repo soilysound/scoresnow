@@ -75,7 +75,7 @@ module.exports = function(){
   }
 
   function buildView(container, dataUrl, template, contentId){
-
+   
     // create ghost pages
     ghostPage.add(container);
 

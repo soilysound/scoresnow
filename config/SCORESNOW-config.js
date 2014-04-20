@@ -19,7 +19,8 @@ module.exports = function(){
       'match': 2,
       'football': 3,
       'tennis': 4,
-      'darts': 5
+      'darts': 5,
+      'cricket': 6
     },
     pageTypeLookup: {
       1: 'home',
@@ -58,6 +59,12 @@ module.exports = function(){
 
         },
         'match': 1
+      },
+      'cricket': {
+        'fixtures': 0,
+        'competition': {
+
+        }
       }
     },
     sportLookup: {
@@ -115,6 +122,10 @@ module.exports = function(){
       },
       'darts': {
 
+      },
+
+      'cricket': {
+
       }
     },
 
@@ -137,6 +148,13 @@ module.exports = function(){
       darts: {
         fixtures: 'https://googledrive.com/host/0B5Em7PKD4NLoR2dYMktjTmxOckU/darts-fixtures-#{date}.js?',
         competition: 'https://googledrive.com/host/0B5Em7PKD4NLoR2dYMktjTmxOckU/darts-fixtures-#{date}.js?'
+      },
+
+      cricket: {
+        //fixtures: 'http://cricketapi.mblogi.com/currseriesjson.php?api=ApCSHNticGyOrDVl&callback=callback'
+        fixtures: 'https://googledrive.com/host/0B5Em7PKD4NLoR2dYMktjTmxOckU/cricket-fixtures-#{date}.js?',
+        competition: 'https://googledrive.com/host/0B5Em7PKD4NLoR2dYMktjTmxOckU/cricket-fixtures-#{date}.js?'
+
       }
     }
   };

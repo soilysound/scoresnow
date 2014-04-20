@@ -38,7 +38,10 @@ window.SCORESNOW.renderFunctions = {
   'tennis-fixtures': require('../../js/modules/render-functions/tennis-fixtures.js'),
   'tennis-competition': require('../../js/modules/render-functions/tennis-competition.js'),
   'darts-fixtures': require('../../js/modules/render-functions/darts-fixtures.js'),
-  'darts-competition': require('../../js/modules/render-functions/darts-competition.js')
+  'darts-competition': require('../../js/modules/render-functions/darts-competition.js'),
+  'cricket-fixtures': require('../../js/modules/render-functions/cricket-fixtures.js'),
+  'cricket-competition': require('../../js/modules/render-functions/cricket-competition.js')
+
 };
 
 // if homepage app, retrieve last page from localstorage

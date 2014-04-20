@@ -17,6 +17,44 @@ var ghostPages = {
   }
 };
 
+function scrapeCricketFixtures(){
+
+  request('http://cricketapi.mblogi.com/currseriesjson.php?api=ApCSHNticGyOrDVl', function(err, resp, body) {
+
+    var json = [
+    
+    ];
+
+    var today = date.getDate();
+    var competitons = JSON.parse(body);
+    competitons.forEach(function(item, index){
+      
+      var comp = {
+        events: [],
+        name: item[0].series,
+        id: index
+      };
+      
+      item.forEach(function(row){
+        if(row.date && date.getDate(0, row.date) === today){
+          row.id = row.mid;
+          comp.events.push(row);
+        }
+      });
+
+      comp.children = comp.events.length;
+      if(comp.children){
+        json.push(comp);
+      }
+
+    });
+
+    fs.writeFile("../../../../Users/mark/Google Drive/scoresnow/cricket-fixtures-" + today + ".js", "callback(" + JSON.stringify(json) + ")");
+
+  });
+
+}
+
 function scrapeFootballFixtures(){
 
   request('http://www.goal.com/en-gb/live-scores?ICID=SP_TN_50', function(err, resp, body) {
@@ -144,12 +182,12 @@ function createGhostPages(){
 // scrapeFootballFixtures();
 // scrapeTennisFixtures();
 // scrapeDartsFixtures();
+scrapeCricketFixtures();
 
-
-var rule = new schedule.RecurrenceRule();
-rule.hour = 0;
-rule.minute = 10;
-schedule.scheduleJob(rule, function(){
-  scrapeFootballFixtures();
-  scrapeTennisFixtures();
-});
+// var rule = new schedule.RecurrenceRule();
+// rule.hour = 0;
+// rule.minute = 10;
+// schedule.scheduleJob(rule, function(){
+//   scrapeFootballFixtures();
+//   scrapeTennisFixtures();
+// });

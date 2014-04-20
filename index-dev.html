@@ -85,7 +85,11 @@
           </li>
 
           <li class="nav__item">
-            <a class="nav__item-link" href='/#/football/fixtures/'>
+            <a class="nav__item-link nav__item-link--cricket" href='/#/cricket'>
+              <svg viewBox="0 0 520 520" class="nav__item-icon">
+                <path d="M 395.309,454.38228 C 372.54337,453.7085 349.33196,449.67344 326.3604,442.53003 259.07588,421.60671 193.31305,374.14152 144.22571,305.23044 95.138369,236.31935 71.786879,158.68172 73.999259,88.253764 c 0.16743,-5.32993 0.51876,-10.61127 0.98325,-15.85564 C -11.533857,157.00918 -26.025736,294.33078 46.387237,395.98746 126.49369,508.44461 282.59732,534.67003 395.05447,454.56358 c 0.0849,-0.0605 0.16975,-0.12075 0.25453,-0.1813 z m 26.51823,-21.80565 c 2.78538,-2.62808 5.47686,-5.31451 8.11872,-8.04689 -22.2889,-0.3435 -44.8443,-3.62516 -67.08776,-9.72468 C 293.06716,395.66719 225.78931,349.2812 176.70197,280.37011 127.61464,211.45903 105.77816,132.74221 110.49705,60.528794 c 0.39956,-6.11453 1.01813,-12.18867 1.80366,-18.20496 -2.46188,1.62718 -4.91478,3.27074 -7.33735,4.9964 -2.05702,1.46528 -4.06239,2.95592 -6.061581,4.47131 -2.18407,11.98259 -3.50589,24.38057 -3.90612,37.12155 -2.05078,65.283286 19.751611,138.738626 66.334271,204.133516 46.58266,65.39489 108.899,110.02934 171.26848,129.42424 30.36286,9.44188 60.62678,12.94093 89.22882,10.10578 z m 26.91014,-29.87346 C 513.58025,317.85613 518.83038,197.42684 453.63059,105.89635 380.80775,3.6642743 245.1741,-27.291636 136.62583,28.104144 c -2.03763,10.53591 -3.41862,21.34181 -4.13973,32.37689 -4.37418,66.938316 15.95917,141.440086 62.54182,206.834976 46.58266,65.3949 110.36805,108.98291 175.06093,126.72277 26.46997,7.25851 53.00498,10.20532 78.64852,8.66439 z">
+              </svg> 
+               <h4 class="nav__item-title">Cricket</h4>           
             </a>
           </li>
 
@@ -145,6 +149,10 @@
           </div>
 
           <div class="page-slot scroll-pane page-slot--5">
+            
+          </div>
+
+          <div class="page-slot scroll-pane page-slot--6">
             
           </div>
         </div>
@@ -217,6 +225,21 @@
           dataObject.name = item.name;
         }
       });
+    }
+
+    /* a cricket fixtures list */
+    if(dataType === 'cricket-fixtures'){
+      
+      dataObject = data;
+      clearInterval(self.timer);
+
+    }
+
+    /* a cricket competition list */
+    if(dataType === 'cricket-competition'){
+
+      dataObject = data[id].events;
+      dataObject.name = data[id].name;
     }
 
     /* a football fixtures list */
@@ -348,6 +371,16 @@
     <span class="data-bar__cell data-bar__cell-awayteam"></span>
     <span class="data-bar__cell data-bar__cell-status"></span>
   </div>
+</script>
+
+<script id="cricket-fixtures" type="html/template"><a class="data-bar" ontouchstart="tapTouch(this)">
+    <span class="data-bar__cell data-bar__cell-competition-name"></span>
+  </a>
+</script>
+
+<script id="cricket-competition" type="html/template"><a class="data-bar" ontouchstart="tapTouch(this)">
+    <span class="data-bar__cell data-bar__cell-competition-name"></span>
+  </a>
 </script>
 
 <script id="tennis-fixtures" type="html/template"><a class="data-bar" ontouchstart="tapTouch(this)">
