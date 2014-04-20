@@ -229,6 +229,38 @@
     /* a football match */
     if(dataType === 'football-match'){
 
+      var events = [];
+
+      function setActualTime(item){
+        if(!item.eventType.match(/assist/i)){
+          var actualTime = item.time.split('+');
+          actualTime = actualTime[0]+ '.' + actualTime[1];
+          actualTime = parseFloat(actualTime, 2);
+          item.actualTime = actualTime;
+          events.push(item);
+        }
+      }
+
+      var home = data.data.events.home.forEach(setActualTime);
+      var away = data.data.events.away.forEach(setActualTime);
+
+      if(data.data.generalInfo.matchStatus.match(/played/i)){
+        events.push({"eventType": "FT", "actualTime": 1000000, "matchEvent": true});
+      }
+
+      if(data.data.generalInfo.matchStatus.match(/played|playing/i)){
+        events.push({"eventType": "KO", "actualTime": 0, "matchEvent": true});
+      }
+
+      if(data.data.generalInfo.matchTime.match(/SECOND-HALF|FULL-TIME/i)){
+        events.push({"eventType": "HT", "actualTime": 45.999, "matchEvent": true})
+      }
+
+      events.sort(function(a, b){
+        return a.actualTime - b.actualTime;
+      });
+
+      data.data.events = events;
       dataObject = [data.data];
       dataObject.id = id;
 
@@ -274,7 +306,8 @@
     <span class="data-bar__cell data-bar__cell-awayteam"></span>
     <span class="data-bar__cell data-bar__cell-awayscore"></span>
   </div>
-  <div class="match-view__events"></div>
+  <div class="match-view__events">
+  </div>
 </div>
 </script>
 

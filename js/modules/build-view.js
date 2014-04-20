@@ -89,7 +89,7 @@ module.exports = function(){
     SCORESNOW.dataWorker.postMessage({
       url: dataUrl,
       type: template,
-      currentDate: date.getDate(),
+      currentDate: date.getDate(-15),
       id: contentId
     });
 
