@@ -10,7 +10,7 @@ module.exports = function(data, firstRun){
   var row = [
     '<div class="match-view__events-row #{class}" id="#{id}">',
       '<div class="match-view__events-row__col match-view__events-row__col1">',
-        '<div class="match-view__events-icon #{event}"></div>',
+        '<div class="match-view__events-icon #{event}" data-event="#{event}"></div>',
       '</div>',
       '<div class="match-view__events-row__col match-view__events-row__col2">#{time}</div>',
       '<div class="match-view__events-row__col match-view__events-row__col3">#{description}</div>',
@@ -48,7 +48,7 @@ module.exports = function(data, firstRun){
       continue;
     }
 
-    itemRow = itemRow.replace('#{event}', '[ ]');
+    itemRow = itemRow.replace(/#{event}/g, item.eventLabel);
     itemRow = itemRow.replace('#{time}', item.time ? (item.time + '\'') : '');
     
     // add descrption text

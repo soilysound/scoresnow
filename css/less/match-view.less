@@ -77,7 +77,8 @@
 
 // highlighted row
 .match-view__events-row--hightlighted {
-  // background: white;
+  background: @dark-grey;
+  color: white;
 }
 
 // no time
@@ -110,7 +111,14 @@
   height: 2.7em;
   background: #bbb;
   display: inline-block;
-  vertical-align: middle
+  vertical-align: middle;
+  overflow: hidden;
+  text-align: center;
+}
+
+.match-view__events-icon:after {
+  content: attr(data-event);
+  font-size: 8px;
 }
 
 @media all and (@tablet-min) and (@tablet-max){
