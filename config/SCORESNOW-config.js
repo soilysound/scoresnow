@@ -39,7 +39,7 @@ module.exports = function(){
         'home': 1
       },
       'football': {
-        'fixtures':0,
+        'fixtures': 0,
         'competition': {
 
         },

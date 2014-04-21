@@ -30,8 +30,9 @@ function scrapeCricketFixtures(){
 
     var today = date.getDate();
     var competitons = JSON.parse(body);
+
     competitons.forEach(function(item, index){
-      ghostPages.cricket.fixtures ++;
+
       var comp = {
         events: [],
         name: item[0].series,
@@ -48,11 +49,13 @@ function scrapeCricketFixtures(){
       comp.children = comp.events.length;
       if(comp.children){
         json.push(comp);
+        ghostPages.cricket.fixtures++;
       }
 
     });
 
     fs.writeFile("../../../../Users/mark/Google Drive/scoresnow/cricket-fixtures-" + today + ".js", "callback(" + JSON.stringify(json) + ")");
+    createGhostPages();
 
   });
 
@@ -183,9 +186,9 @@ function createGhostPages(){
 }
 
 scrapeFootballFixtures();
-// scrapeTennisFixtures();
+scrapeTennisFixtures();
 // scrapeDartsFixtures();
-// scrapeCricketFixtures();
+scrapeCricketFixtures();
 
 // var rule = new schedule.RecurrenceRule();
 // rule.hour = 0;
