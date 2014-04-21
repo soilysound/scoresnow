@@ -1,10 +1,22 @@
 // RENDER A FOOTBALL MATCH
 
 module.exports = function(data, firstRun){
-  
+
   var updateText = require('../update-text.js');
+  var offsetTime = require('../offset-time.js');
+
   var matchEvents = this.querySelector('.match-view__events');
-  var row = '<div class="match-view__events-row #{class}" id="#{id}"><div class="match-view__events-row__col match-view__events-row__col1">#{home}</div><div class="match-view__events-row__col match-view__events-row__col2">#{event}</div> <div class="match-view__events-row__col match-view__events-row__col3">#{away}</div></div>';
+
+  var row = [
+    '<div class="match-view__events-row #{class}" id="#{id}">',
+      '<div class="match-view__events-row__col match-view__events-row__col1">',
+        '<div class="match-view__events-icon #{event}"></div>',
+      '</div>',
+      '<div class="match-view__events-row__col match-view__events-row__col2">#{time}</div>',
+      '<div class="match-view__events-row__col match-view__events-row__col3">#{description}</div>',
+      
+    '</div>'
+  ].join('');
 
   if(firstRun){
     updateText(this.querySelector('.data-bar__cell-hometeam'), data.teams.home.short_name);
@@ -24,6 +36,7 @@ module.exports = function(data, firstRun){
     item.setAttribute('data-status', status);
   });
 
+  // loop through events
   for(var i = -1; ++i < data.events.length;){
 
     var item = data.events[i];
@@ -35,28 +48,30 @@ module.exports = function(data, firstRun){
       continue;
     }
 
-    if(item.isHomeEvent === 1){
-      itemRow = itemRow.replace('#{home}', sanitizePlayerName(item.player[0]) + '<em class="match-view__events-time-home">' + item.time + '\'</em>');
-      itemRow = itemRow.replace('#{away}', '');
+    itemRow = itemRow.replace('#{event}', '[ ]');
+    itemRow = itemRow.replace('#{time}', item.time ? (item.time + '\'') : '');
+    
+    // add descrption text
+    var descriptiton = '';
+
+    if(item.description){
+      description = item.description;
     }
 
-    if(item.isHomeEvent === 0){
-      itemRow = itemRow.replace('#{away}', '<em class="match-view__events-time-away">' + item.time + '\'</em>' + sanitizePlayerName(item.player[0]));
-      itemRow = itemRow.replace('#{home}', '');
+    if(item.player){
+      description = item.player[0];
+    }
+    
+    if(item.eventType.match(/info/i)){
+      description = offsetTime.getTime(data.generalInfo.kickoffDate, data.generalInfo.kickoffTime) + ' &nbsp;' + data.generalInfo.venue;
     }
 
-    if(item.matchEvent){
-      itemRow = itemRow.replace('#{event}', item.eventType);
-      itemRow = itemRow.replace('#{home}', '');
-      itemRow = itemRow.replace('#{away}', '');
+    if(!item.time){
+      itemRow = itemRow.replace('#{class}', 'match-view__events-row--no-time');
     }
 
-    if(item.eventType.match(/goal/i)){
-      itemRow = itemRow.replace('#{class}', 'match-view__events-row--heightlighted');
-    }
-
-    itemRow = itemRow.replace('#{event}', item.eventType.substring(0, 1));
-
+    itemRow = itemRow.replace('#{description}', description);
+  
     matchEvents.insertAdjacentHTML('afterbegin', itemRow);
   }
 

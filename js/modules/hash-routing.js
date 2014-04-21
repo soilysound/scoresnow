@@ -45,9 +45,9 @@ module.exports = function(){
       });
     }
 
-    if(SCORESNOW.page === 'match'){
-      SCORESNOW.pageTitle = 'Match';
-    }
+    // if(SCORESNOW.page === 'match'){
+    //   SCORESNOW.pageTitle = 'Match';
+    // }
 
     if(SCORESNOW.page === 'home'){
       SCORESNOW.pageTitle = 'Home';

@@ -272,6 +272,9 @@
           actualTime = actualTime[0]+ '.' + actualTime[1];
           actualTime = parseFloat(actualTime, 2);
           item.actualTime = actualTime;
+          if(item.eventType){
+            item.eventLabel = item.eventType.toLowerCase().replace(' ', '-');
+          }
           events.push(item);
         }
       }
@@ -280,16 +283,19 @@
       var away = data.data.events.away.forEach(setActualTime);
 
       if(data.data.generalInfo.matchStatus.match(/played/i)){
-        events.push({"eventType": "FT", "actualTime": 1000000, "matchEvent": true});
+        events.push({"eventType": "FT", "eventLabel": "ft", "description": "FULL TIME", "actualTime": 1000000, "matchEvent": true});
       }
 
       if(data.data.generalInfo.matchStatus.match(/played|playing/i)){
-        events.push({"eventType": "KO", "actualTime": 0, "matchEvent": true});
+        events.push({"eventType": "KO", "eventLabel": "ko", "description": "KICK OFF", "actualTime": 0, "matchEvent": true});
       }
 
       if(data.data.generalInfo.matchTime.match(/SECOND-HALF|HALF-TIME|FULL-TIME/i)){
-        events.push({"eventType": "HT", "actualTime": 45.999, "matchEvent": true})
+        events.push({"eventType": "HT", "eventLabel": "ht", "description": "HALF TIME", "actualTime": 45.999, "matchEvent": true})
       }
+
+      /* add basic match info */
+      events.push({"eventType": "INFO", "eventLabel": "info", "actualTime": -1});
 
       events.sort(function(a, b){
         return a.actualTime - b.actualTime;
@@ -298,6 +304,7 @@
       data.data.events = events;
       dataObject = [data.data];
       dataObject.id = id;
+      dataObject.name = data.data.generalInfo.competitionName;
 
     }
 
