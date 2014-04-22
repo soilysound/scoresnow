@@ -26,7 +26,6 @@ module.exports = function(){
     data.forEach(function(item){
 
       var templateInstance = template.cloneNode(true);
-      templateInstance.update = renderFunction;
       templateInstance.id = 'i' + item.id;
       templateInstance.setAttribute('data-children', item.children || 1);
       
@@ -39,8 +38,13 @@ module.exports = function(){
         }, 300);
       };
 
-      // update data in this template
+      // attach update function to this template and run it
+      templateInstance.update = renderFunction;
       templateInstance.update(item, true);
+
+      // remove css that disables clicks
+      templateInstance.style.cssText = "pointer-events:auto;";
+
       // add template to fragment
       fragment.appendChild(templateInstance);
 
