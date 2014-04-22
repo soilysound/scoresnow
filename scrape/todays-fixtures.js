@@ -22,39 +22,59 @@ var ghostPages = {
 
 function scrapeCricketFixtures(){
 
-  request('http://cricketapi.mblogi.com/currseriesjson.php?api=ApCSHNticGyOrDVl', function(err, resp, body) {
+  request('http://www.espncricinfo.com/ci/engine/match/scores/liveframe.html', function(err, resp, body) {
 
     var json = [
     
     ];
 
-    var today = date.getDate();
-    var competitons = JSON.parse(body);
+    var $ = cheerio.load(body);
+    var parent =  $("div").eq(0);
+    var fixtures = parent.children('*');
+    var row = false;
 
-    competitons.forEach(function(item, index){
+    fixtures.each(function(item, node){
 
-      var comp = {
-        events: [],
-        name: item[0].series,
-        id: index
-      };
-      
-      item.forEach(function(row){
-        if(row.date && date.getDate(0, row.date) === today){
-          row.id = row.mid;
-          comp.events.push(row);
+      if($(node).attr('class').match('potMatchSeriesHeading')){
+
+        if(row === false){
+
+          row = {events: []};
+          row.name = $(node).text();
+          row.id = json.length;
+
         }
-      });
 
-      comp.children = comp.events.length;
-      if(comp.children){
-        json.push(comp);
-        ghostPages.cricket.fixtures++;
+        else {
+          json.push(row);
+          ghostPages.cricket.fixtures ++;
+          row = {events: []};
+          row.name = $(node).text();
+          row.id = json.length;
+        }
+
       }
+
+      else {
+
+        var teams = $(node).find('a.potMatchLink').eq(0).text().split(' at')[0];
+        teams = teams.split(' v ');
+        row.events.push({teamone:teams[0], teamtwo: teams[1]});
+      }
+
+      if(item === fixtures.length - 1){
+
+        json.push(row);
+        ghostPages.cricket.fixtures ++;
+
+      }
+
 
     });
 
-    fs.writeFile("../../../../Users/mark/Google Drive/scoresnow/cricket-fixtures-" + today + ".js", "callback(" + JSON.stringify(json) + ")");
+   console.log(JSON.stringify(json));
+
+    fs.writeFile("../../../../Users/mark/Google Drive/scoresnow/cricket-fixtures-" + date.getDate() + ".js", "callback(" + JSON.stringify(json) + ")");
     createGhostPages();
 
   });
@@ -185,9 +205,9 @@ function createGhostPages(){
   fs.writeFile("../../../../Users/mark/Google Drive/scoresnow/ghost-pages.js", 'ghostPageCallBack(' + JSON.stringify(ghostPages) + ');');
 }
 
-scrapeFootballFixtures();
-scrapeTennisFixtures();
-// scrapeDartsFixtures();
+// scrapeFootballFixtures();
+// scrapeTennisFixtures();
+// // scrapeDartsFixtures();
 scrapeCricketFixtures();
 
 // var rule = new schedule.RecurrenceRule();
