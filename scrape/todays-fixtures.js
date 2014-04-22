@@ -207,14 +207,15 @@ function createGhostPages(){
 
 // scrapeFootballFixtures();
 // scrapeTennisFixtures();
-// // scrapeDartsFixtures();
-scrapeCricketFixtures();
+// scrapeDartsFixtures();
+// scrapeCricketFixtures();
 
-// var rule = new schedule.RecurrenceRule();
-// rule.hour = 0;
-// rule.minute = 10;
-// schedule.scheduleJob(rule, function(){
-//   scrapeFootballFixtures();
-//   scrapeTennisFixtures();
-//   scrapeCricketFixtures();
-// });
+var rule = new schedule.RecurrenceRule();
+rule.hour = 0;
+rule.minute = 10;
+schedule.scheduleJob(rule, function(){
+  scrapeFootballFixtures();
+  scrapeTennisFixtures();
+  scrapeDartsFixtures();
+  scrapeCricketFixtures();
+});
