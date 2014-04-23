@@ -3,20 +3,6 @@
 // create site config object
 window.SCORESNOW = require('../../config/SCORESNOW-config.js')();
 
-// asyncronously update config object with ghost pages
-window.ghostPageCallBack = function(object){
-  for(var key in object){
-    SCORESNOW.ghostPages[key].fixtures = object[key].fixtures;
-  }
-};
-
-(function(){
-  var script = document.createElement('script');
-  script.src = "https://googledrive.com/host/0B5Em7PKD4NLoR2dYMktjTmxOckU/ghost-pages.js";
-  document.head.appendChild(script);
-})();
-
-
 // get modules
 var siteLayoutPrimary = require('../../js/modules/site-layout-primary.js');
 var attachFastClick = require('../../js/vendor/fastclick.js');
@@ -27,6 +13,19 @@ var buildView = require('../../js/modules/build-view.js');
 var backButton = require('../../js/modules/back-button.js');
 var nav = require('../../js/modules/nav.js');
 var offsetDate = require('../../js/modules/offset-time.js');
+
+// asyncronously update config object with ghost pages
+window.ghostPageCallBack = function(object){
+  for(var key in object){
+    SCORESNOW.ghostPages[key].fixtures = object[key].fixtures;
+  }
+};
+
+(function(){
+  var script = document.createElement('script');
+  script.src = "http://scoresnow2.s3-website-eu-west-1.amazonaws.com/data/ghost-pages.js?"+offsetDate.getDate();
+  document.head.appendChild(script);
+})();
 
 // add taptpuch globally to add inline
 window.tapTouch = require('../../js/modules/tap-touch.js');
