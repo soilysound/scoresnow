@@ -205,17 +205,17 @@ function createGhostPages(){
   fs.writeFile("../../../../Users/mark/Google Drive/scoresnow/ghost-pages.js", 'ghostPageCallBack(' + JSON.stringify(ghostPages) + ');');
 }
 
-// scrapeFootballFixtures();
-// scrapeTennisFixtures();
-// scrapeDartsFixtures();
-// scrapeCricketFixtures();
+scrapeFootballFixtures();
+scrapeTennisFixtures();
+scrapeDartsFixtures();
+scrapeCricketFixtures();
 
-var rule = new schedule.RecurrenceRule();
-rule.hour = 0;
-rule.minute = 10;
-schedule.scheduleJob(rule, function(){
-  scrapeFootballFixtures();
-  scrapeTennisFixtures();
-  scrapeDartsFixtures();
-  scrapeCricketFixtures();
-});
+// var rule = new schedule.RecurrenceRule();
+// rule.hour = 0;
+// rule.minute = 10;
+// schedule.scheduleJob(rule, function(){
+//   scrapeFootballFixtures();
+//   scrapeTennisFixtures();
+//   scrapeDartsFixtures();
+//   scrapeCricketFixtures();
+// });

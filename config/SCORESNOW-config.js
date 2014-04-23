@@ -135,25 +135,24 @@ module.exports = function(){
       },
 
       football: {
-        fixtures: 'https://googledrive.com/host/0B5Em7PKD4NLoR2dYMktjTmxOckU/football-fixtures-#{date}.js?',
-        // fixtures: 'http://192.168.0.6/data/football/today.js?',
+        fixtures: 'http://scoresnow2.s3-website-eu-west-1.amazonaws.com/data/football-fixtures.js?#{date}',
         competition: 'http://www.goal.com/en-gb/data/get-fixtures?gsmSeasonId=#{id}&gsmLang=en',
         match: 'http://www.goal.com/en-gb/data/get-events-for-match?gsmMatchId=#{id}&gsmLang=en&callback=callback'
       },
 
       tennis: {
-        fixtures: 'https://googledrive.com/host/0B5Em7PKD4NLoR2dYMktjTmxOckU/tennis-fixtures-#{date}.js?',
-        competition: 'https://googledrive.com/host/0B5Em7PKD4NLoR2dYMktjTmxOckU/tennis-fixtures-#{date}.js?'
+        fixtures: 'http://scoresnow2.s3-website-eu-west-1.amazonaws.com/data/tennis-fixtures.js?#{date}',
+        competition: 'http://scoresnow2.s3-website-eu-west-1.amazonaws.com/data/tennis-fixtures.js?#{date}'
       },
       darts: {
-        fixtures: 'https://googledrive.com/host/0B5Em7PKD4NLoR2dYMktjTmxOckU/darts-fixtures-#{date}.js?',
-        competition: 'https://googledrive.com/host/0B5Em7PKD4NLoR2dYMktjTmxOckU/darts-fixtures-#{date}.js?'
+        fixtures: 'http://scoresnow2.s3-website-eu-west-1.amazonaws.com/data/darts-fixtures.js?#{date}',
+        competition: 'http://scoresnow2.s3-website-eu-west-1.amazonaws.com/data/darts-fixtures.js?#{date}'
       },
 
       cricket: {
         //fixtures: 'http://cricketapi.mblogi.com/currseriesjson.php?api=ApCSHNticGyOrDVl&callback=callback'
-        fixtures: 'https://googledrive.com/host/0B5Em7PKD4NLoR2dYMktjTmxOckU/cricket-fixtures-#{date}.js?',
-        competition: 'https://googledrive.com/host/0B5Em7PKD4NLoR2dYMktjTmxOckU/cricket-fixtures-#{date}.js?'
+        fixtures: 'http://scoresnow2.s3-website-eu-west-1.amazonaws.com/data/cricket-fixtures.js?#{date}',
+        competition: 'http://scoresnow2.s3-website-eu-west-1.amazonaws.com/data/cricket-fixtures.js?#{date}'
 
       }
     }
