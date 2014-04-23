@@ -1,6 +1,7 @@
 var request = require('request');
 var cheerio = require('cheerio');
 var date = require('../js/modules/offset-time.js');
+var schedule = require('node-schedule');
 
 var SCORESNOW = require('../config/SCORESNOW-config.js')();
 
@@ -81,6 +82,8 @@ function scrapeFootballFixtures(){
       }
     });
 
+    createGhostPages();
+
   });
 
 }
@@ -119,7 +122,8 @@ function scrapeTennisFixtures(){
         console.log(data);
       }
     });
-    
+
+    createGhostPages();
    
   });
 
@@ -195,12 +199,44 @@ function scrapeCricketFixtures(){
       }
     });
 
-    // createGhostPages();
+    createGhostPages();
 
   });
 
 }
 
+function createGhostPages(){
+
+  var s3 = new AWS.S3();
+  var params = {
+    ACL: 'public-read',
+    Bucket: 'scoresnow2/data', // required
+    Key: 'ghost-pages.js', // required
+    Body: 'ghostPageCallBack(' + JSON.stringify(ghostPages) + ');',
+    CacheControl: 'max-age=189341556',
+    ContentType: 'application/javascript'
+  };
+
+  s3.putObject(params, function(err, data) {
+    if (err) {
+      console.log(err, err.stack);
+    }
+    else  {
+      console.log(data);
+    }
+  });
+
+}
+
 // scrapeFootballFixtures();
-scrapeCricketFixtures();
+// scrapeCricketFixtures();
 // scrapeTennisFixtures();
+
+// var rule = new schedule.RecurrenceRule();
+// rule.hour = 0;
+// rule.minute = 10;
+// schedule.scheduleJob(rule, function(){
+//   scrapeFootballFixtures();
+//   scrapeTennisFixtures();
+//   scrapeCricketFixtures();
+// });
