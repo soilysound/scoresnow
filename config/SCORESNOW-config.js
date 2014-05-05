@@ -1,160 +1,58 @@
 // SCORESNOW CONFIG
 
 module.exports = function(){
+
   return {
+    refreshInterval: 45000,
     history: 0,
     currentPage: 0,
     previousPage: 0,
-    direction: 'forward',
     disableTransitions: true,
-    pageType:{
+    endPoints: {
+      football: '/data/football-fixtures-full.js',
+      cricket: '',
+      tennis: ''
+    },
+    pageSlots: {
+      home: 0,
+      competition: 1,
+      match: 2,
+      football: 3,
+      cricket: 4,
+      tennis: 5
+    },
+    pageTypeLookup: {
       0: 'home',
       1: 'fixtures',
       2: 'competition',
       3: 'match'
     },
-    pageSlot: {
-      'all': 0,
-      'competition': 1,
-      'match': 2,
-      'football': 3,
-      'tennis': 4,
-      'darts': 5,
-      'cricket': 6
-    },
-    pageTypeLookup: {
-      1: 'home',
-      2: 'fixtures',
-      3: 'competition',
-      4: 'match',
-
-      // and the reverse
-      'home': 1,
-      'fixtures': 2,
-      'competition': 3,
-      'match': 4
-    },
     ghostPages: {
-      'all': {
-        'home': 1
-      },
-      'football': {
-        'fixtures': 0,
-        'competition': {
-
-        },
-        'match': 0
-      },
-      'tennis': {
-        'fixtures': 0,
-        'competition': {
-
-        },
-        'match': 0
-      },
-
-      'darts': {
-        'fixtures': 0,
-        'competition': {
-
-        },
-        'match': 1
-      },
-      'cricket': {
-        'fixtures': 0,
-        'competition': {
-
-        }
-      }
-    },
-    sportLookup: {
-      1: 'all',
-      2: 'football',
-      3: 'cricket',
-      4: 'tennis',
-      5: 'darts',
-
-      //and reverse
-      'all': 1,
-      'football': 2,
-      'cricket': 3,
-      'tennis': 4,
-      'darts': 5
-    },
-
-    statusLookup: {
-      'played': 'FT',
-      'fixture': 'KO',
-      'playing': 'IP',
-      'finished': 'FT',
-      'not started': 'KO',
-      'in progress': 'IP'
-    },
-
-    competitionLookup: {
-      'football': {
-        2896: [8318, 'Premier League'],
-        2897: [8428, 'Championship'],
-        3268: [8325, 'League One'],
-        3269: [8326, 'League Two'],
-        2900: [8260, 'FA Cup'],
-        // 233: [111, 'AFC Champions League'],
-        //76: [7707, 'Friendlies'],
-        // 105: [999, 'Club Friendlies'],
-        2932: [8391, 'Scottish Premiership'],
-        438: [8217, 'Scottish Championship'],
-        // 159: [444, 'Indonesian Superleague'],
-        // 75: [666, 'Indian I-League'],
-        46: [8218, 'Scottish League 1'],
-        3277: [8491, 'La Liga'],
-        3275: [8467, 'Bundesliga'],
-        3276: [8398, 'Seria A'],
-        2914: [8381, 'UEFA Champions League'],
-        3274: [8463, 'Ligue 1'],
-        82: [8472, 'DFB Pokal German Cup'],
-        2915: [8295, 'UEFA Europa League'],
-        53: [8342, 'Copa Del Ray'],
-        65: [8658, 'Argentina Primera Division']
-        //63: [7964, 'Major League Soccer']
-      },
-      'tennis': {
-        
-      },
-      'darts': {
-
-      },
-
-      'cricket': {
-
-      }
-    },
-
-    endpoints: {
       all: {
-        home: ''
+        home: 0
       },
-
       football: {
-        fixtures: 'http://scoresnow2.s3-website-eu-west-1.amazonaws.com/data/football-fixtures.js?#{date}',
-        competition: 'http://www.goal.com/en-gb/data/get-fixtures?gsmSeasonId=#{id}&gsmLang=en',
-        match: 'http://www.goal.com/en-gb/data/get-events-for-match?gsmMatchId=#{id}&gsmLang=en&callback=callback'
-      },
+        fixtures: 0,
+        competition: {
 
-      tennis: {
-        fixtures: 'http://scoresnow2.s3-website-eu-west-1.amazonaws.com/data/tennis-fixtures.js?#{date}',
-        competition: 'http://scoresnow2.s3-website-eu-west-1.amazonaws.com/data/tennis-fixtures.js?#{date}'
+        },
+        match: 1
       },
-      darts: {
-        fixtures: 'http://scoresnow2.s3-website-eu-west-1.amazonaws.com/data/darts-fixtures.js?#{date}',
-        competition: 'http://scoresnow2.s3-website-eu-west-1.amazonaws.com/data/darts-fixtures.js?#{date}'
-      },
-
-      cricket: {
-        //fixtures: 'http://cricketapi.mblogi.com/currseriesjson.php?api=ApCSHNticGyOrDVl&callback=callback'
-        fixtures: 'http://scoresnow2.s3-website-eu-west-1.amazonaws.com/data/cricket-fixtures.js?#{date}',
-        competition: 'http://scoresnow2.s3-website-eu-west-1.amazonaws.com/data/cricket-fixtures.js?#{date}'
-
-      }
+      cricket: {},
+      tennis: {}
+    },
+    countrySortOrder: {
+      'eng': 0,
+      'sco': 1,
+      'spa': 20,
+      'ger': 21,
+      'ita': 22,
+      'fra': 23,
+      'net': 24,
+      'bra': 25,
+      'arg': 26
     }
+
   };
+
 };

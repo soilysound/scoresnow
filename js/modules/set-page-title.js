@@ -3,9 +3,9 @@
 module.exports = function(text, defaultText){
 
   // capitlize text
-  String.prototype.capitalize = function() {
-    return this.replace(/(?:^|\s)\S/g, function(a) { return a.toUpperCase(); });
-  };
+  function capitalize(text) {
+    return text.replace(/(?:^|\s)\S/g, function(a) { return a.toUpperCase(); });
+  }
 
   var updateText = require('../modules/update-text.js');
 
@@ -17,6 +17,6 @@ module.exports = function(text, defaultText){
 
   // update document title
   if(newTitle){
-    document.title = newTitle.capitalize();
+    document.title = capitalize(newTitle);
   }
 };

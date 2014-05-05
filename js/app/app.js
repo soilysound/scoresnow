@@ -1,7 +1,6 @@
 // APP.JS
 
-// create site config object
-window.SCORESNOW = require('../../config/SCORESNOW-config.js')();
+var offsetDate = require('../../js/modules/offset-time.js');
 
 // get modules
 var siteLayoutPrimary = require('../../js/modules/site-layout-primary.js');
@@ -12,59 +11,20 @@ var scrollPanes = require('../../js/modules/scroll-panes.js');
 var buildView = require('../../js/modules/build-view.js');
 var backButton = require('../../js/modules/back-button.js');
 var nav = require('../../js/modules/nav.js');
-var offsetDate = require('../../js/modules/offset-time.js');
+var getLastPage = require('../../js/modules/last-page.js');
 
-// asyncronously update config object with ghost pages
-window.ghostPageCallBack = function(object){
-  for(var key in object){
-    SCORESNOW.ghostPages[key].fixtures = object[key].fixtures;
-  }
-};
-
-(function(){
-  var script = document.createElement('script');
-  script.src = "http://scoresnow2.s3-website-eu-west-1.amazonaws.com/data/ghost-pages.js?"+offsetDate.getDate();
-  document.head.appendChild(script);
-})();
-
-// add taptpuch globally to add inline
+// load taptouch globally to add inline events
 window.tapTouch = require('../../js/modules/tap-touch.js');
 
+// set render functions
 window.SCORESNOW.renderFunctions = {
   "football-competition": require('../../js/modules/render-functions/football-competition.js'),
   "football-fixtures": require('../../js/modules/render-functions/football-fixtures.js'),
-  "football-match": require('../../js/modules/render-functions/football-match.js'),
-  'tennis-fixtures': require('../../js/modules/render-functions/tennis-fixtures.js'),
-  'tennis-competition': require('../../js/modules/render-functions/tennis-competition.js'),
-  'darts-fixtures': require('../../js/modules/render-functions/darts-fixtures.js'),
-  'darts-competition': require('../../js/modules/render-functions/darts-competition.js'),
-  'cricket-fixtures': require('../../js/modules/render-functions/cricket-fixtures.js'),
-  'cricket-competition': require('../../js/modules/render-functions/cricket-competition.js')
-
+  "football-match": require('../../js/modules/render-functions/football-match.js')
 };
 
-// if homepage app, retrieve last page from localstorage
-(function(){
-
-  var lastPage = window.localStorage.getItem('last-page');
-
-  if(window.navigator.standalone && lastPage){
-
-    lastPage = JSON.parse(lastPage);
-    var date = offsetDate.getDate();
-
-    if(date !== lastPage.date){
-      window.localStorage.removeItem('last-page');
-    }
-    else {
-      location.hash = lastPage.url;
-      SCORESNOW.history = 0;
-    }
-  }
-
-})();
-
 // run modules
+getLastPage();
 siteLayoutPrimary.init();
 pageTransitions();
 nav();

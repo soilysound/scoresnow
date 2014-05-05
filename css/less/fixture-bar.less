@@ -15,7 +15,6 @@
   background: white;
   border-collapse: collapse;
   font-size: 1.4rem;
-  pointer-events: none
 }
 
 .data-bar__cell {
@@ -41,6 +40,25 @@
   border: 1px solid lighten(@keyline, 5%);
   border-top: 0;
   border-bottom: 0;
+  overflow: visible;
+}
+
+// add box for ft/ht status
+.data-bar__cell-homescore:after {
+  margin-top: -.64em;
+  right: -.5em;
+  position: absolute;
+  font-size: .5em;
+  text-transform: uppercase;
+  background: #fff;
+  top: 50%;
+  padding: 0.2em 0 0.4em;
+  height: 1em;
+  width: 1em;
+  visibility: hidden;
+  line-height: 1;
+  z-index: 2;
+  color: #777;
 }
 
 // fade out long text at right side
@@ -82,36 +100,54 @@
 }
 
 // FIXTURE
-.data-bar[data-status='KO'] > .data-bar__cell-homescore,
-.data-bar[data-status='KO'] > .data-bar__cell-awayscore {
+.data-bar[data-status='ko'] > .data-bar__cell-homescore,
+.data-bar[data-status='ko'] > .data-bar__cell-awayscore,
+.data-bar[data-status='can'] > .data-bar__cell-homescore,
+.data-bar[data-status='can'] > .data-bar__cell-awayscore {
   display: none;
 }
 
-.data-bar[data-status='KO'] > .data-bar__cell-time {
+.data-bar[data-status='ko'] > .data-bar__cell-time, 
+.data-bar[data-status='can'] > .data-bar__cell-time {
   display: table-cell;
 }
 
-.data-bar[data-status='KO'] > .data-bar__cell-status {
+.data-bar[data-status='ko'] > .data-bar__cell-status {
   visibility: hidden;
 }
 
 // INPLAY
-.data-bar[data-status='IP'] > .data-bar__cell-time {
+.data-bar[data-status='ip'] > .data-bar__cell-time {
   display: none;
 }
 
-.data-bar[data-status='IP'] > .data-bar__cell-homescore,
-.data-bar[data-status='IP'] > .data-bar__cell-awayscore {
-  display: table-cell
+// show time or ht status
+.data-bar[data-status='ip'] > .data-bar__cell-homescore:after,
+.data-bar[data-status='ht'] > .data-bar__cell-homescore:after {
+  content: attr(data-status);
+  visibility: visible
+}
+
+.data-bar[data-status='ip'] > .data-bar__cell-homescore,
+.data-bar[data-status='ip'] > .data-bar__cell-awayscore{
+  display: table-cell;
+  .transition(background 0.33 ease-in-out);
 }
 
 // RESULT
-.data-bar[data-status='FT'] > .data-bar__cell-homescore,
-.data-bar[data-status='FT'] > .data-bar__cell-awayscore {
+.data-bar[data-status='ft'] > .data-bar__cell-homescore,
+.data-bar[data-status='ft'] > .data-bar__cell-awayscore {
   background: @red;
   color: white;
   border-color: @red-stroke; 
 }
+
+// .data-bar[data-status='ft'] > .data-bar__cell-homescore:after {
+//   content: "FT";
+//   visibility: visible;
+//   color: white;
+//   background: @red
+// }
 
 // SHIM ELEMENT
 .data-bar[data-status='shim'] > .data-bar__cell {
@@ -132,8 +168,8 @@
   }
 }
 
-.data-bar[data-status='IP'] > .data-bar__cell[data-updated],
-.data-bar__cell-tennis-set-group[data-status='IP'] > .data-bar__cell-tennis-set[data-updated]{
+.data-bar[data-status='ip'] > .data-bar__cell[data-updated],
+.data-bar__cell-tennis-set-group[data-status='ip'] > .data-bar__cell-tennis-set[data-updated]{
   -webkit-animation: update 2s ease-in-out;
   -webkit-animation-iteration-count: 15;
   -webkit-animation-fill-mode: both;
@@ -217,7 +253,7 @@
   visibility: hidden;
 }
 
-.data-bar__cell-tennis-set-group[data-status='KO']:after {
+.data-bar__cell-tennis-set-group[data-status='ko']:after {
   content: "scheduled";
   position: absolute;
   display: inline-block;
@@ -233,7 +269,7 @@
   font-size: 0.7em;
 }
 
-.data-bar__row:last-child  > .data-bar__cell > .data-bar__cell-tennis-set-group[data-status='KO']:after {
+.data-bar__row:last-child  > .data-bar__cell > .data-bar__cell-tennis-set-group[data-status='ko']:after {
   content: ""
 }
 

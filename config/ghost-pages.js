@@ -1,1 +1,0 @@
-window.ghostPages = {"football":{"fixtures":7},"tennis":{"fixtures":7},"darts":{"fixtures":0}}

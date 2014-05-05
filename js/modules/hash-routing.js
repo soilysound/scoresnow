@@ -16,12 +16,34 @@ module.exports = function(){
       tiers.pop();
     }
 
-    SCORESNOW.page = SCORESNOW.pageType[tiers.length];
+    SCORESNOW.pageType = SCORESNOW.pageTypeLookup[tiers.length];
     SCORESNOW.currentSport = tiers[0] || 'all';
     SCORESNOW.contentId = tiers[tiers.length - 1];
-    SCORESNOW.previousPage = SCORESNOW.currentPage;
-    SCORESNOW.currentPage = SCORESNOW.pageSlot[tiers.length < 2 ? SCORESNOW.currentSport : SCORESNOW.page];
 
+    // set previous page
+    SCORESNOW.previousPage = SCORESNOW.currentPage;
+
+    // set current page
+    
+    // this is the homepage
+    if(tiers.length === 0){
+
+      // set homepage title
+      addPageTitle('Home');
+      SCORESNOW.currentPage = 0;
+    }
+
+    // this is a sport page
+    if(tiers.length === 1){
+      SCORESNOW.currentPage = SCORESNOW.pageSlots[tiers[0]];
+      addPageTitle(SCORESNOW.currentSport);
+    }
+
+    if(tiers.length > 1){
+      SCORESNOW.currentPage = SCORESNOW.pageSlots[SCORESNOW.pageType];
+    }
+
+    // set a last page variable to re-open app at previous last page
     var lastPage = {
       url: hash,
       date: offsetDate.getDate()
@@ -30,35 +52,12 @@ module.exports = function(){
     window.localStorage.setItem('last-page', JSON.stringify(lastPage));
   }
 
-  function setPageTitle(hash){
-    
-    if(SCORESNOW.page === 'fixtures'){
-      SCORESNOW.pageTitle = SCORESNOW.currentSport;
+  function setGhostPages(){
+    var numberOfGhostItems = SCORESNOW.ghostPages[SCORESNOW.currentSport][SCORESNOW.pageType];
+    if(SCORESNOW.pageType === 'competition'){
+      numberOfGhostItems = numberOfGhostItems[SCORESNOW.contentId];
     }
-
-    if(SCORESNOW.page === 'competition'){
-      var lookup = SCORESNOW.competitionLookup[SCORESNOW.currentSport];
-      Object.keys(lookup).forEach(function(key){
-        if(lookup[key][0].toString() === SCORESNOW.contentId){
-          SCORESNOW.pageTitle = lookup[key][1];
-        }
-      });
-    }
-
-    // if(SCORESNOW.page === 'match'){
-    //   SCORESNOW.pageTitle = 'Match';
-    // }
-
-    if(SCORESNOW.page === 'home'){
-      SCORESNOW.pageTitle = 'Home';
-    }
-
-    addPageTitle(SCORESNOW.pageTitle);
-
-  }
-
-  function setDirection(direction){
-    SCORESNOW.direction = direction;
+    SCORESNOW.numberOfGhostItems = numberOfGhostItems;
   }
 
   function setUpPages(e){
@@ -69,14 +68,8 @@ module.exports = function(){
       return;
     }
 
-    var hash = location.hash;
-
-    setPage(hash);
-    setPageTitle();
-
-    // @TODO - work out how to tell if the user is going back
-    setDirection('forward');
-
+    setPage(location.hash);
+    setGhostPages();
     document.dispatchEvent(hashEvent);
   }
 

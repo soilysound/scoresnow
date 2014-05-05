@@ -1,64 +1,44 @@
 // BUILD VIEW
-
+window.onerror = function(a, b, c){
+  alert(a);
+  alert(b);
+  alert(c);
+};
 module.exports = function(){
   
   var viewRendered;
   var date = require('../modules/offset-time.js');
-  var ghostPage = require('../modules/ghost-page.js');
   var addPageTitle = require('../modules/set-page-title.js');
   var sanitizeName = require('../modules/sanitize-name.js');
   var getTemplate = require('../modules/get-template.js');
+  var addGhosts = require('../modules/ghost-page.js');
 
 
-  function constructView(container, data, templateId, renderFunction){
-    
-    // add ghost page with number of items expected on the next page
-    ghostPage.set(SCORESNOW.children || data.length);
+  function constructView(container, data, templateId, renderFunction, ghosts){
 
-    // set page title
-    addPageTitle(sanitizeName(data.name));
+    // set page title if its coming from the data
+    if(SCORESNOW.pageType.match(/match|competition/i)){
+      addPageTitle(sanitizeName(data.title));
+    }
 
-    var template = getTemplate(templateId);
-
-    var fragment = document.createDocumentFragment();
-  
     // loop through items in the data
-    data.forEach(function(item){
+    data.children.forEach(function(item, index){
 
-      var templateInstance = template.cloneNode(true);
+      var templateInstance = ghosts[index];
       templateInstance.id = 'i' + item.id;
-      templateInstance.setAttribute('data-children', item.children || 1);
       
-      // override ghostpage function with explicit number of children in next view
-      templateInstance.onclick = function(){
-        SCORESNOW.children = parseInt(this.getAttribute('data-children'), 10);
-        setTimeout(function(){
-        // reset so ghost page function works as normal on next page
-          SCORESNOW.children = null;
-        }, 300);
-      };
-
       // attach update function to this template and run it
       templateInstance.update = renderFunction;
       templateInstance.update(item, true);
 
-      // remove css that disables clicks
-      templateInstance.style.cssText = "pointer-events:auto;";
-
-      // add template to fragment
-      fragment.appendChild(templateInstance);
-
     });
 
-    // add fragment to view
-    container.innerHTML = "";
-    container.appendChild(fragment);
   }
 
   function updateView(container, data){
     
     // @TODO  use ids here instead
-    data.forEach(function(item){
+    data.children.forEach(function(item){
       var bar = container.querySelector('#i' + (item.id));
 
       if(!bar){
@@ -68,9 +48,7 @@ module.exports = function(){
     });
   }
 
-  function noFixtures(container, templateId){
-
-    ghostPage.add(container);
+  function noFixtures(container){
 
     var div = document.createElement('div');
     div.className = 'no-fixtures-message';
@@ -78,43 +56,65 @@ module.exports = function(){
     container.appendChild(div);
   }
 
-  function buildView(container, dataUrl, template, contentId){
-   
-    // create ghost pages
-    ghostPage.add(container);
 
-    // terminate previous web worker
-    if(SCORESNOW.dataWorker){
-      SCORESNOW.dataWorker.terminate();
+  function buildView(container, dataUrl, sport, contentType, contentId){
+     
+    // create ghost pages
+    var ghosts = addGhosts(container, sport + "-" + contentType, SCORESNOW.numberOfGhostItems);
+
+    // @TODO - if switching sports, kill the current data worker
+    // if(SCORESNOW.dataWorker){
+    //   SCORESNOW.dataWorker.terminate();
+    //   SCORESNOW.dataWorker = null;
+    // }
+
+    // create new web worker
+    if(!SCORESNOW.dataWorker){
+      SCORESNOW.dataWorker = new Worker('/data-workers/' + sport + '.js?v=4');
     }
 
-    SCORESNOW.dataWorker = new Worker(blob);
-
+    // post message with url and content section
     SCORESNOW.dataWorker.postMessage({
       url: dataUrl,
-      type: template,
+      type: sport + '-' + contentType,
       currentDate: date.getDate(-15),
-      id: contentId
+      id: contentId,
+      refreshInterval: SCORESNOW.refreshInterval
     });
 
     SCORESNOW.dataWorker.onmessage = function(e){
-
-      if(!e.data){
+      console.log(e.data);
+      if(e.data === null){
         SCORESNOW.dataWorker.terminate();
         return;
       }
 
-      if(e.data.length === 0){
-        noFixtures(container, template);
+      if(e.data.children.length === 0){
+        noFixtures(container);
         return;
       }
 
       if(viewRendered){
         updateView(container, e.data);
+        console.log('update');
       }
 
+      // construct view for the first time
       else {
-        constructView(container, e.data, template, window.SCORESNOW.renderFunctions[template]);
+        console.log('construct');
+        constructView(
+          // page container
+          container,
+          // data 
+          e.data,
+          // content section
+          (sport + '-' + contentType),
+          // render function for this view
+          window.SCORESNOW.renderFunctions[sport + '-' + contentType],
+          // placeholder ghost data bars
+          ghosts
+        );
+
         viewRendered = true;
       }
 
@@ -122,35 +122,29 @@ module.exports = function(){
 
   }
 
-  // create blob url for our inline web worker
-  if(!window.Blob){
-    alert('blob workers not supported');
-    return;
-  }
-  
-  window.URL = window.URL || window.webkitURL;
-
-  var blob = window.URL.createObjectURL(
-    new Blob([
-      document.getElementById('blob-worker').textContent
-    ])
-  );
-
   document.addEventListener('pageChange', function(){
 
+    if(SCORESNOW.pageType === 'home'){
+      return;
+    }
+    // this is a new view so set viewRendered to false
     viewRendered = false;
 
+    // get sport and page type
     var currentSport = SCORESNOW.currentSport;
-    var pageType = SCORESNOW.page;
+    var pageType = SCORESNOW.pageType;
 
-    var url = SCORESNOW.endpoints[currentSport][pageType];
+    // get end point url for [currentSport]
+    var url = SCORESNOW.endPoints[currentSport];
+
+    // optionally pass through content id or date to endpoint
     url = url.replace('#{id}', SCORESNOW.contentId);
     url = url.replace('#{date}', date.getDate(-15));
 
-    var currentView = (SCORESNOW.pages[SCORESNOW.currentPage]);
-    if(SCORESNOW.page !== 'home'){
-      buildView(currentView, url, currentSport + '-' + pageType, SCORESNOW.contentId);
-    }
+    var currentView = SCORESNOW.pages[SCORESNOW.currentPage];
+    
+    buildView(currentView, url, currentSport, pageType, SCORESNOW.contentId);
+    
     
   });
 
@@ -161,8 +155,6 @@ module.exports = function(){
     if(!previousPage){
       return;
     }
-
-    //previousPage.innerHTML = document.getElementById('shim-template').innerHTML;
 
   }, false);
 

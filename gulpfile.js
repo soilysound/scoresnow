@@ -7,7 +7,18 @@ var minifyCSS = require('gulp-minify-css');
 var browserify = require('gulp-browserify');
 var minifyHTML = require('gulp-minify-html');
 var rename = require("gulp-rename");
+var gfi = require("gulp-file-insert");
+var fs = require('fs');
 
+function stringGen(len){
+  var text = '';
+  var charset = "abcdefghijklmnopqrstuvwxyz0123456789";
+  for(var i=-1; ++i<len;){
+    text += charset.charAt(Math.floor(Math.random() * charset.length));
+  }
+
+  return text;
+}
 
 var paths = {
   scripts: {
@@ -30,11 +41,15 @@ gulp.task('head.js', function() {
 
 gulp.task('minify-html', function() {
 
+  fs.writeFile("./deploy/cache-buster.txt", stringGen(10));
   var opts = {quotes:true};
 
   gulp.src('index-dev.html')
     .pipe(minifyHTML(opts))
     .pipe(rename('index.html'))
+    .pipe(gfi({
+      "#{cache}": "deploy/cache-buster.txt"
+    }))
     .pipe(gulp.dest(''));
 });
 
@@ -54,7 +69,6 @@ gulp.task('browserify', function(){
     .pipe(gulp.dest('js/'));
 
 });
-
 
 
 gulp.task('site.css', function(){

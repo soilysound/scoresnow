@@ -1,64 +1,28 @@
 // GHOST PAGE
 
-module.exports = {
+module.exports = function(container, contentType, numberOfItems){
 
-  add: function(container){
+  var ghosts = [];
 
-    var number = 0;
+  var template = document.getElementById(contentType);
+ 
+  var shim = document.createElement('div');
+  shim.innerHTML = template.innerHTML;
+  shim = shim.firstChild;
+  
+  var fragment = document.createDocumentFragment();
 
-    if(SCORESNOW.page === 'fixtures' && SCORESNOW.ghostPages[SCORESNOW.currentSport]['fixtures']){
-        number = SCORESNOW.ghostPages[SCORESNOW.currentSport]['fixtures'];
-    }
-
-    if(SCORESNOW.page === 'match'){
-      number = 1;
-    }
-
-    if(SCORESNOW.page === 'competition') {
-      var reference = SCORESNOW.ghostPages[SCORESNOW.currentSport][SCORESNOW.page];
-      if(reference[SCORESNOW.contentId]){
-        number = reference[SCORESNOW.contentId];
-      }
-    }
-
-    if(SCORESNOW.children){
-      number = SCORESNOW.children;
-    }
-
-    var template = document.getElementById(SCORESNOW.currentSport + '-' + SCORESNOW.page);
-   
-    var shim = document.createElement('div');
-    shim.innerHTML = template.innerHTML;
-    shim = shim.firstChild;
-    
-    var fragment = document.createDocumentFragment();
-
-    for(var i = -1;++i<number;){
-      fragment.appendChild(shim.cloneNode(true));
-    }
-
-    container.innerHTML = "";
-    container.appendChild(fragment);
-
-  },
-
-  set: function(number){
-
-    var reference;
-
-    if(SCORESNOW.page === 'fixtures'){
-      SCORESNOW.ghostPages[SCORESNOW.currentSport]['fixtures'] = number;
-    }
-
-    if(SCORESNOW.page === 'match'){
-      SCORESNOW.ghostPages[SCORESNOW.currentSport]['match'] = 1;
-    }
-
-    else {
-      reference = SCORESNOW.ghostPages[SCORESNOW.currentSport][SCORESNOW.page];
-      reference[SCORESNOW.contentId] = number;
-    }
-    
+  for(var i = -1;++i<numberOfItems;){
+    var newGhost = shim.cloneNode(true);
+    fragment.appendChild(newGhost);
+    ghosts.push(newGhost);
   }
+
+  container.innerHTML = "";
+  container.appendChild(fragment);
+
+  return ghosts;
+
 };
+
 

@@ -18,37 +18,36 @@ module.exports = function(data, firstRun){
     '</div>'
   ].join('');
 
+
   if(firstRun){
-    updateText(this.querySelector('.data-bar__cell-hometeam'), data.teams.home.short_name);
-    updateText(this.querySelector('.data-bar__cell-awayteam'), data.teams.away.short_name);
-    this.id = 'i' + data.matchId;
+    updateText(this.querySelector('.data-bar__cell-hometeam'), data.homepart);
+    updateText(this.querySelector('.data-bar__cell-awayteam'), data.awaypart);
+    this.id = 'i' + data.id;
   }
 
   function sanitizePlayerName(name){
     return name.split(' ').pop();
   }
 
-  updateText(this.querySelector('.data-bar__cell-homescore'), data.score.home);
-  updateText(this.querySelector('.data-bar__cell-awayscore'), data.score.away);
+  updateText(this.querySelector('.data-bar__cell-homescore'), data.score[0]);
+  updateText(this.querySelector('.data-bar__cell-awayscore'), data.score[1]);
 
-  var status = SCORESNOW.statusLookup[data.generalInfo.matchStatus.toLowerCase()];
+  //var status = SCORESNOW.statusLookup[data.status.toLowerCase()];
   this.querySelectorAll('.data-bar').forEach(function(item){
-    item.setAttribute('data-status', status);
+    item.setAttribute('data-status', data.status);
   });
 
   // loop through events
   for(var i = -1; ++i < data.events.length;){
 
     var item = data.events[i];
+
     var itemRow = row;
-    var id = item.eventType + parseInt(item.time, 10);
+    var id = item.type + parseInt(item.time, 10);
     id = id.replace(/ /g, '-');
     itemRow = itemRow.replace('#{id}', id);
-    if(matchEvents.querySelector('#' + id)){
-      continue;
-    }
 
-    itemRow = itemRow.replace(/#{event}/g, item.eventLabel);
+    itemRow = itemRow.replace(/#{event}/g, item.type);
     itemRow = itemRow.replace('#{time}', item.time ? (item.time + '\'') : '');
     
     // add descrption text
@@ -58,21 +57,23 @@ module.exports = function(data, firstRun){
       description = item.description;
     }
 
-    if(item.player){
-      description = item.player[0];
-    }
-    
-    if(item.eventType.match(/info/i)){
-      description = offsetTime.getTime(data.generalInfo.kickoffDate, data.generalInfo.kickoffTime) + ' &nbsp;' + data.generalInfo.venue;
-    }
-
     if(!item.time){
       itemRow = itemRow.replace('#{class}', 'match-view__events-row--no-time');
     }
 
     itemRow = itemRow.replace('#{description}', description);
-  
-    matchEvents.insertAdjacentHTML('afterbegin', itemRow);
+    
+    // check if row is already in page
+    var rowExists = matchEvents.querySelector('#' + id);
+    // if so just update the description (eg, if the goal score comes in after the goal)
+    if(rowExists){
+      rowExists.querySelector('.match-view__events-row__col3').textContent = description;
+    }
+    // add new row
+    else {
+      matchEvents.insertAdjacentHTML('afterbegin', itemRow);
+    }
   }
+
 
 };

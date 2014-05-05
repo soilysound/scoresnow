@@ -1,0 +1,27 @@
+CACHE MANIFEST
+# v0.06
+/fonts/ubuntu.woff
+/fonts/ubuntu-medium.woff
+/js/app.js
+/js/head.js
+/css/site.css
+/data-workers/football.js
+
+NETWORK:
+index.html
+/config/SCORESNOW-config.min.js
+/data/football-fixtures-full.js
+//www.google-analytics.com/analytics.js
+/images/apple-touch-icon-114x114.png
+/images/apple-touch-icon-120x120.png
+/images/apple-touch-icon-144x144.png
+/images/apple-touch-icon-152x152.png
+/images/apple-touch-icon-57x57.png
+/images/apple-touch-icon-60x60.png
+/images/apple-touch-icon-72x72.png
+/images/apple-touch-icon-76x76.png
+/images/apple-touch-icon.png
+/images/apple-touch-startup-image-1536x2008.png
+/images/apple-touch-startup-image-2048x1496.png
+/images/apple-touch-startup-image-640x1096.png
+/images/favicon.ico

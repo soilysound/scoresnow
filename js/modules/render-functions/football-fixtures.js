@@ -5,16 +5,11 @@ module.exports = function(data, firstRun){
   var updateText = require('../update-text.js');
 
   if(firstRun){
-    var isDefinedLeague = SCORESNOW.competitionLookup[SCORESNOW.currentSport][data.id];
 
-    if(!isDefinedLeague){
-      return;
-    }
-
-    var competitionName = isDefinedLeague[1];
-    var competitionURL = '/#/' + [
+    var competitionName = data.title;
+    var competitionURL = '#/' + [
       'football',
-      isDefinedLeague[0]
+      data.id
     ].join('/');
    
     updateText(this.querySelector('.data-bar__cell-competition-name'), competitionName);

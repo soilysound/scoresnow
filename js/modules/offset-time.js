@@ -31,6 +31,41 @@ module.exports = {
       }
 
       return date.toISOString().split('T').shift();
+    },
+
+    convertCestTime: function(time){
+
+      if(time.match(/can/i)){
+        return "P  -  P";
+      }
+
+      if(isNaN(parseInt(time, 10))){
+        return time;
+      }
+
+      if(!time.match(':')){
+        return parseInt(time, 10);
+      }
+
+      var date = new Date();
+      date.setHours(time.split(':')[0]);
+      date.setMinutes(time.split(':')[1]);
+      var localtime = date.getTime();
+      var localoffset = date.getTimezoneOffset()*60000;
+      var newDate = new Date(localtime + localoffset);
+      var newHours = newDate.getHours();
+      var newMinutes =  newDate.getMinutes().toString();
+      
+      if(newMinutes.length === 1){
+        newMinutes = '0' + newMinutes;
+      }
+
+      if(newHours.length === 1){
+        newHours = '0' + newHours;
+      }
+
+      return newHours + ":" + newMinutes;
+
     }
 
 };
