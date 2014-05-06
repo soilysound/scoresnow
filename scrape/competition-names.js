@@ -16,6 +16,7 @@ module.exports = {
 "57":"Eredivisie|Netherlands",
 "59":"Tippeligaen|Norway",
 "61":"Primeira Liga|Portugal",
+"64":"Premiership|Scotland",
 "67":"Allsvenskan|Sweden",
 "71":"Superlig|Turkey",
 "73":"UEFA Europa League|Europe",
