@@ -19,7 +19,7 @@ global.uniquePage = true;
 
 // run every 1 minute
 var rule2 = new schedule.RecurrenceRule();
-rule2.minute = 1;
+rule2.second = 1;
 schedule.scheduleJob(rule2, function(){
   footballFixtures();
 });
