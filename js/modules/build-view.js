@@ -83,7 +83,6 @@ module.exports = function(){
     });
 
     SCORESNOW.dataWorker.onmessage = function(e){
-      console.log(e.data);
       if(e.data === null){
         SCORESNOW.dataWorker.terminate();
         return;
@@ -96,7 +95,6 @@ module.exports = function(){
 
       if(viewRendered){
         updateView(container, e.data);
-        console.log('update');
       }
 
       // construct view for the first time

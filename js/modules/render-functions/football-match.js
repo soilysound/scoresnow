@@ -8,9 +8,9 @@ module.exports = function(data, firstRun){
   var matchEvents = this.querySelector('.match-view__events');
 
   var row = [
-    '<div class="match-view__events-row #{class}" id="#{id}">',
+    '<div class="match-view__events-row match-view__event-#{class}" id="#{id}">',
       '<div class="match-view__events-row__col match-view__events-row__col1">',
-        '<div class="match-view__events-icon #{event}" data-event="#{event}"></div>',
+        '<div class="match-view__events-icon #{event}" data-event="#{event}"><img src="/images/events/yellow-card.svg"></div>',
       '</div>',
       '<div class="match-view__events-row__col match-view__events-row__col2">#{time}</div>',
       '<div class="match-view__events-row__col match-view__events-row__col3">#{description}</div>',
@@ -37,16 +37,18 @@ module.exports = function(data, firstRun){
     item.setAttribute('data-status', data.status);
   });
 
+  // set status on match events to selectively hide some events at different points of the match
+  matchEvents.setAttribute('data-status', data.status);
+
   // loop through events
   for(var i = -1; ++i < data.events.length;){
 
     var item = data.events[i];
 
     var itemRow = row;
-    var id = item.type + parseInt(item.time, 10);
+    var id = item.type + parseInt(item.sortTime, 10);
     id = id.replace(/ /g, '-');
     itemRow = itemRow.replace('#{id}', id);
-
     itemRow = itemRow.replace(/#{event}/g, item.type);
     itemRow = itemRow.replace('#{time}', item.time ? (item.time + '\'') : '');
     
@@ -57,17 +59,28 @@ module.exports = function(data, firstRun){
       description = item.description;
     }
 
+    itemRow = itemRow.replace('#{description}', description);
+
+
+    // add an event class to each event row
+    var eventClass = item.type;
+
     if(!item.time){
-      itemRow = itemRow.replace('#{class}', 'match-view__events-row--no-time');
+      eventClass += " match-view__events-row--no-time";
     }
 
-    itemRow = itemRow.replace('#{description}', description);
+    itemRow = itemRow.replace('#{class}', eventClass);
     
     // check if row is already in page
     var rowExists = matchEvents.querySelector('#' + id);
-    // if so just update the description (eg, if the goal score comes in after the goal)
+    // if so just update the description and time (eg, if the goal score comes in after the goal)
     if(rowExists){
+      if(rowExists && item.replace === true){
+        matchEvents.insertBefore(rowExists, matchEvents.firstChild);
+      }
+
       rowExists.querySelector('.match-view__events-row__col3').textContent = description;
+      rowExists.querySelector('.match-view__events-row__col2').textContent = item.time + '\'';
     }
     // add new row
     else {

@@ -45,51 +45,72 @@ module.exports = function(createGhostPages){
 
     var events = [];
 
-    if(!text){
-      return events;
+    if(text){
+      text = text.split("popup('")[1];
+      text = text.split("','')")[0];
+
+      var $ = cheerio.load(text);
+
+      $('tr').each(function(i, node){
+
+        if(i > 0){
+
+          var event = {};
+          var tds = $(node).find('td');
+
+          var side;
+          if(tds.eq(0).text().length){
+            event.side = 'home';
+            side = 0;
+          }
+          else {
+            side = 2;
+            event.side = 'away';
+          }
+
+          var textString = tds.eq(side).text();
+          event.time = /\d+/.exec(textString)[0];
+          event.sortTime = event.time;
+          var desc = textString.replace(event.time, '').trim();
+          event.description = desc ?  desc : "  ";
+          event.type = tds.eq(1).find('img').eq(0).attr('src').match(/\/(.*)\./)[1];
+          
+          events.push(event);
+        }
+
+      });
+
     }
 
-    text = text.split("popup('")[1];
-    text = text.split("','')")[0];
+    if(typeof time === "string" && time.match(':')){
+      // if its a time, add an informatione vent showing when the kick off is
+      events.push({
+        time: 0,
+        sortTime: -1,
+        description: 'Match Kicks off at ' + time,
+        type: 'info'
+      });
+    }
+    else{
 
-    var $ = cheerio.load(text);
-
-    $('tr').each(function(i, node){
-
-      if(i > 0){
-
-        var event = {};
-        var tds = $(node).find('td');
-
-        var side;
-        if(tds.eq(0).text().length){
-          event.side = 'home';
-          side = 0;
-        }
-        else {
-          side = 2;
-          event.side = 'away';
-        }
-
-        var textString = tds.eq(side).text();
-        event.time = /\d+/.exec(textString)[0];
-        event.sortTime = event.time;
-        var desc = textString.replace(event.time, '').trim();
-        event.description = desc ?  desc : "&nbsp;";
-        event.type = tds.eq(1).find('img').eq(0).attr('src').match(/\/(.*)\./)[1];
-        
-        events.push(event);
+      if(typeof time === 'number'){
+        // add current match time
+        events.push({
+          time: time,
+          sortTime: 9999,
+          description: ' ',
+          type: 'current-time',
+          replace: true
+        });
       }
-
-    });
-
-    // add kick off event
-    events.push({
-      time: 0,
-      sortTime: 0,
-      description: 'Match Kicks Off',
-      type: 'ko'
-    });
+      // if not, add kick off event
+      events.push({
+        time: 0,
+        sortTime: 0,
+        description: 'Match Kicks Off',
+        type: 'ko'
+      });
+    }
 
     //if half time or full time or in the second half, add half time event
     if(status === 'ht' || status === 'ft' || time > 45){
@@ -98,6 +119,16 @@ module.exports = function(createGhostPages){
         sortTime: 45.9,
         description: 'Half Time',
         type: 'ht'
+      });
+
+      // add current match time
+      events.push({
+        time: time,
+        sortTime: 9999,
+        description: ' ',
+        type: 'current-time',
+        replace: true,
+        visibility: 'hidden'
       });
     }
 
@@ -120,8 +151,7 @@ module.exports = function(createGhostPages){
         type: 'ft'
       });
     }
-
-    // add information event with kick off time
+  
 
     // sort events by actual time
     events.sort(function(a, b){

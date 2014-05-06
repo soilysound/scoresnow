@@ -121,6 +121,15 @@
   font-size: 8px;
 }
 
+// show the current time if its ip
+.match-view__event-current-time {
+  display: none
+}
+
+.match-view__events[data-status='ip'] > .match-view__event-current-time {
+  display: block;
+}
+
 @media all and (@tablet-min) and (@tablet-max){
   
   .data-bar--football-match {

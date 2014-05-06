@@ -13,13 +13,13 @@ global.countryNames = require('../scrape/country-names.js');
 global.compNames = require('../scrape/competition-names.js');
 
 global.newDay = false;
-global.uniquePage = false;
+global.uniquePage = true;
 
 // footballFixtures(true);
 
 // run every 1 minute
 var rule2 = new schedule.RecurrenceRule();
-rule2.second = 1;
+rule2.minute = 1;
 schedule.scheduleJob(rule2, function(){
   footballFixtures();
 });

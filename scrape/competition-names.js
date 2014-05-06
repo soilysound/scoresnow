@@ -71,6 +71,7 @@ module.exports = {
 "215":"Úrvalsdeild|Iceland",
 "216":"1. Deild|Iceland",
 "219":"FAI Cup|Ireland",
+"220":"League Cup|Ireland",
 "222":"Super Cup|Italy",
 "223":"J. League|Japan",
 "224":"League Cup|Japan",
@@ -97,6 +98,7 @@ module.exports = {
 "301":"EURO Championship U-17|Europe",
 "306":"World Cup U-17|International",
 "329":"Gulf Cup|International",
+"338":"National League|Russia",
 "342":"League Cup|Finland",
 "440":"Super Cup|Japan",
 "441":"Premier League|Ukraine",
@@ -114,4 +116,4 @@ module.exports = {
 "8973":"Division 1|Slovakia",
 "8976":"Ascenso MX|Mexico",
 "8978":"League Cup|Northern Ireland"
-}
+};

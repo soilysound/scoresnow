@@ -8,17 +8,21 @@ module.exports = function(){
   function showBackButton(show){
 
     if(show){
-      backButton.style.cssText = 'opacity: 1';
+      backButton.style.cssText = 'opacity:1';
     }
 
     else {
-      backButton.style.cssText = 'opacity: 0; pointer-events: none';
+      backButton.style.cssText = 'pointer-events:none;opacity:0;';
     }
 
   }
 
   backButton.addEventListener('click', function(){
-    
+
+    if(backButton.getAttribute('disabled')){
+      return;
+    }
+
     SCORESNOW.historyBack = true;
     history.go(-1);
     backButtonHistory++;
@@ -27,6 +31,8 @@ module.exports = function(){
       backButtonHistory = 0;
       SCORESNOW.history = 0;
     }
+
+    backButton.setAttribute('disabled', true);
     
     setTimeout(function(){
       SCORESNOW.historyBack = false;
@@ -45,6 +51,11 @@ module.exports = function(){
     if(SCORESNOW.history > 0){
       showBackButton(true);
     }
+
+    setTimeout(function(){
+      backButton.removeAttribute('disabled');
+    }, 250);
+
 
   });
 };
