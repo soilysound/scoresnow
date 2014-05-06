@@ -61,6 +61,7 @@ module.exports = {
 "177":"FA Cup|Slovakia",
 "179":"Challenge Cup|Scotland",
 "180":"League Cup|Scotland",
+"181":"Premiership Play-offs|Scotland",
 "182":"Super Liga|Serbia",
 "185":"Segunda Liga|Portugal",
 "189":"Liga I|Romania",
