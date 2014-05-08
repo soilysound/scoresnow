@@ -14,7 +14,8 @@ module.exports = function(){
     }
     else {
       location.hash = lastPage.url;
-      SCORESNOW.history = -1;
+      SCORESNOW.history = 0;
+      SCORESNOW.appStartUp = true;
     }
   }
 

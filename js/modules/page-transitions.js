@@ -59,9 +59,8 @@ module.exports = function(){
     if(!SCORESNOW.historyBack){
       pages[pageToGoTo].scrollTop = 1;
     }
-  
+    
     if(pageToGoTo === previousPage){
-
       setPosition(pages[pageToGoTo], 0, false);
       // reenable transitions after first load
       SCORESNOW.disableTransitions = false;
@@ -73,3 +72,4 @@ module.exports = function(){
   }, false);
 
 };
+

@@ -3,8 +3,12 @@
 module.exports = function(){
 
   var backButtonHistory = 0;
+  var history = 0;
+
+  // get back button node
   var backButton = document.querySelector('.site-header__col1');
 
+  // show hide back button
   function showBackButton(show){
 
     if(show){
@@ -19,43 +23,47 @@ module.exports = function(){
 
   backButton.addEventListener('click', function(){
 
-    if(backButton.getAttribute('disabled')){
+    if(SCORESNOW.historyBack){
       return;
     }
 
-    SCORESNOW.historyBack = true;
-    history.go(-1);
-    backButtonHistory++;
-    if(backButtonHistory === SCORESNOW.history){
-      showBackButton(false);
-      backButtonHistory = 0;
-      SCORESNOW.history = 0;
-    }
+    // go back one in history
+    window.history.go(-1);
 
-    backButton.setAttribute('disabled', true);
-    
+    // set a brief variable saying this is going backwards
+    SCORESNOW.historyBack = true;
     setTimeout(function(){
       SCORESNOW.historyBack = false;
-    }, 50);
+
+    }, 500);
 
   }, false);
 
 
+  // set backbutton state on page change
   document.addEventListener('pageChange', function(){
 
-    // iterate internal history if not back button
-    if(!SCORESNOW.historyBack){
-      SCORESNOW.history++;
+
+    // iterate internal history if going forward
+    if(SCORESNOW.historyBack){
+      backButtonHistory++;
     }
-    
-    if(SCORESNOW.history > 0){
-      showBackButton(true);
+    else {
+      history++;
     }
 
-    setTimeout(function(){
-      backButton.removeAttribute('disabled');
-    }, 250);
+    // if history is more than 0, show back button
+    showBackButton(history ? true : false);
 
+    // if back button history is the same as history, then hide back button or...
+    // ...if app has just started up, hide back button
+
+    if(backButtonHistory === history || SCORESNOW.appStartUp){
+      showBackButton(false);
+      SCORESNOW.appStartUp = false;
+      backButtonHistory = 0;
+      history = 0;
+    }
 
   });
 };

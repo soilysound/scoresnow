@@ -17,9 +17,9 @@ global.uniquePage = true;
 
 // footballFixtures(true);
 
-// run every 1 minute
-var rule2 = new schedule.RecurrenceRule();
-rule2.second = 1;
-schedule.scheduleJob(rule2, function(){
+// run every 5 minutes
+var rulemin = new schedule.RecurrenceRule();
+rulemin.minute = new schedule.Range(0, 59, 5);
+schedule.scheduleJob(rulemin, function(){
   footballFixtures();
 });

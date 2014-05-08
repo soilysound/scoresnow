@@ -8,11 +8,11 @@
   function overlay(){
 
     if(navigator.onLine){
-      style.textContent = ".offline-overlay {visibility: hidden!important}";
+      style.textContent = ".offline-overlay {display: none}";
     }
 
     else {
-      style.textContent = ".offline-overlay {visibility: visible!important}";
+      style.textContent = ".offline-overlay {display: table}";
     }
 
   }
