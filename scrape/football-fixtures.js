@@ -167,19 +167,6 @@ module.exports = function(createGhostPages){
     var $ = cheerio.load(body);
     var rows = $('tr');
 
-    if(global.uniquePage){
-      
-      if(global.uniquePage == rows.eq(1).find('td').eq(1).text()){
-        newDay = false;
-      }
-
-      else {
-        newDay = true;
-      }
-
-      global.uniquePage = rows.eq(1).find('td').eq(1).text();
-    }
-
     var json = {
       title: 'Football',
       children: []
@@ -279,6 +266,19 @@ module.exports = function(createGhostPages){
       // set fixtures 
       SCORESNOW.ghostPages.football.fixtures  = json.children.length;
 
+      var currentGhost = JSON.stringify(SCORESNOW.ghostPages.football);
+      
+      // work out if this is a new day by comparing the current ghostpages with the previous ones
+      if(previousGhost == currentGhost){
+        newDay = false;
+      }
+
+      else {
+        newDay = true;
+      }
+
+      previousGhost = currentGhost;
+
     }
 
     removeDupes();
@@ -356,7 +356,8 @@ module.exports = function(createGhostPages){
 
       // write file locally for testing
       fs.writeFile('../data/football-fixtures-full.js', file);
-
+      
+      console.log(newDay);
 
       if(createGhostPages || newDay){
 

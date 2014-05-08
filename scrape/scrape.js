@@ -12,10 +12,10 @@ AWS.config.loadFromPath('aws.json');
 global.countryNames = require('../scrape/country-names.js');
 global.compNames = require('../scrape/competition-names.js');
 
+// work out if this is a new day by comparing the size of each league
 global.newDay = false;
-global.uniquePage = true;
+global.previousGhost = false;
 
-// footballFixtures(true);
 
 // run every 5 minutes
 var rulemin = new schedule.RecurrenceRule();
