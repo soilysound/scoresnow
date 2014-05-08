@@ -13,7 +13,7 @@ module.exports = function(createGhostPages){
 
   function getStatus(text){
 
-    if(text.match(":")){
+    if(text.match(/:|br/)){
       return 'ko';
     }
 

@@ -39,6 +39,10 @@ module.exports = {
         return "P  -  P";
       }
 
+      if(time.match(/br/i)){
+        return "ABD";
+      }
+
       if(isNaN(parseInt(time, 10))){
         return time;
       }
