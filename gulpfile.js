@@ -87,6 +87,17 @@ gulp.task('deploy-s3', function() {
     }))
     .pipe(awspublish.reporter());
 
+  // upload match icons
+  gulp.src('images/events/*.svg')
+    .pipe(rename(function (path) {
+       path.dirname += '/images/events/';
+    }))
+    .pipe(awspublish.gzip())
+    .pipe(publisher.publish({
+      'Cache-Control': 'max-age=14515200'
+    }))
+    .pipe(awspublish.reporter());
+
   // upload html
   gulp.src('index.html')
     .pipe(awspublish.gzip())

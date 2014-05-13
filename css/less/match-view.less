@@ -65,6 +65,11 @@
   font-size: 1.25rem;
 }
 
+// is away event
+.match-view__event-side-away {
+  background: #eee
+}
+
 .match-view__events-row:first-child {
   opacity: 0;
   -webkit-animation: fade-row 1s ease-in-out forwards;
@@ -81,9 +86,8 @@
   color: white;
 }
 
-// no time
-.match-view__events-row--no-time > .match-view__events-row__col2{
-   display: none;
+.match-view__event-info > .match-view__events-row__col2 {
+  display: none
 }
 
 .match-view__events-row__col {
@@ -114,16 +118,6 @@
   overflow: hidden;
   text-align: center;
   //outline: 1px solid #ccc
-}
-
-.match-view__events-icon > img {
-
-}
-
-
-.match-view__events-icon:after {
-  //content: attr(data-event);
-  font-size: 8px;
 }
 
 // show the current time if its ip

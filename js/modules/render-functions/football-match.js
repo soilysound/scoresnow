@@ -8,9 +8,9 @@ module.exports = function(data, firstRun){
   var matchEvents = this.querySelector('.match-view__events');
 
   var row = [
-    '<div class="match-view__events-row match-view__event-#{class}" id="#{id}">',
+    '<div class="match-view__events-row match-view__event-#{class} match-view__event-side-#{side}" id="#{id}">',
       '<div class="match-view__events-row__col match-view__events-row__col1">',
-        '<div class="match-view__events-icon #{event}" data-event="#{event}"><img src="/images/events/#{event}.svg?v=2"></div>',
+        '<div class="match-view__events-icon #{event}" data-event="#{event}"><img src="/images/events/#{event}.svg?v=3"></div>',
       '</div>',
       '<div class="match-view__events-row__col match-view__events-row__col2">#{time}</div>',
       '<div class="match-view__events-row__col match-view__events-row__col3">#{description}</div>',
@@ -51,7 +51,8 @@ module.exports = function(data, firstRun){
     itemRow = itemRow.replace('#{id}', id);
     itemRow = itemRow.replace(/#{event}/g, item.type);
     itemRow = itemRow.replace('#{time}', item.time ? (item.time + '\'') : '');
-    
+    itemRow = itemRow.replace(/#{side}/g, item.side);
+
     // add descrption text
     var descriptiton = '';
 
