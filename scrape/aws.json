@@ -1,1 +1,5 @@
-{ "accessKeyId": "AKIAIJJRUOSQXIZD4DTA", "secretAccessKey": "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", "region": "eu-west-1" }
+{ 
+  "accessKeyId": "AKIAIJJRUOSQXIZD4DTA", 
+  "secretAccessKey": "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", 
+  "region": "eu-west-1" 
+}

@@ -94,7 +94,7 @@
 }
 
 .match-view__events-row__col1 {
-  width: 4.9em;
+  width: 4.2em;
 }
 
 .match-view__events-row__col2 {
@@ -107,17 +107,22 @@
 }
 
 .match-view__events-icon {
-  width: 2.7em;
-  height: 2.7em;
-  background: #bbb;
+  width: 2.5em;
+  height: 2.5em;
   display: inline-block;
   vertical-align: middle;
   overflow: hidden;
   text-align: center;
+  //outline: 1px solid #ccc
 }
 
+.match-view__events-icon > img {
+
+}
+
+
 .match-view__events-icon:after {
-  content: attr(data-event);
+  //content: attr(data-event);
   font-size: 8px;
 }
 
@@ -127,8 +132,9 @@
 }
 
 .match-view__events[data-status='ip'] > .match-view__event-current-time {
-  display: block;
+  display: table;
 }
+
 
 @media all and (@tablet-min) and (@tablet-max){
   
@@ -157,7 +163,7 @@
   }
 
   .match-view__events-row__col1 {
-    width: 3.9em
+    width: 3.5em
   }
 
   .match-view__events-row__col2 {

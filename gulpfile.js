@@ -9,6 +9,9 @@ var minifyHTML = require('gulp-minify-html');
 var rename = require("gulp-rename");
 var gfi = require("gulp-file-insert");
 var fs = require('fs');
+var awspublish = require('gulp-awspublish');
+var gzip = require("gulp-gzip");
+var rename = require('gulp-rename');
 
 function stringGen(len){
   var text = '';
@@ -52,6 +55,48 @@ gulp.task('minify-html', function() {
     }))
     .pipe(gulp.dest(''));
 });
+
+gulp.task('deploy-s3', function() {
+
+  var publisher = awspublish.create({
+    key: 'AKIAIJJRUOSQXIZD4DTA',
+    secret: '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',
+    bucket: 'www.scores-now.com',
+    region: 'eu-west-1'
+  });
+
+  // upload css
+  gulp.src('css/*.css')
+    .pipe(rename(function (path) {
+       path.dirname += '/css/';
+    }))
+    .pipe(awspublish.gzip())
+    .pipe(publisher.publish({
+      'Cache-Control': 'max-age=14515200'
+    }))
+    .pipe(awspublish.reporter());
+
+  // upload js 
+  gulp.src('js/*.js')
+    .pipe(rename(function (path) {
+       path.dirname += '/js/';
+    }))
+    .pipe(awspublish.gzip())
+    .pipe(publisher.publish({
+      'Cache-Control': 'max-age=14515200'
+    }))
+    .pipe(awspublish.reporter());
+
+  // upload html
+  gulp.src('index.html')
+    .pipe(awspublish.gzip())
+    .pipe(publisher.publish({
+      'Cache-Control': 'max-age=120'
+    }))
+    .pipe(awspublish.reporter());
+
+});
+
 
 // gulp.task('site.js', function() {
 //   // Create site.js

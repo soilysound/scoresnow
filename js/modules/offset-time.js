@@ -57,7 +57,7 @@ module.exports = {
       var localtime = date.getTime();
       var localoffset = date.getTimezoneOffset()*60000;
       var newDate = new Date(localtime + localoffset);
-      var newHours = newDate.getHours();
+      var newHours = newDate.getHours().toString();
       var newMinutes =  newDate.getMinutes().toString();
       
       if(newMinutes.length === 1){

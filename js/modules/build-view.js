@@ -1,9 +1,4 @@
 // BUILD VIEW
-window.onerror = function(a, b, c){
-  alert(a);
-  alert(b);
-  alert(c);
-};
 module.exports = function(){
   
   var viewRendered;

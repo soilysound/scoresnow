@@ -10,7 +10,7 @@ module.exports = function(data, firstRun){
   var row = [
     '<div class="match-view__events-row match-view__event-#{class}" id="#{id}">',
       '<div class="match-view__events-row__col match-view__events-row__col1">',
-        '<div class="match-view__events-icon #{event}" data-event="#{event}"><img src="/images/events/yellow-card.svg"></div>',
+        '<div class="match-view__events-icon #{event}" data-event="#{event}"><img src="/images/events/#{event}.svg?v=2"></div>',
       '</div>',
       '<div class="match-view__events-row__col match-view__events-row__col2">#{time}</div>',
       '<div class="match-view__events-row__col match-view__events-row__col3">#{description}</div>',
