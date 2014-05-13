@@ -16,7 +16,7 @@ global.compNames = require('../scrape/competition-names.js');
 global.newDay = false;
 global.previousGhost = false;
 
-
+footballFixtures();
 // run every 5 minutes
 var rulemin = new schedule.RecurrenceRule();
 rulemin.minute = new schedule.Range(0, 59, 5);

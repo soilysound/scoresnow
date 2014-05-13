@@ -105,7 +105,7 @@ module.exports = function(createGhostPages){
       }
       // if not, add kick off event
       events.push({
-        time: 0,
+        time: 1,
         sortTime: 0,
         description: 'Match Kicks Off',
         type: 'ko'
@@ -115,7 +115,7 @@ module.exports = function(createGhostPages){
     //if half time or full time or in the second half, add half time event
     if(status === 'ht' || status === 'ft' || time > 45){
       events.push({
-        time: 0,
+        time: '45+',
         sortTime: 45.9,
         description: 'Half Time',
         type: 'ht'
@@ -135,7 +135,7 @@ module.exports = function(createGhostPages){
     // add 2nd half kicks off event
     if(status === 'ft' || time > 45){
       events.push({
-        time: 0,
+        time: 46,
         sortTime: 45.99,
         description: '2nd Half Kicks Off',
         type: 'second-half'
@@ -145,7 +145,7 @@ module.exports = function(createGhostPages){
     // add full time event
     if(status === 'ft'){
       events.push({
-        time: 0,
+        time: '90+',
         sortTime: 999,
         description: 'Full Time Result',
         type: 'ft'
