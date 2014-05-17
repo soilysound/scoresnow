@@ -153,7 +153,7 @@ module.exports = function(createGhostPages){
     }
 
     // add full time event
-    if(status.match(/time/)){
+    if(status === '{time}'){
       events.push({
         time: 'et',
         sortTime: 1000,
