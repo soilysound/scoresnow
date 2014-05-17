@@ -46,7 +46,7 @@ module.exports = function(data, firstRun){
     var item = data.events[i];
 
     var itemRow = row;
-    var id = item.type + parseInt(item.sortTime, 10);
+    var id = item.type + parseInt(item.sortTime, 10) + item.side;
     id = id.replace(/ /g, '-');
     itemRow = itemRow.replace('#{id}', id);
     itemRow = itemRow.replace(/#{event}/g, item.type);

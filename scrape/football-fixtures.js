@@ -151,6 +151,16 @@ module.exports = function(createGhostPages){
         type: 'ft'
       });
     }
+
+    // add full time event
+    if(status.match(/time/)){
+      events.push({
+        time: 'et',
+        sortTime: 1000,
+        description: 'Extra Time',
+        type: 'et'
+      });
+    }
   
 
     // sort events by actual time
