@@ -147,7 +147,7 @@ module.exports = function(createGhostPages){
       events.push({
         time: '90+',
         sortTime: 999,
-        description: 'Full Time Result',
+        description: 'Full Time',
         type: 'ft'
       });
     }

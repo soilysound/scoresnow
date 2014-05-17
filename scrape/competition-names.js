@@ -45,6 +45,7 @@ module.exports = {
 "128":"Liga Leumit|Israel",
 "129":"Premiership|Northern Ireland",
 "130":"MLS|United States",
+"132":"FA Cup|England",
 "133":"Carling Cup|England",
 "134":"Coupe De France|France",
 "137":"Scottish Cup|Scotland",
