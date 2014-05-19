@@ -192,7 +192,7 @@ module.exports = function(createGhostPages){
 
   }
 
-  request("http://localhost/1.html", function(err, resp, body){
+  request("http://football-data.enetpulse.com/getContent.php?d=0&showLeagues=all", function(err, resp, body){
 
     var $ = cheerio.load(body);
     var rows = $('tr');
