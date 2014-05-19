@@ -123,7 +123,8 @@
 
 // show time or ht status
 .data-bar[data-status='ip'] > .data-bar__cell-homescore:after,
-.data-bar[data-status='ht'] > .data-bar__cell-homescore:after {
+.data-bar[data-status='ht'] > .data-bar__cell-homescore:after,
+.data-bar[data-status='et'] > .data-bar__cell-homescore:after {
   content: attr(data-status);
   visibility: visible
 }
@@ -136,7 +137,11 @@
 
 // RESULT
 .data-bar[data-status='ft'] > .data-bar__cell-homescore,
-.data-bar[data-status='ft'] > .data-bar__cell-awayscore {
+.data-bar[data-status='ft'] > .data-bar__cell-awayscore,
+.data-bar[data-status='ot'] > .data-bar__cell-homescore,
+.data-bar[data-status='ot'] > .data-bar__cell-awayscore,
+.data-bar[data-status='fap'] > .data-bar__cell-homescore,
+.data-bar[data-status='fap'] > .data-bar__cell-awayscore {
   background: @red;
   color: white;
   border-color: @red-stroke; 

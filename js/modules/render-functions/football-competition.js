@@ -31,6 +31,6 @@ module.exports = function(data, firstRun){
   updateText(this.querySelector('.data-bar__cell-status'), data.status);
 
   // set time/ht indicator
-  this.querySelector('.data-bar__cell-homescore').setAttribute('data-status', (isNaN(data.time) ? data.time : data.time + '\''));
+  this.querySelector('.data-bar__cell-homescore').setAttribute('data-status', (isNaN(data.time) ? data.status : data.time + '\''));
 
 };

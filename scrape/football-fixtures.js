@@ -17,8 +17,8 @@ module.exports = function(createGhostPages){
       return 'ko';
     }
 
-    if(text.match(/ot|aw|fap/i)){
-      return "ft";
+    if(text === '{time}'){
+      return "et";
     }
 
     if(isNaN(parseInt(text, 10))){
@@ -113,7 +113,7 @@ module.exports = function(createGhostPages){
     }
 
     //if half time or full time or in the second half, add half time event
-    if(status === 'ht' || status === 'ft' || time > 45){
+    if(status.match(/ht|ft|ot|aet|et|fap/i) || time > 45){
       events.push({
         time: '45+',
         sortTime: 45.9,
@@ -133,7 +133,7 @@ module.exports = function(createGhostPages){
     }
 
     // add 2nd half kicks off event
-    if(status === 'ft' || time > 45){
+    if(status.match(/ft|ot|aet|et|fap/) || time > 45){
       events.push({
         time: 46,
         sortTime: 45.99,
@@ -152,13 +152,33 @@ module.exports = function(createGhostPages){
       });
     }
 
-    // add full time event
-    if(status === '{time}'){
+    if(status === 'ot'){
       events.push({
-        time: 'et',
+        time: 'AET',
+        sortTime: 1001,
+        description: 'Extra Time Result',
+        type: 'aet'
+      });
+    }
+
+
+    // add full time event
+    if(status === 'et'){
+      events.push({
+        time: 'ET',
         sortTime: 1000,
         description: 'Extra Time',
         type: 'et'
+      });
+    }
+
+    // add full time event
+    if(status === 'fap'){
+      events.push({
+        time: 'AET',
+        sortTime: 1002,
+        description: 'Result after penalties',
+        type: 'aet'
       });
     }
   
@@ -172,7 +192,7 @@ module.exports = function(createGhostPages){
 
   }
 
-  request("http://football-data.enetpulse.com/getContent.php?d=0&showLeagues=all", function(err, resp, body){
+  request("http://localhost/1.html", function(err, resp, body){
 
     var $ = cheerio.load(body);
     var rows = $('tr');
@@ -365,7 +385,7 @@ module.exports = function(createGhostPages){
       });
 
       // write file locally for testing
-      fs.writeFile('../data/football-fixtures-full.js', file);
+      //fs.writeFile('../data/football-fixtures-full.js', file);
       
       console.log(newDay);
 
@@ -391,7 +411,7 @@ module.exports = function(createGhostPages){
         });
 
         // write file locally for testing
-        fs.writeFile('../config/SCORESNOW-config.deploy.js', "window.SCORESNOW = " + JSON.stringify(SCORESNOW));
+        //fs.writeFile('../config/SCORESNOW-config.deploy.js', "window.SCORESNOW = " + JSON.stringify(SCORESNOW));
 
 
       }
