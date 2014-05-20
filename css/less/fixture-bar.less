@@ -189,6 +189,18 @@
   color: #ddd!important
 }
 
+// competition bar
+.data-bar__cell-competition-name[data-live-games]:after {
+  content: attr(data-live-games);
+  font-size: 16px;
+  position: absolute;
+  right: 23px;
+  height: 13px;
+  top: 50%;
+  margin-top: -8px;
+  line-height: 1;
+  color: #aaa
+}
 
 // TENNIS
 .data-bar--tennis-match {
@@ -327,6 +339,13 @@
     top: 1px;
     left: -1px;
     margin-right: 1px;
+  }
+
+  // competition bar
+  .data-bar__cell-competition-name[data-live-games]:after {
+    right: 14px;
+    font-size: 14px;
+    margin-top: -6px;
   }
 
 }

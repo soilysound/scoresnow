@@ -16,5 +16,10 @@ module.exports = function(data, firstRun){
     this.href = competitionURL;
   }
 
+  // add live games indicator
+  if(data.liveGames){
+    this.querySelector('.data-bar__cell-competition-name').setAttribute('data-live-games', data.liveGames);
+  }
+
 
 };
