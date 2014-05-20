@@ -316,7 +316,7 @@ module.exports = function(createGhostPages){
       json.children.forEach(function(item){
         var liveGames = 0;
         item.children.forEach(function(match){
-          if(match.status.match(/et|ip/i)){
+          if(match.status.match(/et|ip|ht/i)){
             liveGames++;
           }
         });
