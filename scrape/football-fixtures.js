@@ -391,17 +391,17 @@ module.exports = function(createGhostPages){
         StorageClass: 'REDUCED_REDUNDANCY'
       };
 
-      s3.putObject(params, function(err, data) {
-        if (err) {
-          console.log(err, err.stack);
-        }
-        else {
-          console.log(data);
-        }
-      });
+      // s3.putObject(params, function(err, data) {
+      //   if (err) {
+      //     console.log(err, err.stack);
+      //   }
+      //   else {
+      //     console.log(data);
+      //   }
+      // });
 
       // write file locally for testing
-      // fs.writeFile('../data/football-fixtures-full.js', file);
+      fs.writeFile('../data/football-fixtures-full.js', file);
       
       console.log(newDay);
 
@@ -417,17 +417,17 @@ module.exports = function(createGhostPages){
           StorageClass: 'REDUCED_REDUNDANCY'
         };
 
-        s3.putObject(paramsGhostPages, function(err, data) {
-          if (err) {
-            console.log(err, err.stack);
-          }
-          else {
-            console.log(data);
-          }
-        });
+        // s3.putObject(paramsGhostPages, function(err, data) {
+        //   if (err) {
+        //     console.log(err, err.stack);
+        //   }
+        //   else {
+        //     console.log(data);
+        //   }
+        // });
 
         // write file locally for testing
-        //fs.writeFile('../config/SCORESNOW-config.deploy.js', "window.SCORESNOW = " + JSON.stringify(SCORESNOW));
+        fs.writeFile('../config/SCORESNOW-config.deploy.js', "window.SCORESNOW = " + JSON.stringify(SCORESNOW));
 
 
       }
