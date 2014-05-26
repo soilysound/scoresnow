@@ -16,6 +16,7 @@
     "zlib": "~1.0.5",
     "gulp-file-insert": "~1.0.2",
     "gulp-awspublish": "0.0.16",
-    "gulp-rename": "~1.2.0"
+    "gulp-rename": "~1.2.0",
+    "gulp": "~3.6.2"
   }
 }
