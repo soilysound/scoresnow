@@ -42,6 +42,8 @@ gulp.task('head.js', function() {
     .pipe(gulp.dest('js'));
 });
 
+
+
 gulp.task('minify-html', function() {
 
   fs.writeFile("./deploy/cache-buster.txt", stringGen(10));
@@ -58,10 +60,8 @@ gulp.task('minify-html', function() {
 
 gulp.task('deploy-s3', function() {
 
-  var publisher = awspublish.create({
-    bucket: 'www.scores-now.com',
-    region: 'eu-west-1'
-  });
+  var awsjson = require('./scrape/aws.json');
+  var publisher = awspublish.create(awsjson);
 
   // upload css
   gulp.src('css/*.css')
