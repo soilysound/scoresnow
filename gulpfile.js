@@ -59,8 +59,6 @@ gulp.task('minify-html', function() {
 gulp.task('deploy-s3', function() {
 
   var publisher = awspublish.create({
-    key: 'AKIAIJJRUOSQXIZD4DTA',
-    secret: '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',
     bucket: 'www.scores-now.com',
     region: 'eu-west-1'
   });
