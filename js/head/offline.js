@@ -5,10 +5,15 @@
   var style = document.createElement('style');
   document.head.appendChild(style);
 
-  function overlay(){
+  function overlay(isEvent){
 
     if(navigator.onLine){
       style.textContent = ".offline-overlay {display: none}";
+      if(isEvent){
+        window.setTimeout(function(){
+         location.reload()
+       }, 1000);
+      }
     }
 
     else {
@@ -20,6 +25,6 @@
   overlay();
 
   window.addEventListener("offline", overlay, false);
-  window.addEventListener("online", overlay, false);
+  window.addEventListener("online", overlay.bind(null, 'isEvent'), false);
 
 })();

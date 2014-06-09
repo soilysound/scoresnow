@@ -11,7 +11,7 @@ module.exports = function(){
     endPoints: {
       football: '/data/football-fixtures-full.js',
       cricket: '',
-      tennis: ''
+      tennis: '/data/tennis-fixtures-full.js'
     },
     pageSlots: {
       home: 0,
@@ -39,8 +39,25 @@ module.exports = function(){
         match: 1
       },
       cricket: {},
-      tennis: {}
+      tennis: {
+        fixtures: 3,
+        competition: {
+          
+        }
+      }
     },
+
+    statusLookup: {
+      tennis: {
+        'played': 'ft',
+        'fixture': 'ko',
+        'playing': 'ip',
+        'finished': 'ft',
+        'not started': 'ko',
+        'in progress': 'ip'
+      }
+    },
+
     countrySortOrder: {
       'eng': 0,
       'sco': 1,

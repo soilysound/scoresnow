@@ -23,10 +23,6 @@ module.exports = function(){
 
   backButton.addEventListener('click', function(){
 
-    if(SCORESNOW.historyBack){
-      return;
-    }
-
     // go back one in history
     window.history.go(-1);
 

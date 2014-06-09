@@ -53,7 +53,7 @@ module.exports = function(){
 
 
   function buildView(container, dataUrl, sport, contentType, contentId){
-     
+    
     // create ghost pages
     var ghosts = addGhosts(container, sport + "-" + contentType, SCORESNOW.numberOfGhostItems);
 
@@ -65,7 +65,13 @@ module.exports = function(){
 
     // create new web worker
     if(!SCORESNOW.dataWorker){
-      SCORESNOW.dataWorker = new Worker('/data-workers/' + sport + '.js?v=4');
+      SCORESNOW.dataWorker = new Worker('/data-workers/' + sport + '.js');
+    }
+
+    // if switching sport terminate previous data worker and create new one
+    if(SCORESNOW.dataWorker && SCORESNOW.currentSport !== SCORESNOW.previousSport){
+      SCORESNOW.dataWorker.terminate();
+      SCORESNOW.dataWorker = new Worker('/data-workers/' + sport + '.js');
     }
 
     // post message with url and content section

@@ -2,6 +2,7 @@
 
 module.exports = function(el){
 
+  var eventType = window.device.hasTouch ? 'ontouchmove' : 'onmousemove';
   var notMoved = true;
 
   setTimeout(function(){
@@ -10,9 +11,9 @@ module.exports = function(el){
     }
   }, 50);
     
-  el.ontouchmove = function(){
+  el[eventType] = function(){
     el.classList.remove('tap-touch');
-    el.ontouchmove = null;
+    el[eventType] = null;
     notMoved = false;
   };
 

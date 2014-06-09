@@ -17,6 +17,7 @@ module.exports = function(){
     }
 
     SCORESNOW.pageType = SCORESNOW.pageTypeLookup[tiers.length];
+    SCORESNOW.previousSport = SCORESNOW.currentSport;
     SCORESNOW.currentSport = tiers[0] || 'all';
     SCORESNOW.contentId = tiers[tiers.length - 1];
 

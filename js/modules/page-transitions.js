@@ -32,19 +32,25 @@ module.exports = function(){
     setPosition(this, '100%', false);
     this.removeEventListener('transitionend', reset);
     document.dispatchEvent(transitionEvent);
+    setTimeout(function(){
+      SCORESNOW.disableGlobalUI(false);
+    }, 50);
   }
 
   function animateTo(nextPage, previousPage, direction){
 
     reset = resetPage.bind(pages[previousPage]);
     pages[previousPage].addEventListener('transitionend', reset);
-
+    
     setPosition(pages[previousPage], 0, false);
     setPosition(pages[nextPage], '100%', false);
 
     setPosition(pages[previousPage], '-100%', true);
     setPosition(pages[nextPage], 0, true);
-
+    
+    // disable global UI
+    SCORESNOW.disableGlobalUI(true);
+    
     // reenable transitions after first load
     SCORESNOW.disableTransitions = false;
   }

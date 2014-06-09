@@ -193,6 +193,11 @@ module.exports = function(createGhostPages){
   }
 
   request("http://football-data.enetpulse.com/getContent.php?d=0&showLeagues=all", function(err, resp, body){
+    
+    if(err){
+      return;
+    }
+
 
     var $ = cheerio.load(body);
     var rows = $('tr');
@@ -239,7 +244,7 @@ module.exports = function(createGhostPages){
           id = id.attr('href').match(/ttfk=([0-9]+)/i)[1];
         }
 
-        var title = compNames[id];
+        var title = compNamesFootball[id];
 
         if(title){
           row.id = id;
@@ -401,7 +406,8 @@ module.exports = function(createGhostPages){
       });
 
       // write file locally for testing
-      // fs.writeFile('../data/football-fixtures-full.js', file);
+      fs.writeFile('../data/football-fixtures-full.js', file);
+     
       
       console.log(newDay);
 
@@ -426,9 +432,9 @@ module.exports = function(createGhostPages){
           }
         });
 
-        // write file locally for testing
-        // fs.writeFile('../config/SCORESNOW-config.deploy.js', "window.SCORESNOW = " + JSON.stringify(SCORESNOW));
-
+        
+         // write file locally for testing
+      fs.writeFile('../config/SCORESNOW-config.deploy.js', "window.SCORESNOW = " + JSON.stringify(SCORESNOW));
 
       }
 

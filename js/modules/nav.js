@@ -19,6 +19,7 @@ module.exports = function(){
   navItems.forEach(function(item){
 
     item.addEventListener('click', function(e){
+      
       if(document.currentBreakPoint === 'mobile' || document.currentBreakPoint === 'tablet'){
         SCORESNOW.disableTransitions = true;
       }

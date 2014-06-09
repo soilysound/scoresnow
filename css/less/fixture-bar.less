@@ -205,7 +205,11 @@
 // TENNIS
 .data-bar--tennis-match {
   margin-bottom: 0.7em;
-  height: 5em;
+  height: 4.6em;
+}
+
+.data-bar--tennis-match > .data-bar__row {
+  height: 2.3em
 }
 
 .data-bar__cell-tennis-side1,
@@ -216,13 +220,13 @@
 
 .data-bar__cell-tennis-score1,
 .data-bar__cell-tennis-score2 {
-  width: 50%;
+  width: 47%;
   direction: rtl;
 }
 
 .data-bar__cell-tennis-set-group {
   display: table;
-  height: 2.5em;
+  height: 2.3em;
   direction: ltr;
   position: relative;
 }
@@ -233,7 +237,7 @@
   display: table-cell;
   vertical-align: middle;
   color: @mid-grey;
-  width: 2.5em
+  width: 2.4em
 }
 
 // serving icon
@@ -254,14 +258,9 @@
   display: none;
 }
 
-// if it goes to 4, show 4th set
-.data-bar__cell-tennis-set-group[data-sets='4'] > .data-bar__cell-tennis-set:nth-child(4){
-  display: table-cell;
-}
-
-// if it goes to 5 sets, show 5th set
-.data-bar__cell-tennis-set-group[data-sets='5'] > .data-bar__cell-tennis-set:nth-child(5){
-  display: table-cell;
+// if it goes to 5, show all 5
+.data-bar__cell-tennis-set-group[data-bestof-sets='5'] > .data-bar__cell-tennis-set:nth-child(n+4) {
+  display: table-cell
 }
 
 
